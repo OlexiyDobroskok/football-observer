@@ -24,7 +24,7 @@
       "modules/*": ["src/modules/*"],
       "pages/*": ["src/pages/*"],
       "store/*": ["src/store/*"],
-      "UI/*": ["src/UI/*"],
+      "ui/*": ["src/ui/*"],
       "styles/*": ["src/styles/*"],
     }
   },
