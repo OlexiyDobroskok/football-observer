@@ -27,6 +27,7 @@
       "ui/*": ["src/ui/*"],
       "styles/*": ["src/styles/*"],
       "types/*": ["src/types/*"],
+      "helpers/*": ["src/helpers/*"],
     }
   },
   "include": ["src"],
