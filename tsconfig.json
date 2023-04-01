@@ -26,6 +26,7 @@
       "store/*": ["src/store/*"],
       "ui/*": ["src/ui/*"],
       "styles/*": ["src/styles/*"],
+      "types/*": ["src/types/*"],
     }
   },
   "include": ["src"],
