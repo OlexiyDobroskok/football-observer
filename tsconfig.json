@@ -28,6 +28,7 @@
       "styles/*": ["src/styles/*"],
       "types/*": ["src/types/*"],
       "helpers/*": ["src/helpers/*"],
+      "api/*": ["src/api/*"],
     }
   },
   "include": ["src"],
