@@ -7,13 +7,15 @@
 
   --secondary-color: #1b1b23;
   --secondary-color-dark: #23232a;
-  --secondary-color-light: #23232a;
+  --secondary-color-light: #322b36;
 
   --text-color: #fff;
 
   --accent-color: #62208c;
   --accent-color-dark: #44066a;
   --accent-color-light: #68109f;
+
+  --active-nav-color: #ffb700;
 }
 
 html {
@@ -24,5 +26,6 @@ html {
 body {
   margin: 0;
   padding: 0;
+  color: var(--text-color);
   background-color: var(--outside-color);
 }
