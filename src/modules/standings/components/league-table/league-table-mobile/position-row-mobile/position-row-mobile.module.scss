@@ -1,0 +1,21 @@
+@use "styles/functions" as fn;
+
+.bi-color {
+  background-color: var(--secondary-color-light);
+}
+
+.team {
+  display: flex;
+  align-items: center;
+  gap: fn.px-to-rem(5px);
+  padding-left: fn.px-to-rem(3px);
+}
+
+.link {
+  color: var(--text-color);
+  text-decoration: none;
+}
+
+.data {
+  text-align: center;
+}
