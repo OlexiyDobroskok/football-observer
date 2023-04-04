@@ -1,0 +1,13 @@
+.nav-menu {
+  position: fixed;
+  bottom: 0;
+  right: 0;
+  left: 0;
+  background-color: var(--secondary-color-dark);
+}
+
+.list {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+}
