@@ -1,0 +1,7 @@
+@use "styles/placeholders" as *;
+@use "styles/functions" as fn;
+
+.list {
+  @extend %flex-center;
+  gap: fn.px-to-rem(3px);
+}
