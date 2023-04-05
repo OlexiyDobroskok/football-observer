@@ -8,13 +8,13 @@ import { fetchLeagueStandings } from "modules/standings/store/fetch-standings-th
 import { v4 as uuidv4 } from "uuid";
 
 export interface StandingsState {
-  leagueData: LeagueInformationReformed | null;
+  leagueData: LeagueInformationReformed | undefined;
   isLoading: boolean;
   error: string;
 }
 
 const initialState: StandingsState = {
-  leagueData: null,
+  leagueData: undefined,
   isLoading: false,
   error: "",
 };
