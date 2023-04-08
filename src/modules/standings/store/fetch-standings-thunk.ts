@@ -19,9 +19,13 @@ export const fetchLeagueStandings = createAsyncThunk<
   "standings/fetchLeagueStandings",
   async ({ leagueId, season }, { rejectWithValue }) => {
     try {
-      const url = `standings?league=${leagueId}&season=${season}`;
       const { data }: FootballApiResponse<StandingsResponse> =
-        await footballApi.get(url);
+        await footballApi.get("standings", {
+          params: {
+            league: leagueId,
+            season: season,
+          },
+        });
       const [standingsResp] = data.response;
       return standingsResp.league;
     } catch (error) {
