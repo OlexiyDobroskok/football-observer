@@ -1,7 +1,7 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
 import { footballApi, FootballApiResponse } from "api/football-service";
 import {
-  LeagueInformationApiResponse,
+  LeagueStandingsApiResponse,
   StandingsResponse,
 } from "modules/standings/types/types";
 
@@ -12,7 +12,7 @@ export interface LeagueQueryParams {
 }
 
 export const fetchLeagueStandings = createAsyncThunk<
-  LeagueInformationApiResponse,
+  LeagueStandingsApiResponse,
   LeagueQueryParams,
   { rejectValue: StandingsFetchError }
 >(

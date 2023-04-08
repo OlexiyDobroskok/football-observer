@@ -46,7 +46,7 @@ export interface PositionReformed extends Position {
   form: TeamForm[];
 }
 
-interface LeagueInformation {
+interface LeagueStandings {
   id: number;
   name: string;
   country: string;
@@ -55,14 +55,14 @@ interface LeagueInformation {
   season: number;
 }
 
-export interface LeagueInformationReformed extends LeagueInformation {
+export interface LeagueStandingsReformed extends LeagueStandings {
   standings: PositionReformed[];
 }
 
-export interface LeagueInformationApiResponse extends LeagueInformation {
+export interface LeagueStandingsApiResponse extends LeagueStandings {
   standings: PositionApiResp[][];
 }
 
 export interface StandingsResponse {
-  league: LeagueInformationApiResponse;
+  league: LeagueStandingsApiResponse;
 }
