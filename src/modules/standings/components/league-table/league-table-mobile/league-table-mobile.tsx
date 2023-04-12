@@ -1,54 +1,30 @@
-import classes from "./league-table-mobile.module.scss";
-import { FC } from "react";
-import { useAppSelector } from "hooks/redux";
+import { FC, useEffect } from "react";
+import { useAppDispatch, useAppSelector } from "hooks/redux";
 import { PositionRowMobile } from "modules/standings/components/league-table/league-table-mobile/position-row-mobile/position-row-mobile";
-import { v4 as uuidv4 } from "uuid";
 import { isEven } from "modules/standings/helpers/helpers";
+import { fetchLeagueStandings } from "modules/standings/store/fetch-standings-thunk";
+import { tableHeaders } from "modules/standings/helpers/consts";
+import classes from "./league-table-mobile.module.scss";
 
-interface ColumnHeading {
-  id: string;
-  head: string;
+interface LeagueTableMobileProps {
+  leagueId: number;
+  season: number;
 }
 
-const tableHeaders: ColumnHeading[] = [
-  {
-    id: uuidv4(),
-    head: "P",
-  },
-  {
-    id: uuidv4(),
-    head: "Team",
-  },
-  {
-    id: uuidv4(),
-    head: "GM",
-  },
-  {
-    id: uuidv4(),
-    head: "GD",
-  },
-  {
-    id: uuidv4(),
-    head: "Pts",
-  },
-  {
-    id: uuidv4(),
-    head: "Form",
-  },
-];
-
-export const LeagueTableMobile: FC = () => {
-  const leagueInformation = useAppSelector(
-    ({ standings }) => standings.leagueData
+export const LeagueTableMobile: FC<LeagueTableMobileProps> = ({
+  leagueId,
+  season,
+}) => {
+  const standings = useAppSelector(
+    ({ standings }) => standings.leagueData?.standings
   );
+  const dispatch = useAppDispatch();
 
-  const {
-    name: leagueName,
-    country,
-    logo: leagueLogo,
-  } = leagueInformation || {};
+  useEffect(() => {
+    dispatch(fetchLeagueStandings({ leagueId: leagueId, season: season }));
+  }, [dispatch, fetchLeagueStandings, leagueId, season]);
 
-  const positionsList = leagueInformation?.standings?.map(
+  const positionsList = standings?.map(
     (
       {
         team: { id, logo, name },
@@ -81,10 +57,6 @@ export const LeagueTableMobile: FC = () => {
 
   return (
     <table className={classes.table}>
-      <caption>
-        <img src={leagueLogo} alt="" />
-        <p>{`${leagueName} (${country})`}</p>
-      </caption>
       <thead>
         <tr>{headingsList}</tr>
       </thead>
