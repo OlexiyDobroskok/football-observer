@@ -37,6 +37,7 @@ export interface SeasonDefinition {
   current: boolean;
   coverage: Coverage;
 }
+
 export interface LeagueInformation {
   league: LeagueDefinition;
   country: CountryDefinition;
