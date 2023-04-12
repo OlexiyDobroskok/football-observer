@@ -1,0 +1,59 @@
+@use "styles/functions" as fn;
+@use "styles/variables" as v;
+
+.input {
+  width: fn.px-to-rem(220px);
+  font-family: v.$font-family;
+  font-weight: 500;
+  padding: fn.px-to-rem(5px) fn.px-to-rem(3px) fn.px-to-rem(5px) 1.7rem;
+  font-size: 1rem;
+  color: #0f0017;
+  border: 2px solid var(--secondary-color-light);
+  border-radius: 5px;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 20 20'\
+   xmlns='http://www.w3.org/2000/svg' fill='none'%3E%3Cpath fill='%23322b36' \
+   fill-rule='evenodd' d='M4 9a5 5 0 1110 0A5 5 0 014 9zm5-7a7 7 0 104.2 12.6.999.999 0 00.093.107l3\
+    3a1 1 0 001.414-1.414l-3-3a.999.999 0 00-.107-.093A7 7 0 009 2z'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-size: 1.2rem;
+  background-position: 2px center;
+
+  &::placeholder {
+    font-style: italic;
+  }
+
+  &:focus {
+    outline-color: var(--accent-color-light);
+    border-color: transparent;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 20 20' \
+    xmlns='http://www.w3.org/2000/svg' fill='none'%3E%3Cpath fill='%2368109f' \
+    fill-rule='evenodd' d='M4 9a5 5 0 1110 0A5 5 0 014 9zm5-7a7 7 0 104.2 12.6.999.999\
+     0 00.093.107l3 3a1 1 0 001.414-1.414l-3-3a.999.999 0 00-.107-.093A7 7 0 009 \
+     2z'/%3E%3C/svg%3E");
+  }
+
+  &:focus::placeholder {
+    color: var(--accent-color-light);
+  }
+
+  &::-webkit-search-cancel-button {
+    -webkit-appearance: none;
+    width: 1rem;
+    height: 1rem;
+    cursor: pointer;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 1024 1024' \
+    xmlns='http://www.w3.org/2000/svg'%3E%3Cpath fill='%2368109f' \
+    d='M195.2 195.2a64 64 0 0 1 90.496 0L512 421.504 738.304 195.2a64 \
+    64 0 0 1 90.496 90.496L602.496 512 828.8 738.304a64 64 0 0 1-90.496 \
+    90.496L512 602.496 285.696 828.8a64 64 0 0 1-90.496-90.496L421.504 \
+    512 195.2 285.696a64 64 0 0 1 0-90.496z'/%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    opacity: 0;
+    pointer-events: none;
+  }
+
+  &:focus::-webkit-search-cancel-button {
+    opacity: 1;
+    pointer-events: all;
+  }
+}
