@@ -24,4 +24,4 @@ const modalsSlice = createSlice({
 });
 
 export const { openSearchModal, closeModal } = modalsSlice.actions;
-export const uiReducer = modalsSlice.reducer;
+export const modalsReducer = modalsSlice.reducer;
