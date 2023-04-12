@@ -1,0 +1,13 @@
+@use "styles/placeholders" as *;
+
+.search {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+}
+
+.result-list {
+  @extend %flex-center;
+  flex-wrap: wrap;
+  gap: 0.3rem;
+}
