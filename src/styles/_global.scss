@@ -1,4 +1,5 @@
 @use "variables" as v;
+@use "functions" as fn;
 
 :root {
   --outside-color: #322b36;
@@ -25,7 +26,7 @@ html {
 
 body {
   margin: 0;
-  padding: 0;
+  padding: 0 fn.px-to-rem(5px);
   color: var(--text-color);
   background-color: var(--outside-color);
 }
