@@ -1,0 +1,13 @@
+@use "styles/functions" as fn;
+
+.button {
+  padding: fn.px-to-rem(5px);
+  border-radius: 10px;
+  background-color: #a20505;
+}
+
+.icon {
+  width: 1.5rem;
+  height: 1.5rem;
+  fill: #fff;
+}
