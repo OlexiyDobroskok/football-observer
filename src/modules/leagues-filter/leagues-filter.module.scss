@@ -1,0 +1,7 @@
+@use "styles/functions" as fn;
+
+.container {
+  display: flex;
+  justify-content: flex-end;
+  padding: 0 fn.px-to-rem(6px);
+}
