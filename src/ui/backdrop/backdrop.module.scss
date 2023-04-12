@@ -1,0 +1,6 @@
+.backdrop {
+  position: fixed;
+  inset: 0;
+  background-color: var(--secondary-color);
+  z-index: 1000;
+}
