@@ -3,9 +3,9 @@
 
 .container {
   @extend %flex-center;
-  padding: fn.px-to-rem(5px);
-  width: fn.px-to-rem(20px);
-  height: fn.px-to-rem(20px);
+  padding: fn.px-to-rem(3px);
+  width: fn.px-to-rem(16px);
+  height: fn.px-to-rem(16px);
   border-radius: 50%;
   background-color: var(--primary-color);
 }
