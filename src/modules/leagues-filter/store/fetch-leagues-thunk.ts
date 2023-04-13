@@ -17,7 +17,7 @@ export const fetchLeagues = createAsyncThunk<
   "leagues-filter/fetchLeagues",
   async ({ id, type, current }, { rejectWithValue }) => {
     try {
-      const { data }: FootballApiResponse<LeagueInformation> =
+      const { data }: FootballApiResponse<LeagueInformation[]> =
         await footballApi.get("leagues", {
           params: {
             id: id,

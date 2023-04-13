@@ -1,6 +1,6 @@
 import axios from "axios";
 export interface FootballApiData<T> {
-  response: T[];
+  response: T;
 }
 export interface FootballApiResponse<T> {
   data: FootballApiData<T>;
