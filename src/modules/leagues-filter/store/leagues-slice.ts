@@ -3,7 +3,7 @@ import {
   LeagueInformation,
   SeasonDefinition,
 } from "modules/leagues-filter/api/types";
-import { fetchLeagues } from "modules/leagues-filter/store/fetch-leagues-thunk";
+import { fetchLeagues } from "modules/leagues-filter/store/leagues-thunk";
 
 interface LeaguesState {
   availableLeagues: LeagueInformation[];

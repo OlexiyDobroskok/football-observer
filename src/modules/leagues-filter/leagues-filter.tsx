@@ -1,7 +1,7 @@
 import { useEffect } from "react";
 import { useAppDispatch, useAppSelector } from "hooks/redux";
 import { openSearchModal } from "store/modals-slice";
-import { fetchLeagues } from "modules/leagues-filter/store/fetch-leagues-thunk";
+import { fetchLeagues } from "modules/leagues-filter/store/leagues-thunk";
 import { SearchModal } from "modules/leagues-filter/components/search-modal/search-modal";
 import { TopLeaguesList } from "modules/leagues-filter/components/top-leagues-list/top-leagues-list";
 import { Container } from "ui/container/container";

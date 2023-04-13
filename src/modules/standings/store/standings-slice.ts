@@ -4,7 +4,7 @@ import {
   PositionReformed,
 } from "modules/standings/api/types";
 import { createSlice } from "@reduxjs/toolkit";
-import { fetchLeagueStandings } from "modules/standings/store/fetch-standings-thunk";
+import { fetchLeagueStandings } from "modules/standings/store/standings-thunk";
 import { v4 as uuidv4 } from "uuid";
 
 export interface StandingsState {
