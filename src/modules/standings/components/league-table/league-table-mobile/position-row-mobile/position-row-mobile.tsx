@@ -1,5 +1,5 @@
 import classes from "./position-row-mobile.module.scss";
-import { Position, TeamForm } from "modules/standings/api/types";
+import { TeamForm } from "modules/standings/api/types";
 import { FC } from "react";
 import { ClubIcon } from "ui/club-icon/club-icon";
 import { FormList } from "modules/standings/components/form-list/form-list";
