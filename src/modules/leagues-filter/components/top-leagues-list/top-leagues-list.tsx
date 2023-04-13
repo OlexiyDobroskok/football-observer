@@ -45,7 +45,6 @@ export const TopLeaguesList = () => {
         renderItem={({ league: { id, name, logo } }) => (
           <LeagueButton
             key={id}
-            id={id}
             leagueName={name}
             logo={logo}
             isCurrent={id === currentLeagueId}

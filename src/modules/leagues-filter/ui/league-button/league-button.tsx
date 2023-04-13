@@ -3,7 +3,6 @@ import { Button } from "ui/button/button";
 import classes from "./league-button.module.scss";
 
 interface LeagueButtonProps {
-  id: number;
   leagueName: string;
   onClick: MouseEventHandler<HTMLButtonElement>;
   logo: string;
@@ -11,7 +10,6 @@ interface LeagueButtonProps {
 }
 
 export const LeagueButton: FC<LeagueButtonProps> = ({
-  id,
   leagueName,
   logo,
   onClick,

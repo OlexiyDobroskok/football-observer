@@ -57,7 +57,6 @@ export const SearchLeague = () => {
         renderItem={({ league: { id, name, logo } }) => (
           <LeagueButton
             key={id}
-            id={id}
             logo={logo}
             leagueName={name}
             onClick={() => handleLeagueButtonClick(id)}
