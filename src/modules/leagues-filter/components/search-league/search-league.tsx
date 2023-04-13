@@ -54,10 +54,11 @@ export const SearchLeague = () => {
       <List
         className={classes["result-list"]}
         listItems={foundLeagues}
-        renderItem={({ league: { id, name } }) => (
+        renderItem={({ league: { id, name, logo } }) => (
           <LeagueButton
             key={id}
             id={id}
+            logo={logo}
             leagueName={name}
             onClick={() => handleLeagueButtonClick(id)}
           />

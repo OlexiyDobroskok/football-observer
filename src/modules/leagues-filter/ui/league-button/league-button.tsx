@@ -6,12 +6,14 @@ interface LeagueButtonProps {
   id: number;
   leagueName: string;
   onClick: MouseEventHandler<HTMLButtonElement>;
+  logo: string;
   isCurrent?: boolean;
 }
 
 export const LeagueButton: FC<LeagueButtonProps> = ({
   id,
   leagueName,
+  logo,
   onClick,
   isCurrent,
 }) => {
@@ -22,12 +24,7 @@ export const LeagueButton: FC<LeagueButtonProps> = ({
   return (
     <Button className={buttonClass} onClick={onClick}>
       <div className={classes.wrap}>
-        <img
-          className={classes.logo}
-          src={`https://media.api-sports.io/football/leagues/${id}.png
-`}
-          alt=""
-        />
+        <img className={classes.logo} src={logo} alt="" />
       </div>
       {leagueName}
     </Button>

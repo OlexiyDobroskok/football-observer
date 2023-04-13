@@ -42,11 +42,12 @@ export const TopLeaguesList = () => {
       <List
         className={classes.list}
         listItems={topLeaguesList}
-        renderItem={({ league: { id, name } }) => (
+        renderItem={({ league: { id, name, logo } }) => (
           <LeagueButton
             key={id}
             id={id}
             leagueName={name}
+            logo={logo}
             isCurrent={id === currentLeagueId}
             onClick={() => handleTopLeagueButtonClick(id)}
           />
