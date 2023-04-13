@@ -70,11 +70,9 @@ const leaguesSlice = createSlice({
       state.availableSeasons = leagueSeasons;
       state.currentSeason = leagueSeasons[leagueSeasons.length - 1]?.year;
     });
-    builder.addCase(fetchLeagues.rejected, (state, { payload }) => {
+    builder.addCase(fetchLeagues.rejected, (state, { payload, error }) => {
       state.isLoading = false;
-      if (payload) {
-        state.error = payload;
-      }
+      state.error = payload ? payload : error.message ? error.message : "";
     });
   },
 });

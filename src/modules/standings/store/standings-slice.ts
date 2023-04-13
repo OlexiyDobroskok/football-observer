@@ -41,12 +41,13 @@ const standingsSlice = createSlice({
       state.isLoading = false;
       state.error = "";
     });
-    builder.addCase(fetchLeagueStandings.rejected, (state, { payload }) => {
-      if (payload) {
-        state.error = payload;
+    builder.addCase(
+      fetchLeagueStandings.rejected,
+      (state, { payload, error }) => {
         state.isLoading = false;
+        state.error = payload ? payload : error.message ? error.message : "";
       }
-    });
+    );
   },
 });
 
