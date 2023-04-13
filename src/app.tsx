@@ -1,6 +1,14 @@
 import { FC } from "react";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
-import { Root, Calendar, Home, Profile, Standings, Teams } from "src/pages";
+import {
+  Root,
+  Calendar,
+  Home,
+  Profile,
+  Standings,
+  Teams,
+  TeamInfo,
+} from "src/pages";
 import { PAGE_ROUTES } from "helpers/consts";
 import { Provider } from "react-redux";
 import { store } from "store/store";
@@ -15,6 +23,7 @@ export const App: FC = () => {
         { path: PAGE_ROUTES.CALENDAR, element: <Calendar /> },
         { path: PAGE_ROUTES.STANDINGS, element: <Standings /> },
         { path: PAGE_ROUTES.TEAMS, element: <Teams /> },
+        { path: PAGE_ROUTES.TEAM_INFO, element: <TeamInfo /> },
         { path: PAGE_ROUTES.PROFILE, element: <Profile /> },
       ],
     },
