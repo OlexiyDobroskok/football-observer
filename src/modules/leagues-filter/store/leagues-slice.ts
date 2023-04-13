@@ -2,7 +2,7 @@ import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 import {
   LeagueInformation,
   SeasonDefinition,
-} from "modules/leagues-filter/types/types";
+} from "modules/leagues-filter/api/types";
 import { fetchLeagues } from "modules/leagues-filter/store/fetch-leagues-thunk";
 
 interface LeaguesState {
