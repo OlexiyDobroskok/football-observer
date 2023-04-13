@@ -1,15 +1,11 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
-import { footballApi, FootballApiResponse } from "api/football-service";
+import { LeagueStandingsApiResponse } from "modules/standings/api/types";
 import {
-  LeagueStandingsApiResponse,
-  StandingsResponse,
-} from "modules/standings/types/types";
+  getLeagueStandings,
+  LeagueQueryParams,
+} from "modules/standings/api/endpoints";
 
 export type StandingsFetchError = string;
-export interface LeagueQueryParams {
-  leagueId: number;
-  season: number;
-}
 
 export const fetchLeagueStandings = createAsyncThunk<
   LeagueStandingsApiResponse,
@@ -19,15 +15,7 @@ export const fetchLeagueStandings = createAsyncThunk<
   "standings/fetchLeagueStandings",
   async ({ leagueId, season }, { rejectWithValue }) => {
     try {
-      const { data }: FootballApiResponse<StandingsResponse[]> =
-        await footballApi.get("standings", {
-          params: {
-            league: leagueId,
-            season: season,
-          },
-        });
-      const [standingsResp] = data.response;
-      return standingsResp.league;
+      return await getLeagueStandings({ leagueId, season });
     } catch (error) {
       return rejectWithValue((error as Error).message);
     }
