@@ -3,5 +3,6 @@ export const PAGE_ROUTES = {
   HOME: "/",
   CALENDAR: "calendar",
   STANDINGS: "standings",
+  TEAMS: "teams",
   PROFILE: "profile",
 } as const;
