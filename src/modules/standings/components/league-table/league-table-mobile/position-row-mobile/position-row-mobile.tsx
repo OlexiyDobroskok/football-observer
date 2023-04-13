@@ -34,7 +34,7 @@ export const PositionRowMobile: FC<PositionRowMobileProps> = ({
       <td>
         <div className={classes.team}>
           <ClubIcon icon={logo} />
-          <Link className={classes.link} to={`/team/${id}`}>
+          <Link className={classes.link} to={`/teams/${id}`}>
             {name}
           </Link>
         </div>
