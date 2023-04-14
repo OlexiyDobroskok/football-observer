@@ -53,22 +53,24 @@ const leaguesSlice = createSlice({
       state.isLoading = true;
     });
     builder.addCase(fetchLeagues.fulfilled, (state, { payload }) => {
-      const currentLeagueInformation = payload.find(
-        ({ league: { id } }) => id === state.currentLeagueId
-      );
-      const leagueSeasons = currentLeagueInformation
-        ? currentLeagueInformation.seasons
-            .filter(({ coverage }) => coverage.standings)
-            .sort(
-              (seasonFirst, seasonSecond) =>
-                seasonFirst.year - seasonSecond.year
-            )
-        : [];
+      if (payload.length) {
+        const currentLeagueInformation = payload.find(
+          ({ league: { id } }) => id === state.currentLeagueId
+        );
+        const leagueSeasons = currentLeagueInformation
+          ? currentLeagueInformation.seasons
+              .filter(({ coverage }) => coverage.standings)
+              .sort(
+                (seasonFirst, seasonSecond) =>
+                  seasonFirst.year - seasonSecond.year
+              )
+          : [];
+        state.availableSeasons = leagueSeasons;
+        state.currentSeason = leagueSeasons[leagueSeasons.length - 1]?.year;
+      }
       state.isLoading = false;
       state.error = "";
       state.availableLeagues = payload;
-      state.availableSeasons = leagueSeasons;
-      state.currentSeason = leagueSeasons[leagueSeasons.length - 1]?.year;
     });
     builder.addCase(fetchLeagues.rejected, (state, { payload, error }) => {
       state.isLoading = false;
