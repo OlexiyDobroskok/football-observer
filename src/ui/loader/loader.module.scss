@@ -1,0 +1,60 @@
+.main {
+  position: absolute;
+  inset: 0;
+  background-color: rgba(0, 0, 0, 0.8);
+  .loader {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+  }
+}
+
+.icon {
+  height: 100px;
+  display: block;
+  margin: 0 auto;
+  path {
+    animation-duration: 1s;
+    animation-name: pulse;
+    animation-iteration-count: infinite;
+    color: #26a380;
+
+    &.seven {
+      animation-delay: -1s;
+    }
+    &.six {
+      animation-delay: -0.875s;
+    }
+    &.five {
+      animation-delay: -0.75s;
+    }
+    &.four {
+      animation-delay: -0.625s;
+    }
+    &.three {
+      animation-delay: -0.5s;
+    }
+    &.two {
+      animation-delay: -0.375s;
+    }
+    &.one {
+      animation-delay: -0.25s;
+    }
+    &.zero {
+      animation-delay: -0.125s;
+    }
+  }
+}
+
+@keyframes pulse {
+  0% {
+    opacity: 0.1;
+  }
+  30% {
+    opacity: 0.8;
+  }
+  100% {
+    opacity: 0.1;
+  }
+}
