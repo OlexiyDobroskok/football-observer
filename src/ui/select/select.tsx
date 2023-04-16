@@ -21,18 +21,16 @@ export const Select: FC<SelectProps> = ({
   className,
   onChange,
 }) => (
-  <div>
-    <select
-      className={[classes.select, className].join(" ")}
-      name={name}
-      value={selected}
-      onChange={onChange}
-    >
-      {optList.map(({ title, value }) => (
-        <option key={value} value={value}>
-          {title}
-        </option>
-      ))}
-    </select>
-  </div>
+  <select
+    className={[classes.select, className].join(" ")}
+    name={name}
+    value={selected}
+    onChange={onChange}
+  >
+    {optList.map(({ title, value }) => (
+      <option key={value} value={value}>
+        {title}
+      </option>
+    ))}
+  </select>
 );
