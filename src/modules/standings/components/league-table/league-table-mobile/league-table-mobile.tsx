@@ -5,6 +5,7 @@ import { isEven } from "modules/standings/helpers/helpers";
 import { fetchLeagueStandings } from "modules/standings/store/standings-thunk";
 import { tableHeaders } from "modules/standings/helpers/consts";
 import classes from "./league-table-mobile.module.scss";
+import { Loader } from "ui/loader/loader";
 
 interface LeagueTableMobileProps {
   leagueId: number;
@@ -15,16 +16,16 @@ export const LeagueTableMobile: FC<LeagueTableMobileProps> = ({
   leagueId,
   season,
 }) => {
-  const standings = useAppSelector(
-    ({ standings }) => standings.leagueData?.standings
+  const { leagueData, isLoading } = useAppSelector(
+    ({ standings }) => standings
   );
   const dispatch = useAppDispatch();
 
   useEffect(() => {
     dispatch(fetchLeagueStandings({ leagueId: leagueId, season: season }));
-  }, [dispatch, fetchLeagueStandings, leagueId, season]);
+  }, [leagueId, season]);
 
-  const positionsList = standings?.map(
+  const positionsList = leagueData?.standings?.map(
     (
       {
         team: { id, logo, name },
@@ -56,11 +57,17 @@ export const LeagueTableMobile: FC<LeagueTableMobileProps> = ({
   ));
 
   return (
-    <table className={classes.table}>
-      <thead>
-        <tr>{headingsList}</tr>
-      </thead>
-      <tbody>{positionsList}</tbody>
-    </table>
+    <>
+      {isLoading ? (
+        <Loader />
+      ) : (
+        <table className={classes.table}>
+          <thead>
+            <tr>{headingsList}</tr>
+          </thead>
+          <tbody>{positionsList}</tbody>
+        </table>
+      )}
+    </>
   );
 };
