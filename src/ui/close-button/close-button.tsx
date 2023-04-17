@@ -1,4 +1,4 @@
-import { ButtonHTMLAttributes, FC, MouseEventHandler } from "react";
+import { ButtonHTMLAttributes, MouseEventHandler } from "react";
 import { SvgIcon } from "ui/svg-icon/svg-icon";
 import { Button } from "ui/button/button";
 import closeIcon from "./close-icon.svg";
@@ -9,11 +9,11 @@ interface CloseButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
   className?: string;
 }
 
-export const CloseButton: FC<CloseButtonProps> = ({
+export const CloseButton = ({
   className,
   onClick,
   ...props
-}) => (
+}: CloseButtonProps) => (
   <Button
     className={[classes.button, className].join(" ")}
     {...props}

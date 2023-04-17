@@ -1,15 +1,14 @@
+import { ReactNode } from "react";
 import classes from "./hidden-element.module.scss";
-import { FC, PropsWithChildren } from "react";
 
-interface HiddenElementProps extends PropsWithChildren {
+interface HiddenElementProps {
   as?: keyof JSX.IntrinsicElements;
+  children: ReactNode;
 }
 
-export const HiddenElement: FC<HiddenElementProps> = ({
+export const HiddenElement = ({
   as: Component = "div",
   children,
-}) => {
-  return (
-    <Component className={classes["visually-hidden"]}>{children}</Component>
-  );
-};
+}: HiddenElementProps) => (
+  <Component className={classes["visually-hidden"]}>{children}</Component>
+);

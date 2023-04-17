@@ -1,4 +1,4 @@
-import { FC, MouseEventHandler } from "react";
+import { MouseEventHandler } from "react";
 import { SvgIcon } from "ui/svg-icon/svg-icon";
 import { Button } from "ui/button/button";
 import searchIcon from "./search.svg";
@@ -8,7 +8,7 @@ interface SearchButtonProps {
   onClick: MouseEventHandler<HTMLButtonElement>;
 }
 
-export const SearchButton: FC<SearchButtonProps> = ({ onClick }) => (
+export const SearchButton = ({ onClick }: SearchButtonProps) => (
   <Button className={classes.button} onClick={onClick}>
     <SvgIcon className={classes.icon} href={`${searchIcon}#search`} />
   </Button>

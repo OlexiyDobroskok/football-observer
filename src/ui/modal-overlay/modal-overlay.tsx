@@ -1,11 +1,15 @@
-import { FC, PropsWithChildren } from "react";
 import { CloseButton } from "ui/close-button/close-button";
 import { useAppDispatch } from "hooks/redux";
 import { closeModal } from "store/modals-slice";
 import classes from "./modal-overlay.module.scss";
 
-export const ModalOverlay: FC<PropsWithChildren> = ({ children }) => {
+interface ModalOverlayProps {
+  children: JSX.Element;
+}
+
+export const ModalOverlay = ({ children }: ModalOverlayProps) => {
   const dispatch = useAppDispatch();
+
   const closeModalHandler = () => {
     dispatch(closeModal());
   };

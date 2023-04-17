@@ -1,4 +1,4 @@
-import { ChangeEvent, FC } from "react";
+import { ChangeEvent } from "react";
 import classes from "./select.module.scss";
 
 export interface SelectOption {
@@ -14,13 +14,13 @@ interface SelectProps {
   className?: string;
 }
 
-export const Select: FC<SelectProps> = ({
+export const Select = ({
   name,
   optList,
   selected,
   className,
   onChange,
-}) => (
+}: SelectProps) => (
   <select
     className={[classes.select, className].join(" ")}
     name={name}

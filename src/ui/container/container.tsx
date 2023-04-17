@@ -1,9 +1,8 @@
-import { FC, PropsWithChildren } from "react";
-
-interface ContainerProps extends PropsWithChildren {
+interface ContainerProps {
   className?: string;
+  children: JSX.Element | JSX.Element[];
 }
 
-export const Container: FC<ContainerProps> = ({ className, children }) => {
-  return <div className={className}>{children}</div>;
-};
+export const Container = ({ className, children }: ContainerProps) => (
+  <div className={className}>{children}</div>
+);

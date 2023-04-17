@@ -1,4 +1,4 @@
-import { FC, useEffect } from "react";
+import { useEffect } from "react";
 import { useAppDispatch, useAppSelector } from "hooks/redux";
 import { PositionRowMobile } from "modules/standings/components/league-table/league-table-mobile/position-row-mobile/position-row-mobile";
 import { isEven } from "modules/standings/helpers/helpers";
@@ -12,10 +12,10 @@ interface LeagueTableMobileProps {
   season: number;
 }
 
-export const LeagueTableMobile: FC<LeagueTableMobileProps> = ({
+export const LeagueTableMobile = ({
   leagueId,
   season,
-}) => {
+}: LeagueTableMobileProps) => {
   const { leagueData, isLoading } = useAppSelector(
     ({ standings }) => standings
   );

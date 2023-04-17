@@ -1,9 +1,8 @@
-import classes from "./position-row-mobile.module.scss";
-import { TeamForm } from "modules/standings/api/types";
-import { FC } from "react";
-import { ClubIcon } from "ui/club-icon/club-icon";
-import { FormList } from "modules/standings/components/form-list/form-list";
 import { Link } from "react-router-dom";
+import { TeamForm } from "modules/standings/api/types";
+import { FormList } from "modules/standings/components/form-list/form-list";
+import { ClubIcon } from "ui/club-icon/club-icon";
+import classes from "./position-row-mobile.module.scss";
 
 interface PositionRowMobileProps {
   id: number;
@@ -17,7 +16,7 @@ interface PositionRowMobileProps {
   isEven: boolean;
 }
 
-export const PositionRowMobile: FC<PositionRowMobileProps> = ({
+export const PositionRowMobile = ({
   id,
   rank,
   name,
@@ -27,24 +26,22 @@ export const PositionRowMobile: FC<PositionRowMobileProps> = ({
   points,
   form,
   isEven,
-}) => {
-  return (
-    <tr className={isEven ? classes["bi-color"] : ""}>
-      <td className={classes.data}>{rank}</td>
-      <td>
-        <div className={classes.team}>
-          <ClubIcon icon={logo} />
-          <Link className={classes.link} to={`/teams/${id}`}>
-            {name}
-          </Link>
-        </div>
-      </td>
-      <td className={classes.data}>{gamesPlayed}</td>
-      <td className={classes.data}>{goalsDiff}</td>
-      <td className={classes.data}>{points}</td>
-      <td>
-        <FormList formList={form} limit={3} />
-      </td>
-    </tr>
-  );
-};
+}: PositionRowMobileProps) => (
+  <tr className={isEven ? classes["bi-color"] : ""}>
+    <td className={classes.data}>{rank}</td>
+    <td>
+      <div className={classes.team}>
+        <ClubIcon icon={logo} />
+        <Link className={classes.link} to={`/teams/${id}`}>
+          {name}
+        </Link>
+      </div>
+    </td>
+    <td className={classes.data}>{gamesPlayed}</td>
+    <td className={classes.data}>{goalsDiff}</td>
+    <td className={classes.data}>{points}</td>
+    <td>
+      <FormList formList={form} limit={3} />
+    </td>
+  </tr>
+);
