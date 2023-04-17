@@ -1,3 +1,21 @@
+interface StandingsParams {
+  leagueId?: number;
+  teamId?: number;
+  season: number;
+}
+
+type LeagueOrTeam =
+  | {
+      leagueId: number;
+      teamId?: number;
+    }
+  | {
+      leagueId?: number;
+      teamId: number;
+    };
+
+export type RequiredStandingsParams = StandingsParams & LeagueOrTeam;
+
 export interface Goals {
   for: number;
   against: number;

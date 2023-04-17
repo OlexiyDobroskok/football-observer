@@ -1,4 +1,4 @@
-import { LeagueStandings, Position } from "api/standings-types";
+import { LeagueStandings, Position } from "api/types/standings-types";
 
 export type FormChar = "W" | "L" | "D";
 

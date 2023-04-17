@@ -1,5 +1,5 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
-import { LeagueInformation } from "api/leagues-types";
+import { LeagueInformation } from "api/types/leagues-types";
 import { FootballService } from "api/football-service";
 
 type FetchLeaguesError = string;

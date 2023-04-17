@@ -1,5 +1,5 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
-import { LeagueStandingsApiResponse } from "api/standings-types";
+import { LeagueStandingsApiResponse } from "api/types/standings-types";
 import { FootballService } from "api/football-service";
 
 export type StandingsFetchError = string;

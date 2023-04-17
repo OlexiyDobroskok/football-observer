@@ -1,3 +1,12 @@
+export interface LeaguesParams {
+  leagueId: number;
+  teamId: number;
+  season: number;
+  type: "league" | "cup";
+  current: "true" | "false";
+  search: string;
+}
+
 export interface LeagueDefinition {
   id: number;
   name: string;

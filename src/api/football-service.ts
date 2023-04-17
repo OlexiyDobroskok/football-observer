@@ -1,6 +1,9 @@
 import axios from "axios";
-import { LeagueInformation } from "api/leagues-types";
-import { StandingsResponse } from "api/standings-types";
+import { LeagueInformation, LeaguesParams } from "api/types/leagues-types";
+import {
+  RequiredStandingsParams,
+  StandingsResponse,
+} from "api/types/standings-types";
 
 interface FootballApiData<T> {
   response: T;
@@ -17,33 +20,6 @@ export const footballApi = axios.create({
     "x-rapidapi-key": import.meta.env.VITE_API_SPORTS_KEY,
   },
 });
-
-export interface LeaguesParams {
-  leagueId: number;
-  teamId: number;
-  season: number;
-  type: "league" | "cup";
-  current: "true" | "false";
-  search: string;
-}
-
-interface StandingsParams {
-  leagueId?: number;
-  teamId?: number;
-  season: number;
-}
-
-type LeagueOrTeam =
-  | {
-      leagueId: number;
-      teamId?: number;
-    }
-  | {
-      leagueId?: number;
-      teamId: number;
-    };
-
-export type RequiredStandingsParams = StandingsParams & LeagueOrTeam;
 
 export class FootballService {
   static async getLeagues(params?: Partial<LeaguesParams>) {

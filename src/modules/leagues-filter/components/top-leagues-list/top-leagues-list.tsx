@@ -4,7 +4,7 @@ import { LeagueButton } from "modules/leagues-filter/ui/league-button/league-but
 import { topLeaguesIdList } from "modules/leagues-filter/helpers/consts";
 import { setCurrentLeague } from "modules/leagues-filter/store/leagues-slice";
 import { List } from "ui/list/list";
-import { LeagueInformation } from "api/leagues-types";
+import { LeagueInformation } from "api/types/leagues-types";
 import classes from "./top-leagues-list.module.scss";
 
 export const TopLeaguesList = () => {

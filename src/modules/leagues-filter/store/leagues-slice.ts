@@ -1,6 +1,6 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 import { fetchLeagues } from "modules/leagues-filter/store/leagues-thunk";
-import { LeagueInformation, SeasonDefinition } from "api/leagues-types";
+import { LeagueInformation, SeasonDefinition } from "api/types/leagues-types";
 
 interface LeaguesState {
   availableLeagues: LeagueInformation[];
