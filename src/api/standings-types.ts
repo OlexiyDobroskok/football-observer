@@ -35,28 +35,13 @@ export interface PositionApiResp extends Position {
   form: string;
 }
 
-export type FormChar = "W" | "L" | "D";
-
-export interface TeamForm {
-  id: string;
-  result: FormChar;
-}
-
-export interface PositionReformed extends Position {
-  form: TeamForm[];
-}
-
-interface LeagueStandings {
+export interface LeagueStandings {
   id: number;
   name: string;
   country: string;
   logo: string;
   flag: string;
   season: number;
-}
-
-export interface LeagueStandingsReformed extends LeagueStandings {
-  standings: PositionReformed[];
 }
 
 export interface LeagueStandingsApiResponse extends LeagueStandings {

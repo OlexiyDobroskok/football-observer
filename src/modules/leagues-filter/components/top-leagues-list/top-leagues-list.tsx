@@ -1,10 +1,10 @@
 import { useMemo } from "react";
 import { useAppDispatch, useAppSelector } from "hooks/redux";
-import { LeagueInformation } from "modules/leagues-filter/api/types";
 import { LeagueButton } from "modules/leagues-filter/ui/league-button/league-button";
 import { topLeaguesIdList } from "modules/leagues-filter/helpers/consts";
 import { setCurrentLeague } from "modules/leagues-filter/store/leagues-slice";
 import { List } from "ui/list/list";
+import { LeagueInformation } from "api/leagues-types";
 import classes from "./top-leagues-list.module.scss";
 
 export const TopLeaguesList = () => {

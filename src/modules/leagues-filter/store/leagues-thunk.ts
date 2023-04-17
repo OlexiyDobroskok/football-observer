@@ -1,19 +1,16 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
-import { LeagueInformation } from "modules/leagues-filter/api/types";
-import {
-  FetchLeaguesArgs,
-  getAllLeagues,
-} from "modules/leagues-filter/api/endpoints";
+import { LeagueInformation } from "api/leagues-types";
+import { FootballService } from "api/football-service";
 
 type FetchLeaguesError = string;
 
 export const fetchLeagues = createAsyncThunk<
   LeagueInformation[],
-  FetchLeaguesArgs,
+  void,
   { rejectValue: FetchLeaguesError }
->("leagues-filter/fetchLeagues", async ({ type }, { rejectWithValue }) => {
+>("leagues-filter/fetchLeagues", async (_, { rejectWithValue }) => {
   try {
-    return await getAllLeagues({ type });
+    return await FootballService.getLeagues();
   } catch (error) {
     return rejectWithValue((error as Error).message);
   }

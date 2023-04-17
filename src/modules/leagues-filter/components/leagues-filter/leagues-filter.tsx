@@ -13,7 +13,7 @@ export const LeaguesFilter = () => {
   const dispatch = useAppDispatch();
 
   useEffect(() => {
-    dispatch(fetchLeagues({}));
+    dispatch(fetchLeagues());
   }, []);
 
   const handleSearchButtonClick = () => {

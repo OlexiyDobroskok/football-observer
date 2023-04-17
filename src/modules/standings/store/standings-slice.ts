@@ -1,11 +1,11 @@
+import { createSlice } from "@reduxjs/toolkit";
+import { fetchLeagueStandings } from "modules/standings/store/standings-thunk";
+import { v4 as uuidv4 } from "uuid";
 import {
   FormChar,
   LeagueStandingsReformed,
   PositionReformed,
-} from "modules/standings/api/types";
-import { createSlice } from "@reduxjs/toolkit";
-import { fetchLeagueStandings } from "modules/standings/store/standings-thunk";
-import { v4 as uuidv4 } from "uuid";
+} from "modules/standings/types/types";
 
 export interface StandingsState {
   leagueData: LeagueStandingsReformed | undefined;

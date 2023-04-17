@@ -1,7 +1,7 @@
 import classes from "./form-list.module.scss";
 import { List } from "ui/list/list";
 import { FormItem } from "modules/standings/components/form-list/form-item/form-item";
-import { TeamForm } from "modules/standings/api/types";
+import { TeamForm } from "modules/standings/types/types";
 
 interface FormListProps {
   formList: TeamForm[];

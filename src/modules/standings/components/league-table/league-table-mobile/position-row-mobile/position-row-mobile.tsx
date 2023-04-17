@@ -1,7 +1,7 @@
 import { Link } from "react-router-dom";
-import { TeamForm } from "modules/standings/api/types";
 import { FormList } from "modules/standings/components/form-list/form-list";
 import { ClubIcon } from "ui/club-icon/club-icon";
+import { TeamForm } from "modules/standings/types/types";
 import classes from "./position-row-mobile.module.scss";
 
 interface PositionRowMobileProps {

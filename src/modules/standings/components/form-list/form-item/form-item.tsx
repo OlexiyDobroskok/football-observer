@@ -1,5 +1,5 @@
 import classes from "./form-item.module.scss";
-import { FormChar } from "modules/standings/api/types";
+import { FormChar } from "api/standings-types";
 
 interface FormItemProps {
   formChar: FormChar;
