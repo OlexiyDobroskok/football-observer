@@ -24,30 +24,28 @@ const standingsSlice = createSlice({
   initialState,
   reducers: {},
   extraReducers: (builder) => {
-    builder.addCase(fetchLeagueStandings.pending, (state) => {
-      state.isLoading = true;
-    });
-    builder.addCase(fetchLeagueStandings.fulfilled, (state, { payload }) => {
-      const reformedStandings = payload.standings.flat().map(
-        (position) =>
-          ({
-            ...position,
-            form: position.form
-              .split("")
-              .map((char) => ({ id: uuidv4(), result: char as FormChar })),
-          } as PositionReformed)
-      );
-      state.leagueData = { ...payload, standings: reformedStandings };
-      state.isLoading = false;
-      state.error = "";
-    });
-    builder.addCase(
-      fetchLeagueStandings.rejected,
-      (state, { payload, error }) => {
+    builder
+      .addCase(fetchLeagueStandings.pending, (state) => {
+        state.isLoading = true;
+      })
+      .addCase(fetchLeagueStandings.fulfilled, (state, { payload }) => {
+        const reformedStandings = payload.standings.flat().map(
+          (position) =>
+            ({
+              ...position,
+              form: position.form
+                .split("")
+                .map((char) => ({ id: uuidv4(), result: char as FormChar })),
+            } as PositionReformed)
+        );
+        state.leagueData = { ...payload, standings: reformedStandings };
+        state.isLoading = false;
+        state.error = "";
+      })
+      .addCase(fetchLeagueStandings.rejected, (state, { payload, error }) => {
         state.isLoading = false;
         state.error = payload ? payload : error.message ? error.message : "";
-      }
-    );
+      });
   },
 });
 

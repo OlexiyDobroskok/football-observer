@@ -46,33 +46,34 @@ const leaguesSlice = createSlice({
     },
   },
   extraReducers: (builder) => {
-    builder.addCase(fetchLeagues.pending, (state) => {
-      state.isLoading = true;
-    });
-    builder.addCase(fetchLeagues.fulfilled, (state, { payload }) => {
-      if (payload.length) {
-        const currentLeagueInformation = payload.find(
-          ({ league: { id } }) => id === state.currentLeagueId
-        );
-        const leagueSeasons = currentLeagueInformation
-          ? currentLeagueInformation.seasons
-              .filter(({ coverage }) => coverage.standings)
-              .sort(
-                (seasonFirst, seasonSecond) =>
-                  seasonFirst.year - seasonSecond.year
-              )
-          : [];
-        state.availableSeasons = leagueSeasons;
-        state.currentSeason = leagueSeasons[leagueSeasons.length - 1]?.year;
-      }
-      state.isLoading = false;
-      state.error = "";
-      state.availableLeagues = payload;
-    });
-    builder.addCase(fetchLeagues.rejected, (state, { payload, error }) => {
-      state.isLoading = false;
-      state.error = payload ? payload : error.message ? error.message : "";
-    });
+    builder
+      .addCase(fetchLeagues.pending, (state) => {
+        state.isLoading = true;
+      })
+      .addCase(fetchLeagues.fulfilled, (state, { payload }) => {
+        if (payload.length) {
+          const currentLeagueInformation = payload.find(
+            ({ league: { id } }) => id === state.currentLeagueId
+          );
+          const leagueSeasons = currentLeagueInformation
+            ? currentLeagueInformation.seasons
+                .filter(({ coverage }) => coverage.standings)
+                .sort(
+                  (seasonFirst, seasonSecond) =>
+                    seasonFirst.year - seasonSecond.year
+                )
+            : [];
+          state.availableSeasons = leagueSeasons;
+          state.currentSeason = leagueSeasons[leagueSeasons.length - 1]?.year;
+        }
+        state.isLoading = false;
+        state.error = "";
+        state.availableLeagues = payload;
+      })
+      .addCase(fetchLeagues.rejected, (state, { payload, error }) => {
+        state.isLoading = false;
+        state.error = payload ? payload : error.message ? error.message : "";
+      });
   },
 });
 
