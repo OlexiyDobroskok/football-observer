@@ -1,6 +1,8 @@
-interface ContainerProps {
+import { ReactNode } from "react";
+
+export interface ContainerProps {
   className?: string;
-  children: JSX.Element | JSX.Element[];
+  children: ReactNode;
 }
 
 export const Container = ({ className, children }: ContainerProps) => (
