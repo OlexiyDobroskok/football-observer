@@ -1,12 +1,11 @@
-import { FC } from "react";
-import classes from "./NavMenuMobile.module.scss";
 import { MenuItemMobile } from "components/NavMenu/NavMenuMobile/MenuItemMobile/MenuItemMobile";
 import { List } from "ui/List/List";
 import { menuList } from "components/NavMenu/consts";
+import classes from "./NavMenuMobile.module.scss";
 
-export const NavMenuMobile: FC = () => {
+export const NavMenuMobile = () => {
   return (
-    <nav className={classes["NavMenu"]}>
+    <nav className={classes["nav-menu"]}>
       <List
         className={classes.list}
         listItems={menuList}
