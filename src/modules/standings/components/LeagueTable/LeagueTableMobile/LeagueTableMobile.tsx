@@ -1,7 +1,7 @@
 import { useEffect } from "react";
 import { useAppDispatch, useAppSelector } from "hooks/redux";
 import { PositionRowMobile } from "modules/standings/components/LeagueTable/LeagueTableMobile/PositionRowMobile/PositionRowMobile";
-import { isEven } from "modules/standings/helpers/helpers";
+import { checkIsEven } from "helpers/check-is-even";
 import { fetchLeagueStandings } from "modules/standings/store/standings-thunk";
 import { tableHeaders } from "modules/standings/helpers/consts";
 import classes from "./LeagueTableMobile.module.scss";
@@ -47,7 +47,7 @@ export const LeagueTableMobile = ({
         goalsDiff={goalsDiff}
         points={points}
         formList={form}
-        isEven={isEven(index)}
+        isEven={checkIsEven(index)}
       />
     )
   );
