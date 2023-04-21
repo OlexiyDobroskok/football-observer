@@ -46,7 +46,7 @@ export const LeagueTableMobile = ({
         gamesPlayed={played}
         goalsDiff={goalsDiff}
         points={points}
-        form={form}
+        formList={form}
         isEven={isEven(index)}
       />
     )
