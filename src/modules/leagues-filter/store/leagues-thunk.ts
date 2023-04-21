@@ -8,7 +8,7 @@ export const fetchLeagues = createAsyncThunk<
   LeagueInformation[],
   void,
   { rejectValue: FetchLeaguesError }
->("leagues-filter/fetchLeagues", async (_, { rejectWithValue }) => {
+>("leagues/fetchLeagues", async (_, { rejectWithValue }) => {
   try {
     return await FootballService.getLeagues();
   } catch (error) {

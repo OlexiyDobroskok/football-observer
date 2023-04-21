@@ -1,3 +1,3 @@
 export { leaguesReducer } from "./store/leagues-slice";
-export { LeaguesFilter } from "./components/leagues-filter/leagues-filter";
-export { SeasonsSelect } from "./components/seasons-select/seasons-select";
+export { LeaguesFilter } from "modules/leagues-filter/components/LeaguesFilter/LeaguesFilter";
+export { SeasonsSelect } from "modules/leagues-filter/components/SeasonsSelect/SeasonsSelect";
