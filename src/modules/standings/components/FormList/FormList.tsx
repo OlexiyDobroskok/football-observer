@@ -3,13 +3,13 @@ import { List } from "ui/List/List";
 import { FormItem } from "modules/standings/components/FormList/FormItem/FormItem";
 import { TeamForm } from "modules/standings/types/types";
 
-interface FormListProps {
+export interface FormListProps {
   formList: TeamForm[];
-  limit?: number;
+  formLimit?: number;
 }
 
-export const FormList = ({ formList, limit }: FormListProps) => {
-  const listItems = !limit ? formList : formList.slice(0, limit);
+export const FormList = ({ formList, formLimit }: FormListProps) => {
+  const listItems = !formLimit ? formList : formList.slice(0, formLimit);
 
   return (
     <List
