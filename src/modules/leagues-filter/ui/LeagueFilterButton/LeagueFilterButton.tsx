@@ -1,4 +1,4 @@
-import { FC, MouseEventHandler } from "react";
+import { MouseEventHandler } from "react";
 import { Button } from "ui/Button/Button";
 import classes from "./LeagueFilterButton.module.scss";
 
