@@ -3,7 +3,7 @@ export interface LeaguesParams {
   teamId: number;
   season: number;
   type: "league" | "cup";
-  current: "true" | "false";
+  current: boolean;
   search: string;
 }
 
