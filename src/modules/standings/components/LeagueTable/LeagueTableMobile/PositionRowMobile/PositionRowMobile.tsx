@@ -1,18 +1,18 @@
 import { Link } from "react-router-dom";
-import { FormList } from "modules/standings/components/FormList/FormList";
-import { ClubIcon } from "ui/ClubIcon/ClubIcon";
-import { TeamForm } from "modules/standings/types/types";
+import {
+  FormList,
+  FormListProps,
+} from "modules/standings/components/FormList/FormList";
+import { ClubLogo, ClubLogoProps } from "ui/ClubLogo/ClubLogo";
 import classes from "./PositionRowMobile.module.scss";
 
-interface PositionRowMobileProps {
+interface PositionRowMobileProps extends FormListProps, ClubLogoProps {
   id: number;
   rank: number;
   name: string;
-  logo: string;
   gamesPlayed: number;
   goalsDiff: number;
   points: number;
-  form: TeamForm[];
   isEven: boolean;
 }
 
@@ -24,14 +24,14 @@ export const PositionRowMobile = ({
   gamesPlayed,
   goalsDiff,
   points,
-  form,
+  formList,
   isEven,
 }: PositionRowMobileProps) => (
   <tr className={isEven ? classes["bi-color"] : ""}>
     <td className={classes.data}>{rank}</td>
     <td>
       <div className={classes.team}>
-        <ClubIcon icon={logo} />
+        <ClubLogo logo={logo} logoSize="SM" />
         <Link className={classes.link} to={`/teams/${id}`}>
           {name}
         </Link>
@@ -41,7 +41,7 @@ export const PositionRowMobile = ({
     <td className={classes.data}>{goalsDiff}</td>
     <td className={classes.data}>{points}</td>
     <td>
-      <FormList formList={form} limit={3} />
+      <FormList formList={formList} formLimit={3} />
     </td>
   </tr>
 );
