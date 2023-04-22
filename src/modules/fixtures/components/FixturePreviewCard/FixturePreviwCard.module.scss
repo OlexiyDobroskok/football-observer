@@ -1,0 +1,33 @@
+@use "styles/functions" as fn;
+
+.card {
+  box-sizing: border-box;
+  width: 70vw;
+  padding: fn.px-to-rem(10px) fn.px-to-rem(5px);
+  background-color: var(--secondary-color-light);
+  text-align: center;
+  border-radius: 10px;
+}
+
+.title {
+  margin: 0 0 fn.px-to-rem(5px);
+  font-size: 1rem;
+}
+
+.subtitle {
+  margin: 0 0 fn.px-to-rem(10px);
+  font-size: fn.px-to-rem(14px);
+}
+
+.match-information {
+  display: grid;
+  grid-template-columns: 1fr max-content 1fr;
+  column-gap: fn.px-to-rem(10px);
+  align-items: center;
+}
+
+.match-status {
+  display: flex;
+  flex-direction: column;
+  gap: fn.px-to-rem(10px);
+}
