@@ -8,7 +8,7 @@ import { getTimeShortFormat } from "modules/fixtures/helpers/date-format";
 import { Container } from "ui/Container/Container";
 import classes from "./FixtureItem.module.scss";
 
-export interface FixtureItemProps extends ScoreboardProps {
+export interface FixtureItemProps extends Pick<ScoreboardProps, "matchScore"> {
   date: string;
   teamsOfMatch: FixtureTeamResult;
   isEven?: boolean;

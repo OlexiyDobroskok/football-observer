@@ -3,7 +3,12 @@
 .score {
   margin: 0;
   padding: fn.px-to-rem(3px) fn.px-to-rem(10px);
+  font-size: 1rem;
   font-weight: 700;
   border-radius: 3px;
   background-color: var(--accent-color-extra-light);
+}
+
+.md {
+  font-size: fn.px-to-rem(20px);
 }
