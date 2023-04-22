@@ -7,11 +7,11 @@ export const SearchModal = () => (
   <>
     {createPortal(
       <Backdrop />,
-      document.getElementById("Root-Backdrop") as HTMLDivElement
+      document.getElementById("root-backdrop") as HTMLDivElement
     )}
     {createPortal(
       <ModalOverlay children={<SearchLeague />} />,
-      document.getElementById("Root-overlay") as HTMLDivElement
+      document.getElementById("root-overlay") as HTMLDivElement
     )}
   </>
 );
