@@ -4,6 +4,7 @@ import {
   RequiredStandingsParams,
   StandingsResponse,
 } from "api/types/standings-types";
+import { AvailableFixtureParams, Fixture } from "api/types/fixtures-types";
 
 interface FootballApiData<T> {
   response: T;
@@ -51,8 +52,41 @@ export class FootballService {
           season,
         },
       });
-    console.log(data.response);
     const [standingsResp] = data.response;
     return standingsResp.league;
+  }
+
+  static async getAvailableFixtures({
+    leagueId,
+    teamId,
+    season,
+    status,
+    from,
+    to,
+    live,
+    date,
+    nextFixtures,
+    lastFixtures,
+    round,
+  }: Partial<AvailableFixtureParams>) {
+    const { data }: FootballApiResponse<Fixture[]> = await footballApi.get(
+      "fixtures",
+      {
+        params: {
+          league: leagueId,
+          team: teamId,
+          last: lastFixtures,
+          next: nextFixtures,
+          season,
+          status,
+          from,
+          to,
+          live,
+          date,
+          round,
+        },
+      }
+    );
+    return data.response;
   }
 }
