@@ -1,8 +1,13 @@
 @use "styles/functions" as fn;
 
 .button {
+  display: flex;
+  justify-content: center;
+  align-items: center;
   padding: fn.px-to-rem(5px);
+  border: none;
   border-radius: 10px;
+  cursor: pointer;
   background-color: #a20505;
 }
 
