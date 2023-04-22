@@ -1,0 +1,9 @@
+@use "styles/functions" as fn;
+
+.score {
+  margin: 0;
+  padding: fn.px-to-rem(3px) fn.px-to-rem(10px);
+  font-weight: 700;
+  border-radius: 3px;
+  background-color: var(--accent-color-extra-light);
+}
