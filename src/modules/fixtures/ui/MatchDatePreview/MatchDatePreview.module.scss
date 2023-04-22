@@ -1,0 +1,26 @@
+@use "styles/functions" as fn;
+
+.container {
+  padding: 0 fn.px-to-rem(5px);
+}
+
+.time {
+  margin: 0 0 fn.px-to-rem(10px) 0;
+  font-size: fn.px-to-rem(24px);
+  font-weight: 700;
+  color: var(--accent-color-extra-light);
+}
+
+.day,
+.month {
+  font-size: fn.px-to-rem(14px);
+  font-weight: 500;
+}
+
+.day {
+  margin: 0 0 fn.px-to-rem(5px);
+}
+
+.month {
+  margin: 0;
+}
