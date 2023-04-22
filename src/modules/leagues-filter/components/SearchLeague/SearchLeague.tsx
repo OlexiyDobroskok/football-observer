@@ -52,7 +52,7 @@ export const SearchLeague = () => {
         onChange={handleQueryChange}
       />
       <List
-        className={classes["result-List"]}
+        className={classes["result-list"]}
         listItems={foundLeagues}
         renderItem={({ league: { id, name, logo } }) => (
           <LeagueFilterButton
