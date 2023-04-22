@@ -1,0 +1,15 @@
+@use "styles/functions" as fn;
+
+.fixtures-list {
+  padding: 0 fn.px-to-rem(5px) fn.px-to-rem(10px) fn.px-to-rem(5px);
+  background-color: var(--secondary-color);
+}
+
+.date {
+  margin: 0 0 1rem;
+  padding: 1.5rem 0.5rem 0;
+  font-size: 1.3rem;
+  font-weight: 700;
+  text-align: center;
+  color: var(--accent-color-extra-light);
+}
