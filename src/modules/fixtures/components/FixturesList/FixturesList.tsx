@@ -1,6 +1,6 @@
 import { Fragment } from "react";
 import { DayFixtures } from "api/types/fixtures-types";
-import { convertDateToStrLgFormat } from "modules/fixtures/helpers/date-format";
+import { getDateLongFormat } from "modules/fixtures/helpers/date-format";
 import { FixtureItem } from "modules/fixtures/components/FixtureItem/FixtureItem";
 import { checkIsEven } from "helpers/check-is-even";
 import classes from "./FixturesList.module.scss";
@@ -12,7 +12,7 @@ export interface FixturesListProps {
 export const FixturesList = ({ fixtures }: FixturesListProps) => {
   const allMatchesList = fixtures.map(({ date, fixtures }) => {
     const matchesDate = new Date(date);
-    const formattedDate = convertDateToStrLgFormat(matchesDate);
+    const formattedDate = getDateLongFormat(matchesDate);
     const dayMatchesList = fixtures.map(({ fixture, teams, goals }, index) => (
       <FixtureItem
         key={fixture.id}

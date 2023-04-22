@@ -4,7 +4,7 @@ import {
   Scoreboard,
   ScoreboardProps,
 } from "modules/fixtures/ui/Scoreboard/Scoreboard";
-import { convertTimeToStrShortFormat } from "modules/fixtures/helpers/date-format";
+import { getTimeShortFormat } from "modules/fixtures/helpers/date-format";
 import { Container } from "ui/Container/Container";
 import classes from "./FixtureItem.module.scss";
 
@@ -21,7 +21,7 @@ export const FixtureItem = ({
   isEven,
 }: FixtureItemProps) => {
   const matchDate = new Date(date);
-  const matchTime = convertTimeToStrShortFormat(matchDate);
+  const matchTime = getTimeShortFormat(matchDate);
   const isScore = matchScore.home !== null && matchScore.away !== null;
 
   return (
