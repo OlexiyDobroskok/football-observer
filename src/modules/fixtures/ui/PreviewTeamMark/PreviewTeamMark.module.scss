@@ -1,0 +1,19 @@
+@use "styles/functions" as fn;
+
+.card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: fn.px-to-rem(10px);
+}
+
+.name {
+  margin: 0;
+  font-size: fn.px-to-rem(14px);
+  font-weight: 500;
+}
+
+.logo {
+  width: fn.px-to-rem(50px);
+  height: fn.px-to-rem(50px);
+}
