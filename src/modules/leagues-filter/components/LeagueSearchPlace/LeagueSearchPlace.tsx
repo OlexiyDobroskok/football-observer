@@ -1,17 +1,17 @@
-import { ChangeEvent, useEffect, useMemo, useRef } from "react";
+import { ChangeEvent, useEffect, useRef } from "react";
 import { useAppDispatch, useAppSelector } from "hooks/redux";
 import { SearchInput } from "ui/SearchInput/SearchInput";
 import { List } from "ui/List/List";
-import { LeagueFilterButton } from "modules/leagues-filter/ui/LeagueFilterButton/LeagueFilterButton";
 import {
   setCurrentLeague,
-  setSearchQuery,
+  setSearchLeaguesQuery,
 } from "modules/leagues-filter/store/leagues-slice";
 import { closeModal } from "store/modals-slice";
-import classes from "./SearchLeague.module.scss";
+import classes from "./LeagueSearchPlace.module.scss";
+import { Button } from "ui/Button/Button";
 
-export const SearchLeague = () => {
-  const { availableLeagues, searchQuery } = useAppSelector(
+export const LeagueSearchPlace = () => {
+  const { searchQuery, filteredLeagues } = useAppSelector(
     ({ leagues }) => leagues
   );
   const dispatch = useAppDispatch();
@@ -21,24 +21,13 @@ export const SearchLeague = () => {
     searchInputRef.current?.focus();
   }, []);
 
-  const foundLeagues = useMemo(() => {
-    const minLength = 3;
-    return availableLeagues && searchQuery.length >= minLength
-      ? availableLeagues.filter(({ league, country }) =>
-          `${league.name} ${country.name}`
-            .toLowerCase()
-            .includes(searchQuery.trim().toLowerCase())
-        )
-      : [];
-  }, [availableLeagues, searchQuery]);
-
   const handleQueryChange = ({ target }: ChangeEvent<HTMLInputElement>) => {
-    dispatch(setSearchQuery(target.value));
+    dispatch(setSearchLeaguesQuery(target.value));
   };
 
   const handleLeagueButtonClick = (id: number) => {
     dispatch(setCurrentLeague(id));
-    dispatch(setSearchQuery(""));
+    dispatch(setSearchLeaguesQuery(""));
     dispatch(closeModal());
   };
 
@@ -53,14 +42,15 @@ export const SearchLeague = () => {
       />
       <List
         className={classes["result-list"]}
-        listItems={foundLeagues}
-        renderItem={({ league: { id, name, logo } }) => (
-          <LeagueFilterButton
+        listItems={filteredLeagues}
+        renderItem={({
+          league: { id, name: leagueName },
+          country: { name: countryName },
+        }) => (
+          <Button
             key={id}
-            logo={logo}
-            leagueName={name}
             onClick={() => handleLeagueButtonClick(id)}
-          />
+          >{`${leagueName} (${countryName})`}</Button>
         )}
       />
     </div>
