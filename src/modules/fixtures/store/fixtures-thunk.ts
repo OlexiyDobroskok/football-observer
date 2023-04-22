@@ -5,7 +5,6 @@ import {
   DayFixtures,
   Fixture,
 } from "api/types/fixtures-types";
-import { AppDispatch } from "src/store/store";
 import { fixturesStatus } from "src/api/helpers/consts";
 import { sortDayFixtures } from "../helpers/sort-day-fixtures";
 
@@ -20,8 +19,8 @@ export interface FixturesData {
 export const fetchFixtures = createAsyncThunk<
   FixturesData,
   Partial<AvailableFixtureParams>,
-  { rejectValue: string; dispatch: AppDispatch }
->("fixtures/fetchFixtures", async (params, { rejectWithValue, dispatch }) => {
+  { rejectValue: string }
+>("fixtures/fetchFixtures", async (params, { rejectWithValue }) => {
   try {
     const fixtures = await FootballService.getAvailableFixtures(params);
     const finishedMatches = fixtures.filter(
