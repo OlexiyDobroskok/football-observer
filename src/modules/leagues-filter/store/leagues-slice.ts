@@ -8,6 +8,7 @@ interface LeaguesState {
   currentLeagueId: number;
   currentSeason: number;
   searchQuery: string;
+  filteredLeagues: LeagueInformation[];
   isLoading: boolean;
   error: string;
 }
@@ -18,6 +19,7 @@ const initialState: LeaguesState = {
   currentLeagueId: 39,
   currentSeason: 2022,
   searchQuery: "",
+  filteredLeagues: [],
   isLoading: false,
   error: "",
 };
@@ -41,8 +43,17 @@ const leaguesSlice = createSlice({
     setCurrentSeason: (state, { payload }: PayloadAction<number>) => {
       state.currentSeason = payload;
     },
-    setSearchQuery: (state, { payload }: PayloadAction<string>) => {
+    setSearchLeaguesQuery: (state, { payload }: PayloadAction<string>) => {
       state.searchQuery = payload;
+      const minLength = 3;
+      state.filteredLeagues =
+        payload.length >= minLength
+          ? state.availableLeagues.filter(({ league, country }) =>
+              `${league.name} ${country.name}`
+                .toLowerCase()
+                .includes(payload.trim().toLowerCase())
+            )
+          : [];
     },
   },
   extraReducers: (builder) => {
@@ -77,6 +88,6 @@ const leaguesSlice = createSlice({
   },
 });
 
-export const { setCurrentLeague, setCurrentSeason, setSearchQuery } =
+export const { setCurrentLeague, setCurrentSeason, setSearchLeaguesQuery } =
   leaguesSlice.actions;
 export const leaguesReducer = leaguesSlice.reducer;
