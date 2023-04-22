@@ -1,5 +1,5 @@
 import { FixtureTeamResult } from "api/types/fixtures-types";
-import { TeamCard } from "modules/fixtures/ui/TeamCard/TeamCard";
+import { ListTeamCard } from "modules/fixtures/ui/ListTeamCard/ListTeamCard";
 import {
   Scoreboard,
   ScoreboardProps,
@@ -26,12 +26,12 @@ export const FixtureItem = ({
 
   return (
     <Container className={[classes.fixture, isEven && classes.dark].join(" ")}>
-      <TeamCard team={homeTeam} teamStatus={"HOME"} />
+      <ListTeamCard team={homeTeam} teamStatus={"HOME"} />
       <Container className={classes["match-status"]}>
         {isScore && <Scoreboard matchScore={matchScore} />}
         {!isScore && <p className={classes.time}>{matchTime}</p>}
       </Container>
-      <TeamCard team={awayTeam} teamStatus={"AWAY"} />
+      <ListTeamCard team={awayTeam} teamStatus={"AWAY"} />
     </Container>
   );
 };
