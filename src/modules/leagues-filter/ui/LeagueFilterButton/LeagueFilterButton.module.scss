@@ -2,23 +2,6 @@
 @use "styles/placeholders" as *;
 @use "styles/variables" as v;
 
-.button {
-  flex-grow: 1;
-  gap: fn.px-to-rem(5px);
-  padding: fn.px-to-rem(5px) fn.px-to-rem(10px);
-  font-size: 1rem;
-  font-family: v.$font-family;
-  font-weight: 700;
-  white-space: nowrap;
-  border-radius: 10px;
-  color: var(--text-color);
-  background-color: var(--accent-color-dark);
-}
-
-.current {
-  background-color: var(--accent-color-light);
-}
-
 .wrap {
   @extend %flex-center;
   padding: fn.px-to-rem(2px) fn.px-to-rem(5px);
