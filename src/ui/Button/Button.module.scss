@@ -1,7 +1,23 @@
+@use "styles/functions" as fn;
+@use "styles/variables" as v;
+
 .button {
   display: inline-flex;
   justify-content: center;
   align-items: center;
+  gap: fn.px-to-rem(5px);
+  padding: fn.px-to-rem(5px) fn.px-to-rem(10px);
+  font-family: v.$font-family;
+  font-size: 1rem;
+  font-weight: 700;
+  white-space: nowrap;
+  border-radius: 10px;
+  color: var(--text-color);
+  background-color: var(--accent-color-dark);
   cursor: pointer;
   border: none;
+
+  &.current {
+    background-color: var(--accent-color-light);
+  }
 }

@@ -1,27 +1,15 @@
-import {
-  ButtonHTMLAttributes,
-  FC,
-  MouseEventHandler,
-  PropsWithChildren,
-} from "react";
+import { MouseEventHandler, ReactNode } from "react";
 import classes from "./Button.module.scss";
 
-interface ButtonProps
-  extends PropsWithChildren,
-    ButtonHTMLAttributes<HTMLButtonElement> {
+export interface ButtonProps {
   onClick: MouseEventHandler<HTMLButtonElement>;
-  className?: string;
+  children?: ReactNode;
+  isCurrent?: boolean;
 }
 
-export const Button: FC<ButtonProps> = ({
-  className,
-  onClick,
-  children,
-  ...props
-}) => (
+export const Button = ({ onClick, children, isCurrent }: ButtonProps) => (
   <button
-    className={[classes.button, className].join(" ")}
-    {...props}
+    className={[classes.button, isCurrent && classes.current].join(" ")}
     onClick={onClick}
   >
     {children}
