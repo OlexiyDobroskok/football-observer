@@ -1,16 +1,16 @@
 import { FixtureTeam } from "api/types/fixtures-types";
 import { ClubLogo } from "ui/ClubLogo/ClubLogo";
-import classes from "./ListTeamCard.module.scss";
+import classes from "./ListTeamMark.module.scss";
 
-export interface ListTeamCardProps {
+export interface ListTeamMarkProps {
   team: FixtureTeam;
   teamStatus: "HOME" | "AWAY";
 }
 
-export const ListTeamCard = ({
+export const ListTeamMark = ({
   team: { name, logo },
   teamStatus,
-}: ListTeamCardProps) => (
+}: ListTeamMarkProps) => (
   <div className={classes.card}>
     <p
       className={[classes.name, teamStatus === "AWAY" && classes.away].join(
