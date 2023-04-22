@@ -1,7 +1,7 @@
 import { createPortal } from "react-dom";
 import { Backdrop } from "ui/Backdrop/Backdrop";
 import { ModalOverlay } from "ui/ModalOverlay/ModalOverlay";
-import { SearchLeague } from "modules/leagues-filter/components/SearchLeague/SearchLeague";
+import { LeagueSearchPlace } from "modules/leagues-filter/components/LeagueSearchPlace/LeagueSearchPlace";
 
 export const SearchModal = () => (
   <>
@@ -10,7 +10,7 @@ export const SearchModal = () => (
       document.getElementById("root-backdrop") as HTMLDivElement
     )}
     {createPortal(
-      <ModalOverlay children={<SearchLeague />} />,
+      <ModalOverlay children={<LeagueSearchPlace />} />,
       document.getElementById("root-overlay") as HTMLDivElement
     )}
   </>
