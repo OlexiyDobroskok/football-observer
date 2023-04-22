@@ -1,0 +1,26 @@
+@use "styles/functions" as fn;
+
+.fixture {
+  display: grid;
+  grid-template-columns: 1fr max-content 1fr;
+  column-gap: fn.px-to-rem(10px);
+  padding: fn.px-to-rem(10px) fn.px-to-rem(5px);
+}
+
+.match-status {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.time {
+  margin: 0;
+  padding: 0 fn.px-to-rem(10px);
+  font-weight: 700;
+  color: var(--accent-color-extra-light);
+}
+
+.dark {
+  border-radius: 3px;
+  background-color: var(--secondary-color-light);
+}
