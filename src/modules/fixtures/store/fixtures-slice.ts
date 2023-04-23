@@ -1,4 +1,4 @@
-import { createSlice, PayloadAction } from "@reduxjs/toolkit";
+import { createSlice } from "@reduxjs/toolkit";
 import { DayFixtures, Fixture } from "api/types/fixtures-types";
 import { fetchFixtures } from "modules/fixtures/store/fixtures-thunk";
 
