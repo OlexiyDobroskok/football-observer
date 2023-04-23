@@ -1,6 +1,8 @@
 @use "styles/functions" as fn;
 
 .container {
+  display: flex;
+  flex-direction: column;
   padding: 0 fn.px-to-rem(5px);
 }
 

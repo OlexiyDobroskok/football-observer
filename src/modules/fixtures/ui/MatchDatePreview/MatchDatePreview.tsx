@@ -17,9 +17,15 @@ export const MatchDatePreview = ({ date }: MatchDatePreviewProps) => {
 
   return (
     <div className={classes.container}>
-      <p className={classes.time}>{formattedTime}</p>
-      <p className={classes.day}>{matchDay}</p>
-      <p className={classes.month}>{matchDayAndMonth}</p>
+      <time dateTime={date} className={classes.time}>
+        {formattedTime}
+      </time>
+      <time dateTime={date} className={classes.day}>
+        {matchDay}
+      </time>
+      <time dateTime={date} className={classes.month}>
+        {matchDayAndMonth}
+      </time>
     </div>
   );
 };
