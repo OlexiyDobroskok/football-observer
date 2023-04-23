@@ -1,6 +1,9 @@
 import { Fragment } from "react";
 import { DayFixtures } from "api/types/fixtures-types";
-import { getDateLongFormat } from "modules/fixtures/helpers/date-format";
+import {
+  getDateLongFormat,
+  getValidDateTimeStrYMDFormat,
+} from "modules/fixtures/helpers/date-format";
 import { FixtureItem } from "modules/fixtures/components/FixtureItem/FixtureItem";
 import { checkIsEven } from "helpers/check-is-even";
 import classes from "./FixturesList.module.scss";
@@ -25,7 +28,11 @@ export const FixturesList = ({ fixtures }: FixturesListProps) => {
 
     return (
       <Fragment key={date}>
-        <p className={classes.date}>{formattedDate}</p>
+        <p className={classes.date}>
+          <time dateTime={getValidDateTimeStrYMDFormat(matchesDate)}>
+            {formattedDate}
+          </time>
+        </p>
         <div>{dayMatchesList}</div>
       </Fragment>
     );
