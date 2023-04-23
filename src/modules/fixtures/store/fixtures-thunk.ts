@@ -31,7 +31,10 @@ export const fetchFixtures = createAsyncThunk<
         status.short === fixturesStatus.AET ||
         status.short === fixturesStatus.PEN
     );
-    const finishedMatchesConverted = sortDayFixtures(finishedMatches);
+    const finishedMatchesConverted = sortDayFixtures(
+      finishedMatches,
+      "DESCENDING"
+    );
     const scheduledMatches = fixtures.filter(
       ({ fixture: { status } }) =>
         status.short === fixturesStatus.NS ||
