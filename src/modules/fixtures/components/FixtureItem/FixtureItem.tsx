@@ -29,7 +29,11 @@ export const FixtureItem = ({
       <ListTeamMark team={homeTeam} teamStatus={"HOME"} />
       <Container className={classes["match-status"]}>
         {isScore && <Scoreboard matchScore={matchScore} />}
-        {!isScore && <p className={classes.time}>{matchTime}</p>}
+        {!isScore && (
+          <time dateTime={date} className={classes.time}>
+            {matchTime}
+          </time>
+        )}
       </Container>
       <ListTeamMark team={awayTeam} teamStatus={"AWAY"} />
     </Container>
