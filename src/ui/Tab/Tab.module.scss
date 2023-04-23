@@ -1,0 +1,14 @@
+@use "styles/functions" as fn;
+
+.tab {
+  display: flex;
+  padding: fn.px-to-rem(10px) fn.px-to-rem(20px);
+  border-top-right-radius: 5px;
+  border-top-left-radius: 5px;
+  background-color: var(--accent-color);
+  transition: background-color 0.2s ease;
+}
+
+.selected {
+  background-color: var(--secondary-color);
+}
