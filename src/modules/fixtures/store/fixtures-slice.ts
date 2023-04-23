@@ -1,4 +1,4 @@
-import { createSlice } from "@reduxjs/toolkit";
+import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 import { DayFixtures, Fixture } from "api/types/fixtures-types";
 import { fetchFixtures } from "modules/fixtures/store/fixtures-thunk";
 
@@ -8,6 +8,7 @@ interface FixturesState {
   liveMatches: Fixture[];
   scheduledMatches: DayFixtures[];
   timeToNextLiveMatch: number | null | undefined;
+  isLive: boolean | undefined;
   isLoading: boolean;
   error: string | null;
 }
@@ -18,6 +19,7 @@ const initialState: FixturesState = {
   liveMatches: [],
   scheduledMatches: [],
   timeToNextLiveMatch: undefined,
+  isLive: undefined,
   isLoading: false,
   error: null,
 };
@@ -32,13 +34,20 @@ const fixturesSlice = createSlice({
         state.isLoading = true;
       })
       .addCase(fetchFixtures.fulfilled, (state, { payload }) => {
-        const { allFixtures, finished, scheduled, live, timeToNextLiveMatch } =
-          payload;
+        const {
+          allFixtures,
+          finished,
+          scheduled,
+          live,
+          timeToNextLiveMatch,
+          isLive,
+        } = payload;
         state.availableFixtures = allFixtures;
         state.finishedMatches = finished;
         state.scheduledMatches = scheduled;
         state.liveMatches = live;
         state.timeToNextLiveMatch = timeToNextLiveMatch;
+        state.isLive = isLive;
         state.isLoading = false;
         state.error = null;
       })

@@ -14,6 +14,7 @@ export interface FixturesData {
   scheduled: DayFixtures[];
   live: Fixture[];
   timeToNextLiveMatch: number | null;
+  isLive: boolean;
 }
 
 export const fetchFixtures = createAsyncThunk<
@@ -48,13 +49,16 @@ export const fetchFixtures = createAsyncThunk<
     );
 
     let timeToNextLiveMatch: number | null;
+    let isLive: boolean;
     if (!liveMatches.length && scheduledMatchesConverted.length) {
       const [nextLiveMatch] = scheduledMatchesConverted;
       const currentDate = Date.now();
       const nextLiveMatchDate = new Date(nextLiveMatch.date);
       timeToNextLiveMatch = nextLiveMatchDate.getTime() - currentDate;
+      isLive = false;
     } else {
       timeToNextLiveMatch = null;
+      isLive = true;
     }
 
     return {
@@ -63,6 +67,7 @@ export const fetchFixtures = createAsyncThunk<
       scheduled: scheduledMatchesConverted,
       live: liveMatches,
       timeToNextLiveMatch,
+      isLive,
     };
   } catch (error) {
     return rejectWithValue((error as Error).message);
