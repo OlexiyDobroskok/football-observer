@@ -1,12 +1,12 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { DayFixtures, Fixture } from "api/types/fixtures-types";
+import { Fixture } from "api/types/fixtures-types";
 import { fetchFixtures } from "modules/fixtures/store/fixtures-thunk";
 
 interface FixturesState {
   availableFixtures: Fixture[];
-  finishedMatches: DayFixtures[];
+  finishedMatches: Fixture[];
   liveMatches: Fixture[];
-  scheduledMatches: DayFixtures[];
+  scheduledMatches: Fixture[];
   timeToNextLiveMatch: number | null | undefined;
   isLive: boolean | undefined;
   isLoading: boolean;
