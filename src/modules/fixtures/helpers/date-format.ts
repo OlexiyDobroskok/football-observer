@@ -1,9 +1,15 @@
+const getWeekDayLF = (date: Date) =>
+  date.toLocaleString("en", { weekday: "long" });
+
+const getMonthLF = (date: Date) => date.toLocaleString("en", { month: "long" });
+
+const getMonthDaySF = (date: Date) =>
+  date.toLocaleString("en", { day: "numeric" });
+
 export const getDateLongFormat = (date: Date) =>
-  date.toLocaleString("en", {
-    weekday: "long",
-    month: "long",
-    day: "numeric",
-  });
+  `${getWeekDayLF(date)} ${getMonthDaySF(date)} ${getMonthLF(
+    date
+  )} ${date.getFullYear()}`;
 
 export const getTimeShortFormat = (date: Date) =>
   date.toLocaleString("en", {
