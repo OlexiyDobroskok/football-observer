@@ -1,17 +1,12 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
 import { FootballService } from "api/football-service";
-import {
-  AvailableFixtureParams,
-  DayFixtures,
-  Fixture,
-} from "api/types/fixtures-types";
+import { AvailableFixtureParams, Fixture } from "api/types/fixtures-types";
 import { fixturesStatus } from "src/api/helpers/consts";
-import { sortDayFixtures } from "../helpers/sort-day-fixtures";
 
 export interface FixturesData {
   allFixtures: Fixture[];
-  finished: DayFixtures[];
-  scheduled: DayFixtures[];
+  finished: Fixture[];
+  scheduled: Fixture[];
   live: Fixture[];
   timeToNextLiveMatch: number | null;
   isLive: boolean;
@@ -24,39 +19,51 @@ export const fetchFixtures = createAsyncThunk<
 >("fixtures/fetchFixtures", async (params, { rejectWithValue }) => {
   try {
     const fixtures = await FootballService.getAvailableFixtures(params);
-    const finishedMatches = fixtures.filter(
-      ({ fixture: { status } }) =>
-        status.short === fixturesStatus.FT ||
-        status.short === fixturesStatus.AET ||
-        status.short === fixturesStatus.AET ||
-        status.short === fixturesStatus.PEN
-    );
-    const finishedMatchesConverted = sortDayFixtures(
-      finishedMatches,
-      "DESCENDING"
-    );
-    const scheduledMatches = fixtures.filter(
-      ({ fixture: { status } }) =>
-        status.short === fixturesStatus.NS ||
-        status.short === fixturesStatus.TBD
-    );
-    const scheduledMatchesConverted = sortDayFixtures(scheduledMatches);
-    const liveMatches = fixtures.filter(
-      ({ fixture: { status } }) =>
-        status.short === fixturesStatus["1H"] ||
-        status.short === fixturesStatus["2H"] ||
-        status.short === fixturesStatus.HT ||
-        status.short === fixturesStatus.ET ||
-        status.short === fixturesStatus.BT ||
-        status.short === fixturesStatus.INT
-    );
+    const finishedMatches = fixtures
+      .filter(
+        ({ fixture: { status } }) =>
+          status.short === fixturesStatus.FT ||
+          status.short === fixturesStatus.AET ||
+          status.short === fixturesStatus.AET ||
+          status.short === fixturesStatus.PEN
+      )
+      .sort(
+        (firstFixture, secondFixture) =>
+          secondFixture.fixture.timestamp - firstFixture.fixture.timestamp
+      );
+
+    const scheduledMatches = fixtures
+      .filter(
+        ({ fixture: { status } }) =>
+          status.short === fixturesStatus.NS ||
+          status.short === fixturesStatus.TBD
+      )
+      .sort(
+        (firstFixture, secondFixture) =>
+          firstFixture.fixture.timestamp - secondFixture.fixture.timestamp
+      );
+
+    const liveMatches = fixtures
+      .filter(
+        ({ fixture: { status } }) =>
+          status.short === fixturesStatus["1H"] ||
+          status.short === fixturesStatus["2H"] ||
+          status.short === fixturesStatus.HT ||
+          status.short === fixturesStatus.ET ||
+          status.short === fixturesStatus.BT ||
+          status.short === fixturesStatus.INT
+      )
+      .sort(
+        (firstFixture, secondFixture) =>
+          firstFixture.fixture.timestamp - secondFixture.fixture.timestamp
+      );
 
     let timeToNextLiveMatch: number | null;
     let isLive: boolean;
-    if (!liveMatches.length && scheduledMatchesConverted.length) {
-      const [nextLiveMatch] = scheduledMatchesConverted;
+    if (!liveMatches.length && scheduledMatches.length) {
+      const [nextLiveMatch] = scheduledMatches;
       const currentDate = Date.now();
-      const nextLiveMatchDate = new Date(nextLiveMatch.date);
+      const nextLiveMatchDate = new Date(nextLiveMatch.fixture.date);
       timeToNextLiveMatch = nextLiveMatchDate.getTime() - currentDate;
       isLive = false;
     } else {
@@ -66,8 +73,8 @@ export const fetchFixtures = createAsyncThunk<
 
     return {
       allFixtures: fixtures,
-      finished: finishedMatchesConverted,
-      scheduled: scheduledMatchesConverted,
+      finished: finishedMatches,
+      scheduled: scheduledMatches,
       live: liveMatches,
       timeToNextLiveMatch,
       isLive,
