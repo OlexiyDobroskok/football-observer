@@ -1,7 +1,12 @@
 @use "styles/functions" as fn;
 
 .button {
+  display: flex;
+  justify-content: center;
+  align-items: center;
   padding: fn.px-to-rem(5px);
+  border: none;
+  cursor: pointer;
   border-radius: 10px;
   color: var(--text-color);
   background-color: var(--accent-color-dark);
