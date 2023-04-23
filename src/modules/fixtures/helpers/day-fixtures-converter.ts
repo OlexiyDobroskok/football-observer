@@ -1,19 +1,9 @@
 import { DayFixtures, Fixture } from "api/types/fixtures-types";
 
-type SortMethod = "ASCENDING" | "DESCENDING";
-
-export const sortDayFixtures = (
-  fixtures: Fixture[],
-  sortMethod: SortMethod = "ASCENDING"
-) => {
+export const dayFixturesConverter = (fixtures: Fixture[]) => {
   let eventDate: Date;
 
-  return [...fixtures]
-    .sort((firstFixture, secondFixture) =>
-      sortMethod === "DESCENDING"
-        ? secondFixture.fixture.timestamp - firstFixture.fixture.timestamp
-        : firstFixture.fixture.timestamp - secondFixture.fixture.timestamp
-    )
+  return fixtures
     .map(({ fixture }, _, fixtures) => {
       const matchDate = new Date(fixture.date);
       const matchDay = matchDate.getDate();
