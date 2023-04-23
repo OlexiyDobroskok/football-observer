@@ -1,12 +1,18 @@
 import { DayFixtures, Fixture } from "api/types/fixtures-types";
 
-export const sortDayFixtures = (fixtures: Fixture[]) => {
+type SortMethod = "ASCENDING" | "DESCENDING";
+
+export const sortDayFixtures = (
+  fixtures: Fixture[],
+  sortMethod: SortMethod = "ASCENDING"
+) => {
   let eventDate: Date;
 
   return [...fixtures]
-    .sort(
-      (firstFixture, secondFixture) =>
-        firstFixture.fixture.timestamp - secondFixture.fixture.timestamp
+    .sort((firstFixture, secondFixture) =>
+      sortMethod === "DESCENDING"
+        ? secondFixture.fixture.timestamp - firstFixture.fixture.timestamp
+        : firstFixture.fixture.timestamp - secondFixture.fixture.timestamp
     )
     .map(({ fixture }, _, fixtures) => {
       const matchDate = new Date(fixture.date);
@@ -31,7 +37,10 @@ export const sortDayFixtures = (fixtures: Fixture[]) => {
             eventDate.getFullYear() === year
           );
         });
-        return { date: matchDate.toISOString(), fixtures: dayFixtures } as DayFixtures;
+        return {
+          date: matchDate.toISOString(),
+          fixtures: dayFixtures,
+        } as DayFixtures;
       }
       return null;
     })
