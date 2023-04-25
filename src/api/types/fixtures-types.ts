@@ -39,7 +39,7 @@ export interface FixtureVenue {
 
 export interface FixtureStatus {
   long: string;
-  short: string;
+  short: FixturesAvailableStatus;
   elapsed: number | null;
 }
 
