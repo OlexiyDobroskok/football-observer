@@ -6,10 +6,12 @@ import {
 } from "modules/fixtures/ui/Scoreboard/Scoreboard";
 import { getTimeShortFormat } from "modules/fixtures/helpers/date-format";
 import { Container } from "ui/Container/Container";
+import { FixturesAvailableStatus, fixturesStatus } from "api/helpers/consts";
 import classes from "./FixtureItem.module.scss";
 
 export interface FixtureItemProps extends Pick<ScoreboardProps, "matchScore"> {
   date: string;
+  matchStatus: FixturesAvailableStatus;
   teamsOfMatch: FixtureTeamResult;
   isEven?: boolean;
 }
@@ -18,10 +20,14 @@ export const FixtureItem = ({
   date,
   teamsOfMatch: { home: homeTeam, away: awayTeam },
   matchScore,
+  matchStatus,
   isEven,
 }: FixtureItemProps) => {
   const matchDate = new Date(date);
-  const matchTime = getTimeShortFormat(matchDate);
+  const matchTime =
+    matchStatus === fixturesStatus.TBD
+      ? `- : -`
+      : getTimeShortFormat(matchDate);
   const isScore = matchScore.home !== null && matchScore.away !== null;
 
   return (

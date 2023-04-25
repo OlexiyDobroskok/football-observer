@@ -20,6 +20,7 @@ export const FixturesList = ({ fixtures }: FixturesListProps) => {
       <FixtureItem
         key={fixture.id}
         date={fixture.date}
+        matchStatus={fixture.status.short}
         teamsOfMatch={teams}
         matchScore={goals}
         isEven={checkIsEven(index)}
