@@ -24,7 +24,6 @@ export const fetchFixtures = createAsyncThunk<
         ({ fixture: { status } }) =>
           status.short === fixturesStatus.FT ||
           status.short === fixturesStatus.AET ||
-          status.short === fixturesStatus.AET ||
           status.short === fixturesStatus.PEN
       )
       .sort(
