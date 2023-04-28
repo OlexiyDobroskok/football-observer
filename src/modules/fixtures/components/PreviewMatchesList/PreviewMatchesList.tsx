@@ -1,5 +1,5 @@
-import { Fixture } from "api/types/fixtures-types";
 import { FixturePreviewCard } from "modules/fixtures/components/FixturePreviewCard/FixturePreviewCard";
+import { Fixture } from "src/api/types/fixtures-types";
 import classes from "./PreviewMatchesList.module.scss";
 
 export interface PreviewMatchesListProps {
