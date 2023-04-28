@@ -1,9 +1,6 @@
 import { Link } from "react-router-dom";
-import {
-  FormList,
-  FormListProps,
-} from "modules/standings/components/FormList/FormList";
 import { ClubLogo, ClubLogoProps } from "ui/ClubLogo/ClubLogo";
+import { FormList, FormListProps } from "../../components/FormList/FormList";
 import classes from "./PositionRowMobile.module.scss";
 
 interface PositionRowMobileProps extends FormListProps, ClubLogoProps {
