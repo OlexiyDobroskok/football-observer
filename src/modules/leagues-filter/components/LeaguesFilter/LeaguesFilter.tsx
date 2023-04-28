@@ -1,11 +1,11 @@
 import { useEffect } from "react";
 import { useAppDispatch, useAppSelector } from "hooks/redux";
 import { openSearchModal } from "store/modals-slice";
-import { fetchLeagues } from "modules/leagues-filter/store/leagues-thunk";
-import { SearchModal } from "modules/leagues-filter/components/SearchModal/SearchModal";
-import { TopLeaguesList } from "modules/leagues-filter/components/TopLeaguesList/TopLeaguesList";
 import { Container } from "ui/Container/Container";
 import { SearchButton } from "ui/SearchButton/SearchButton";
+import { fetchLeagues } from "../../store/leagues-thunk";
+import { SearchModal } from "../SearchModal/SearchModal";
+import { TopLeaguesList } from "../TopLeaguesList/TopLeaguesList";
 import classes from "./LeaguesFilter.module.scss";
 
 export const LeaguesFilter = () => {

@@ -2,13 +2,13 @@ import { ChangeEvent, useEffect, useRef } from "react";
 import { useAppDispatch, useAppSelector } from "hooks/redux";
 import { SearchInput } from "ui/SearchInput/SearchInput";
 import { List } from "ui/List/List";
+import { Button } from "ui/Button/Button";
+import { closeModal } from "store/modals-slice";
 import {
   setCurrentLeague,
   setSearchLeaguesQuery,
-} from "modules/leagues-filter/store/leagues-slice";
-import { closeModal } from "store/modals-slice";
+} from "../../store/leagues-slice";
 import classes from "./LeagueSearchPlace.module.scss";
-import { Button } from "ui/Button/Button";
 
 export const LeagueSearchPlace = () => {
   const { searchQuery, filteredLeagues } = useAppSelector(

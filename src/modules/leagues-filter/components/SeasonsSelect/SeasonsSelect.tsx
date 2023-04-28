@@ -1,7 +1,7 @@
-import { Select, SelectOption } from "ui/Select/Select";
-import { useAppDispatch, useAppSelector } from "hooks/redux";
 import { ChangeEvent, useMemo } from "react";
-import { setCurrentSeason } from "modules/leagues-filter/store/leagues-slice";
+import { useAppDispatch, useAppSelector } from "hooks/redux";
+import { Select, SelectOption } from "ui/Select/Select";
+import { setCurrentSeason } from "../../store/leagues-slice";
 
 interface SeasonsSelectProps {
   className?: string;

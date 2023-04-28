@@ -1,11 +1,13 @@
 import { useMemo } from "react";
 import { useAppDispatch, useAppSelector } from "hooks/redux";
-import { LeagueFilterButton } from "modules/leagues-filter/ui/LeagueFilterButton/LeagueFilterButton";
-import { topLeaguesIdList } from "modules/leagues-filter/helpers/consts";
-import { setCurrentLeague } from "modules/leagues-filter/store/leagues-slice";
 import { List } from "ui/List/List";
 import { LeagueInformation } from "api/types/leagues-types";
+import { setCurrentLeague } from "../../store/leagues-slice";
+import { LeagueFilterButton } from "../../ui/LeagueFilterButton/LeagueFilterButton";
 import classes from "./TopLeaguesList.module.scss";
+
+
+const topLeaguesIdList = [39, 78, 140, 135, 61];
 
 export const TopLeaguesList = () => {
   const { availableLeagues, currentLeagueId } = useAppSelector(
