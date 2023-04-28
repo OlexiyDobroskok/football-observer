@@ -1,12 +1,9 @@
 import { FixtureTeamResult } from "api/types/fixtures-types";
-import { ListTeamMark } from "modules/fixtures/ui/ListTeamMark/ListTeamMark";
-import {
-  Scoreboard,
-  ScoreboardProps,
-} from "modules/fixtures/ui/Scoreboard/Scoreboard";
-import { getTimeShortFormat } from "modules/fixtures/helpers/date-format";
 import { Container } from "ui/Container/Container";
 import { FixturesAvailableStatus, fixturesStatus } from "api/helpers/consts";
+import { Scoreboard, ScoreboardProps } from "../../ui/Scoreboard/Scoreboard";
+import { getTimeShortFormat } from "../../helpers/date-format";
+import { ListTeamMark } from "../../ui/ListTeamMark/ListTeamMark";
 import classes from "./FixtureItem.module.scss";
 
 export interface FixtureItemProps extends Pick<ScoreboardProps, "matchScore"> {

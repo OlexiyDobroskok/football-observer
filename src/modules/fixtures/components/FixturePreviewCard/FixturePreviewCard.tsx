@@ -1,10 +1,10 @@
 import { Fixture } from "api/types/fixtures-types";
-import { Scoreboard } from "modules/fixtures/ui/Scoreboard/Scoreboard";
-import { MatchStatus } from "modules/fixtures/ui/MatchSatus/MatchStatus";
-import { MatchDatePreview } from "modules/fixtures/ui/MatchDatePreview/MatchDatePreview";
-import { PreviewTeamMark } from "modules/fixtures/ui/PreviewTeamMark/PreviewTeamMark";
 import { Container } from "ui/Container/Container";
-import classes from "./FixturePreviwCard.module.scss";
+import { PreviewTeamMark } from "../../ui/PreviewTeamMark/PreviewTeamMark";
+import { Scoreboard } from "../../ui/Scoreboard/Scoreboard";
+import { MatchStatus } from "../../ui/MatchStatus/MatchStatus";
+import { MatchDatePreview } from "../../ui/MatchDatePreview/MatchDatePreview";
+import classes from "./FixturePreviewCard.module.scss";
 
 export interface FixturePreviewCardProps {
   fixtureInfo: Fixture;

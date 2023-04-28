@@ -1,6 +1,6 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { fetchFixtures } from "modules/fixtures/store/fixtures-thunk";
 import { Fixture } from "api/types/fixtures-types";
+import { fetchFixtures } from "./fixtures-thunk";
 import { DayFixtures } from "../helpers/day-fixtures-converter";
 
 interface FixturesState {
