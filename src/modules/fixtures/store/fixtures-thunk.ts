@@ -2,11 +2,15 @@ import { createAsyncThunk } from "@reduxjs/toolkit";
 import { FootballService } from "api/football-service";
 import { AvailableFixtureParams, Fixture } from "api/types/fixtures-types";
 import { fixturesStatus } from "src/api/helpers/consts";
+import {
+  DayFixtures,
+  dayFixturesConverter,
+} from "../helpers/day-fixtures-converter";
 
 export interface FixturesData {
   allFixtures: Fixture[];
-  finished: Fixture[];
-  scheduled: Fixture[];
+  finished: DayFixtures[];
+  scheduled: DayFixtures[];
   live: Fixture[];
   timeToNextLiveMatch: number | null;
   isLive: boolean;
@@ -19,48 +23,40 @@ export const fetchFixtures = createAsyncThunk<
 >("fixtures/fetchFixtures", async (params, { rejectWithValue }) => {
   try {
     const fixtures = await FootballService.getAvailableFixtures(params);
-    const finishedMatches = fixtures
-      .filter(
+
+    const finishedMatches = dayFixturesConverter(
+      fixtures.filter(
         ({ fixture: { status } }) =>
           status.short === fixturesStatus.FT ||
           status.short === fixturesStatus.AET ||
           status.short === fixturesStatus.PEN
-      )
-      .sort(
-        (firstFixture, secondFixture) =>
-          secondFixture.fixture.timestamp - firstFixture.fixture.timestamp
-      );
+      ),
+      "DESCENDING"
+    );
 
-    const scheduledMatches = fixtures
-      .filter(
+    const scheduledMatches = dayFixturesConverter(
+      fixtures.filter(
         ({ fixture: { status } }) =>
           status.short === fixturesStatus.NS ||
           status.short === fixturesStatus.TBD
       )
-      .sort(
-        (firstFixture, secondFixture) =>
-          firstFixture.fixture.timestamp - secondFixture.fixture.timestamp
-      );
+    );
 
-    const liveMatches = fixtures
-      .filter(
-        ({ fixture: { status } }) =>
-          status.short === fixturesStatus["1H"] ||
-          status.short === fixturesStatus["2H"] ||
-          status.short === fixturesStatus.HT ||
-          status.short === fixturesStatus.ET ||
-          status.short === fixturesStatus.BT ||
-          status.short === fixturesStatus.INT
-      )
-      .sort(
-        (firstFixture, secondFixture) =>
-          firstFixture.fixture.timestamp - secondFixture.fixture.timestamp
-      );
+    const liveMatches = fixtures.filter(
+      ({ fixture: { status } }) =>
+        status.short === fixturesStatus["1H"] ||
+        status.short === fixturesStatus["2H"] ||
+        status.short === fixturesStatus.HT ||
+        status.short === fixturesStatus.ET ||
+        status.short === fixturesStatus.BT ||
+        status.short === fixturesStatus.INT
+    );
 
     let timeToNextLiveMatch: number | null;
     let isLive: boolean;
     if (!liveMatches.length && scheduledMatches.length) {
-      const [nextLiveMatch] = scheduledMatches;
+      const [nextMatchDay] = scheduledMatches
+      const [nextLiveMatch] = nextMatchDay.fixtures;
       const currentDate = Date.now();
       const nextLiveMatchDate = new Date(nextLiveMatch.fixture.date);
       timeToNextLiveMatch = nextLiveMatchDate.getTime() - currentDate;
