@@ -101,7 +101,3 @@ export interface Fixture {
   score: FixtureScore;
 }
 
-export interface DayFixtures {
-  date: string;
-  fixtures: Fixture[];
-}
