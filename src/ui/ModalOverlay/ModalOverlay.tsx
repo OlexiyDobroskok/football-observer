@@ -16,7 +16,7 @@ export const ModalOverlay = ({ children }: ModalOverlayProps) => {
   };
 
   useEffect(() => {
-    const body = document.querySelector("body")! as HTMLBodyElement;
+    const body = document.querySelector("body") as HTMLBodyElement;
     body.classList.add(classes["scroll-hidden"]);
 
     return () => body.classList.remove(classes["scroll-hidden"]);
