@@ -1,11 +1,11 @@
 import { useEffect } from "react";
 import { useAppDispatch, useAppSelector } from "hooks/redux";
-import { PositionRowMobile } from "modules/standings/components/LeagueTable/LeagueTableMobile/PositionRowMobile/PositionRowMobile";
-import { checkIsEven } from "helpers/check-is-even";
-import { fetchLeagueStandings } from "modules/standings/store/standings-thunk";
-import { tableHeaders } from "modules/standings/helpers/consts";
-import classes from "./LeagueTableMobile.module.scss";
 import { Loader } from "ui/Loader/Loader";
+import { checkIsEven } from "helpers/check-is-even";
+import { tableHeaders } from "../../helpers/consts";
+import { fetchLeagueStandings } from "../../store/standings-thunk";
+import { PositionRowMobile } from "../../ui/PositionRowMobile/PositionRowMobile";
+import classes from "./LeagueTableMobile.module.scss";
 
 interface LeagueTableMobileProps {
   leagueId: number;
