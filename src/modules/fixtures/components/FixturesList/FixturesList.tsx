@@ -1,11 +1,9 @@
 import { Fragment } from "react";
-import { DayFixtures } from "api/types/fixtures-types";
-import {
-  getDateLongFormat,
-  getValidDateTimeStrYMDFormat,
-} from "modules/fixtures/helpers/date-format";
-import { FixtureItem } from "modules/fixtures/components/FixtureItem/FixtureItem";
+import { useInfinityPagination } from "src/hooks/use-infinity-pagination";
 import { checkIsEven } from "helpers/check-is-even";
+import { FixtureItem } from "../FixtureItem/FixtureItem";
+import { getDateLongFormat, getValidDateTimeStrYMDFormat } from "../../helpers/date-format";
+import { DayFixtures } from "../../helpers/day-fixtures-converter";
 import classes from "./FixturesList.module.scss";
 
 export interface FixturesListProps {
@@ -13,7 +11,13 @@ export interface FixturesListProps {
 }
 
 export const FixturesList = ({ fixtures }: FixturesListProps) => {
-  const allMatchesList = fixtures.map(({ date, fixtures }) => {
+  const [containerRef, fixturesPage] = useInfinityPagination({
+    dataList: fixtures,
+    elementsPerPage: 7,
+    observerOptions: { threshold: 0 },
+  });
+
+  const matchesList = fixturesPage.map(({ date, fixtures }) => {
     const matchesDate = new Date(date);
     const formattedDate = getDateLongFormat(matchesDate);
     const dayMatchesList = fixtures.map(({ fixture, teams, goals }, index) => (
@@ -34,10 +38,10 @@ export const FixturesList = ({ fixtures }: FixturesListProps) => {
             {formattedDate}
           </time>
         </p>
-        <div>{dayMatchesList}</div>
+        <div ref={containerRef}>{dayMatchesList}</div>
       </Fragment>
     );
   });
 
-  return <div className={classes["fixtures-list"]}>{allMatchesList}</div>;
+  return <div className={classes["fixtures-list"]}>{matchesList}</div>;
 };
