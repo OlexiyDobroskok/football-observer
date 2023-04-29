@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom";
 import { FixtureTeamResult } from "api/types/fixtures-types";
 import { Container } from "ui/Container/Container";
 import { FixturesAvailableStatus, fixturesStatus } from "api/helpers/consts";
@@ -7,6 +8,7 @@ import { ListTeamMark } from "../../ui/ListTeamMark/ListTeamMark";
 import classes from "./FixtureItem.module.scss";
 
 export interface FixtureItemProps extends Pick<ScoreboardProps, "matchScore"> {
+  fixtureId: number;
   date: string;
   matchStatus: FixturesAvailableStatus;
   teamsOfMatch: FixtureTeamResult;
@@ -14,6 +16,7 @@ export interface FixtureItemProps extends Pick<ScoreboardProps, "matchScore"> {
 }
 
 export const FixtureItem = ({
+  fixtureId,
   date,
   teamsOfMatch: { home: homeTeam, away: awayTeam },
   matchScore,
@@ -39,6 +42,7 @@ export const FixtureItem = ({
         )}
       </Container>
       <ListTeamMark team={awayTeam} teamStatus={"AWAY"} />
+      <Link className={classes.link} to={`${fixtureId}`} />
     </Container>
   );
 };

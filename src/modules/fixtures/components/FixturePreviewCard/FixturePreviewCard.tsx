@@ -5,6 +5,8 @@ import { Scoreboard } from "../../ui/Scoreboard/Scoreboard";
 import { MatchStatus } from "../../ui/MatchStatus/MatchStatus";
 import { MatchDatePreview } from "../../ui/MatchDatePreview/MatchDatePreview";
 import classes from "./FixturePreviewCard.module.scss";
+import { fixturesStatus } from "src/api/helpers/consts";
+import { Link } from "react-router-dom";
 
 export interface FixturePreviewCardProps {
   fixtureInfo: Fixture;
@@ -22,6 +24,10 @@ export const FixturePreviewCard = ({
   const { home: homeTeam, away: awayTeam } = teams;
 
   const isMatchResult = goals.home !== null && goals.away !== null;
+  const isMatchFinished =
+    status.short === fixturesStatus.FT ||
+    status.short === fixturesStatus.PEN ||
+    status.short === fixturesStatus.AET;
 
   return (
     <article className={classes.card}>
@@ -32,11 +38,14 @@ export const FixturePreviewCard = ({
         <PreviewTeamMark team={homeTeam} />
         <Container className={classes["match-status"]}>
           {isMatchResult && <Scoreboard matchScore={goals} boardSize={"MD"} />}
-          {status.elapsed && <MatchStatus matchStatus={status} />}
+          {status.elapsed && !isMatchFinished && (
+            <MatchStatus matchStatus={status} />
+          )}
           {!status.elapsed && <MatchDatePreview date={date} />}
         </Container>
         <PreviewTeamMark team={awayTeam} />
       </Container>
+      <Link className={classes.link} to={`${fixtureId}`} />
     </article>
   );
 };

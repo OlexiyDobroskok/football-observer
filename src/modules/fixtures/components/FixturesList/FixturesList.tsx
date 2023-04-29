@@ -2,7 +2,10 @@ import { Fragment } from "react";
 import { useInfinityPagination } from "src/hooks/use-infinity-pagination";
 import { checkIsEven } from "helpers/check-is-even";
 import { FixtureItem } from "../FixtureItem/FixtureItem";
-import { getDateLongFormat, getValidDateTimeStrYMDFormat } from "../../helpers/date-format";
+import {
+  getDateLongFormat,
+  getValidDateTimeStrYMDFormat,
+} from "../../helpers/date-format";
 import { DayFixtures } from "../../helpers/day-fixtures-converter";
 import classes from "./FixturesList.module.scss";
 
@@ -23,6 +26,7 @@ export const FixturesList = ({ fixtures }: FixturesListProps) => {
     const dayMatchesList = fixtures.map(({ fixture, teams, goals }, index) => (
       <FixtureItem
         key={fixture.id}
+        fixtureId={fixture.id}
         date={fixture.date}
         matchStatus={fixture.status.short}
         teamsOfMatch={teams}
