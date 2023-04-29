@@ -45,7 +45,7 @@ export const FixturePreviewCard = ({
         </Container>
         <PreviewTeamMark team={awayTeam} />
       </Container>
-      <Link className={classes.link} to={`${fixtureId}`} />
+      <Link className={classes.link} to={`/fixtures/${fixtureId}`} />
     </article>
   );
 };

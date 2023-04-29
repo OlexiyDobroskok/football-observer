@@ -42,7 +42,7 @@ export const FixtureItem = ({
         )}
       </Container>
       <ListTeamMark team={awayTeam} teamStatus={"AWAY"} />
-      <Link className={classes.link} to={`${fixtureId}`} />
+      <Link className={classes.link} to={`/fixtures/${fixtureId}`} />
     </Container>
   );
 };
