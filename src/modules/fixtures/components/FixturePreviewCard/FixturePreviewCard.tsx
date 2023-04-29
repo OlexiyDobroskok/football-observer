@@ -1,12 +1,13 @@
+import { Link } from "react-router-dom";
 import { Fixture } from "api/types/fixtures-types";
 import { Container } from "ui/Container/Container";
+import { fixturesStatus } from "src/api/helpers/consts";
 import { PreviewTeamMark } from "../../ui/PreviewTeamMark/PreviewTeamMark";
 import { Scoreboard } from "../../ui/Scoreboard/Scoreboard";
 import { MatchStatus } from "../../ui/MatchStatus/MatchStatus";
 import { MatchDatePreview } from "../../ui/MatchDatePreview/MatchDatePreview";
 import classes from "./FixturePreviewCard.module.scss";
-import { fixturesStatus } from "src/api/helpers/consts";
-import { Link } from "react-router-dom";
+
 
 export interface FixturePreviewCardProps {
   fixtureInfo: Fixture;
