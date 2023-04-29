@@ -1,4 +1,4 @@
-export const fixturesStatus = {
+export const fixtureStatus = {
   TBD: "TBD",
   NS: "NS",
   "1H": "1H",
@@ -20,4 +20,64 @@ export const fixturesStatus = {
   LIVE: "LIVE",
 } as const;
 
-export type FixturesAvailableStatus = keyof typeof fixturesStatus;
+type FixtureShortStatusKey = keyof typeof fixtureStatus;
+export type FixtureShortStatus = (typeof fixtureStatus)[FixtureShortStatusKey];
+
+export const fixtureEventType = {
+  GOAL: "Goal",
+  CARD: "Card",
+  SUBST: "Subst",
+  VAR: "Var",
+} as const;
+
+type FixtureEventTypeKey = keyof typeof fixtureEventType;
+export type FixtureEventType = (typeof fixtureEventType)[FixtureEventTypeKey];
+
+export const fixtureGoalType = {
+  NORMAL: "Normal Goal",
+  OWN: "Own Goal",
+  PEN: "Penalty",
+  MISS_PEN: "Missed Penalty",
+} as const;
+
+type FixtureGoalTypeKey = keyof typeof fixtureGoalType;
+export type FixtureGoalType = (typeof fixtureGoalType)[FixtureGoalTypeKey];
+
+export const fixtureCardType = {
+  YELLOW: "Yellow Card",
+  RED: "Red Card",
+} as const;
+
+type FixtureCardTypeKey = keyof typeof fixtureCardType;
+export type FixtureCardType = (typeof fixtureCardType)[FixtureCardTypeKey];
+
+export const fixtureVarType = {
+  GOAL_CANC: "Goal cancelled",
+  PEN_CONF: "Penalty confirmed",
+} as const;
+
+type FixtureVarTypeKey = keyof typeof fixtureVarType;
+export type FixtureVarType = (typeof fixtureVarType)[FixtureVarTypeKey];
+
+export const fixtureStatisticType = {
+  shotsOnGoal: "Shots on Goal",
+  shotsOfGoal: "Shots off Goal",
+  shotsInsideBox: "Shots insidebox",
+  shotsOutsideBox: "Shots outsidebox",
+  totalShots: "Total Shots",
+  blockedShots: "Blocked Shots",
+  fouls: "Fouls",
+  cornerKicks: "Corner Kicks",
+  offsides: "Offsides",
+  ballPossession: "Ball Possession",
+  yellowCards: "Yellow Cards",
+  redCards: "Red Cards",
+  goalkeeperSaves: "Goalkeeper Saves",
+  totalPasses: "Total passes",
+  passesAccurate: "Passes accurate",
+  passesPercent: "Passes %",
+} as const;
+
+type FixtureStatisticTypeKey = keyof typeof fixtureStatisticType
+export type FixtureStatisticType =
+  (typeof fixtureStatisticType)[FixtureStatisticTypeKey];
