@@ -1,7 +1,7 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
 import { FootballService } from "api/football-service";
 import { AvailableFixtureParams, Fixture } from "api/types/fixtures-types";
-import { fixturesStatus } from "src/api/helpers/consts";
+import { fixtureStatus } from "src/api/helpers/consts";
 import {
   DayFixtures,
   dayFixturesConverter,
@@ -27,9 +27,9 @@ export const fetchFixtures = createAsyncThunk<
     const finishedMatches = dayFixturesConverter(
       fixtures.filter(
         ({ fixture: { status } }) =>
-          status.short === fixturesStatus.FT ||
-          status.short === fixturesStatus.AET ||
-          status.short === fixturesStatus.PEN
+          status.short === fixtureStatus.FT ||
+          status.short === fixtureStatus.AET ||
+          status.short === fixtureStatus.PEN
       ),
       "DESCENDING"
     );
@@ -37,25 +37,25 @@ export const fetchFixtures = createAsyncThunk<
     const scheduledMatches = dayFixturesConverter(
       fixtures.filter(
         ({ fixture: { status } }) =>
-          status.short === fixturesStatus.NS ||
-          status.short === fixturesStatus.TBD
+          status.short === fixtureStatus.NS ||
+          status.short === fixtureStatus.TBD
       )
     );
 
     const liveMatches = fixtures.filter(
       ({ fixture: { status } }) =>
-        status.short === fixturesStatus["1H"] ||
-        status.short === fixturesStatus["2H"] ||
-        status.short === fixturesStatus.HT ||
-        status.short === fixturesStatus.ET ||
-        status.short === fixturesStatus.BT ||
-        status.short === fixturesStatus.INT
+        status.short === fixtureStatus["1H"] ||
+        status.short === fixtureStatus["2H"] ||
+        status.short === fixtureStatus.HT ||
+        status.short === fixtureStatus.ET ||
+        status.short === fixtureStatus.BT ||
+        status.short === fixtureStatus.INT
     );
 
     let timeToNextLiveMatch: number | null;
     let isLive: boolean;
     if (!liveMatches.length && scheduledMatches.length) {
-      const [nextMatchDay] = scheduledMatches
+      const [nextMatchDay] = scheduledMatches;
       const [nextLiveMatch] = nextMatchDay.fixtures;
       const currentDate = Date.now();
       const nextLiveMatchDate = new Date(nextLiveMatch.fixture.date);

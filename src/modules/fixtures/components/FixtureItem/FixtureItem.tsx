@@ -1,7 +1,7 @@
 import { Link } from "react-router-dom";
 import { FixtureTeamResult } from "api/types/fixtures-types";
 import { Container } from "ui/Container/Container";
-import { FixturesAvailableStatus, fixturesStatus } from "api/helpers/consts";
+import { FixtureShortStatus, fixtureStatus } from "api/helpers/consts";
 import { Scoreboard, ScoreboardProps } from "../../ui/Scoreboard/Scoreboard";
 import { getTimeShortFormat } from "../../helpers/date-format";
 import { ListTeamMark } from "../../ui/ListTeamMark/ListTeamMark";
@@ -10,7 +10,7 @@ import classes from "./FixtureItem.module.scss";
 export interface FixtureItemProps extends Pick<ScoreboardProps, "matchScore"> {
   fixtureId: number;
   date: string;
-  matchStatus: FixturesAvailableStatus;
+  matchStatus: FixtureShortStatus;
   teamsOfMatch: FixtureTeamResult;
   isEven?: boolean;
 }
@@ -25,9 +25,7 @@ export const FixtureItem = ({
 }: FixtureItemProps) => {
   const matchDate = new Date(date);
   const matchTime =
-    matchStatus === fixturesStatus.TBD
-      ? `- : -`
-      : getTimeShortFormat(matchDate);
+    matchStatus === fixtureStatus.TBD ? `- : -` : getTimeShortFormat(matchDate);
   const isScore = matchScore.home !== null && matchScore.away !== null;
 
   return (

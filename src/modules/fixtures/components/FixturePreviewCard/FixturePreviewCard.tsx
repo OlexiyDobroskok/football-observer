@@ -1,13 +1,12 @@
 import { Link } from "react-router-dom";
 import { Fixture } from "api/types/fixtures-types";
 import { Container } from "ui/Container/Container";
-import { fixturesStatus } from "src/api/helpers/consts";
+import { fixtureStatus } from "src/api/helpers/consts";
 import { PreviewTeamMark } from "../../ui/PreviewTeamMark/PreviewTeamMark";
 import { Scoreboard } from "../../ui/Scoreboard/Scoreboard";
 import { MatchStatus } from "../../ui/MatchStatus/MatchStatus";
 import { MatchDatePreview } from "../../ui/MatchDatePreview/MatchDatePreview";
 import classes from "./FixturePreviewCard.module.scss";
-
 
 export interface FixturePreviewCardProps {
   fixtureInfo: Fixture;
@@ -26,9 +25,9 @@ export const FixturePreviewCard = ({
 
   const isMatchResult = goals.home !== null && goals.away !== null;
   const isMatchFinished =
-    status.short === fixturesStatus.FT ||
-    status.short === fixturesStatus.PEN ||
-    status.short === fixturesStatus.AET;
+    status.short === fixtureStatus.FT ||
+    status.short === fixtureStatus.PEN ||
+    status.short === fixtureStatus.AET;
 
   return (
     <article className={classes.card}>
