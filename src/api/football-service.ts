@@ -4,7 +4,11 @@ import {
   RequiredStandingsParams,
   StandingsResponse,
 } from "api/types/standings-types";
-import { AvailableFixtureParams, Fixture } from "api/types/fixtures-types";
+import {
+  AvailableFixtureParams,
+  Fixture,
+  FixtureDetail,
+} from "api/types/fixtures-types";
 
 interface FootballApiData<T> {
   response: T;
@@ -88,5 +92,16 @@ export class FootballService {
       }
     );
     return data.response;
+  }
+
+  static async getDetailFixtureInfo(fixtureId: number) {
+    const { data }: FootballApiResponse<FixtureDetail[]> =
+      await footballApi.get("fixtures", {
+        params: {
+          id: fixtureId,
+        },
+      });
+    const [fixtureDetail] = data.response;
+    return fixtureDetail;
   }
 }
