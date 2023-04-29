@@ -1,7 +1,8 @@
-export { Root } from "pages/Root/Root";
-export { Home } from "pages/Home/Home";
-export { Calendar } from "pages/Calendar/Calendar";
-export { Standings } from "pages/Standings/Standings";
-export { Profile } from "pages/Profile/Profile";
-export { Teams } from "pages/Teams/Teams";
-export { TeamInfo } from "pages/TeamInfo/TeamInfo";
+export { Root } from "./Root/Root";
+export { Home } from "./Home/Home";
+export { Fixtures } from "./Fixtures/Fixtures";
+export { Standings } from "./Standings/Standings";
+export { Profile } from "./Profile/Profile";
+export { Teams } from "./Teams/Teams";
+export { TeamInfo } from "./TeamInfo/TeamInfo";
+export { FixtureDetail } from './FixtureDetail/FixtureDetail';

@@ -1,5 +1,5 @@
+import { ChangeEvent, useEffect, useState } from "react";
 import { useAppDispatch, useAppSelector } from "hooks/redux";
-import { ChangeEvent, useEffect, useMemo, useState } from "react";
 import { useLocation } from "react-router-dom";
 import {
   fetchFixtures,
@@ -8,13 +8,13 @@ import {
 } from "modules/fixtures";
 import { HiddenElement } from "ui/HiddenElement/HiddenElement";
 import { Tab } from "ui/Tab/Tab";
-import { dayFixturesConverter } from "modules/fixtures/helpers/day-fixtures-converter";
-import classes from "./Calendar.module.scss";
+import classes from "./Fixtures.module.scss";
+import { Fixture } from "src/api/types/fixtures-types";
 
-type CalendarTab = "Results" | "Fixtures";
+type FixturesTab = "Results" | "Fixtures";
 
-export const Calendar = () => {
-  const [selectedTab, setSelectedTab] = useState<CalendarTab>("Fixtures");
+export const Fixtures = () => {
+  const [selectedTab, setSelectedTab] = useState<FixturesTab>("Fixtures");
   const {
     finishedMatches,
     scheduledMatches,
@@ -58,9 +58,10 @@ export const Calendar = () => {
     };
   }, [isLive, currentLeagueId, currentSeason, location.pathname]);
 
-  const availableTabs: CalendarTab[] = ["Results", "Fixtures"];
+  const availableTabs: FixturesTab[] = ["Results", "Fixtures"];
+
   const changeTabs = ({ target }: ChangeEvent<HTMLInputElement>) => {
-    setSelectedTab(target.value as CalendarTab);
+    setSelectedTab(target.value as FixturesTab);
   };
 
   const tabsList = availableTabs.map((tabName) => (
@@ -73,27 +74,34 @@ export const Calendar = () => {
     />
   ));
 
-  const resultsList = useMemo(
-    () => dayFixturesConverter(finishedMatches),
-    [finishedMatches]
-  );
-  const fixturesList = useMemo(
-    () => dayFixturesConverter(scheduledMatches),
-    [scheduledMatches]
-  );
+  let previewMatches: Fixture[];
+  if (selectedTab === "Fixtures" && liveMatches.length) {
+    previewMatches = liveMatches;
+  } else if (
+    selectedTab === "Fixtures" &&
+    !liveMatches.length &&
+    scheduledMatches.length
+  ) {
+    const [upcomingMatchDay] = scheduledMatches;
+    previewMatches = upcomingMatchDay.fixtures;
+  } else if (selectedTab === "Results" && finishedMatches.length) {
+    const [latestMatchDay] = finishedMatches;
+    previewMatches = latestMatchDay.fixtures;
+  } else {
+    previewMatches = [];
+  }
 
-  console.log(fixturesList);
   return (
     <>
       <HiddenElement as={"h1"}>League Fixtures</HiddenElement>
-      {!!liveMatches.length && (
-        <div className={classes["live-place"]}>
-          <PreviewMatchesList matches={liveMatches} />
-        </div>
-      )}
+      <div className={classes["live-place"]}>
+        <PreviewMatchesList matches={previewMatches} />
+      </div>
       <div className={classes["tabs-group"]}>{tabsList}</div>
-      {selectedTab === "Results" && <FixturesList fixtures={resultsList} />}
-      {selectedTab === "Fixtures" && <FixturesList fixtures={fixturesList} />}
+      {selectedTab === "Results" && <FixturesList fixtures={finishedMatches} />}
+      {selectedTab === "Fixtures" && (
+        <FixturesList fixtures={scheduledMatches} />
+      )}
     </>
   );
 };

@@ -18,8 +18,8 @@ export const menuList: MenuElement[] = [
   },
   {
     id: "c2",
-    title: "CALENDAR",
-    path: PAGE_ROUTES.CALENDAR,
+    title: "FIXTURES",
+    path: PAGE_ROUTES.FIXTURES,
     iconHref: `${svgSprite}#calendar`,
   },
   {
