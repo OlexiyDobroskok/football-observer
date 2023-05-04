@@ -1,14 +1,14 @@
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import {
-  Root,
+  FixtureDetail,
   Fixtures,
   Home,
   Profile,
+  Root,
   Standings,
-  Teams,
   TeamInfo,
-  FixtureDetail,
-} from "src/pages";
+  Teams,
+} from "./pages";
 import { PAGE_ROUTES } from "helpers/consts";
 import { Provider } from "react-redux";
 import { store } from "store/store";

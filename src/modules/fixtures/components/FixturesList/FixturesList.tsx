@@ -1,5 +1,5 @@
 import { Fragment } from "react";
-import { useInfinityPagination } from "src/hooks/use-infinity-pagination";
+import { useInfinityPagination } from "hooks/use-infinity-pagination";
 import { checkIsEven } from "helpers/check-is-even";
 import { FixtureItem } from "../FixtureItem/FixtureItem";
 import {

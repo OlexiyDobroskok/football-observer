@@ -1,7 +1,7 @@
 import { Link } from "react-router-dom";
 import { Fixture } from "api/types/fixtures-types";
 import { Container } from "ui/Container/Container";
-import { fixtureStatus } from "src/api/helpers/consts";
+import { fixtureStatus } from "api/helpers/consts";
 import { PreviewTeamMark } from "../../ui/PreviewTeamMark/PreviewTeamMark";
 import { Scoreboard } from "../../ui/Scoreboard/Scoreboard";
 import { MatchStatus } from "../../ui/MatchStatus/MatchStatus";

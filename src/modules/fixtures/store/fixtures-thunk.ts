@@ -1,7 +1,7 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
 import { FootballService } from "api/football-service";
 import { AvailableFixtureParams, Fixture } from "api/types/fixtures-types";
-import { fixtureStatus } from "src/api/helpers/consts";
+import { fixtureStatus } from "api/helpers/consts";
 import {
   DayFixtures,
   dayFixturesConverter,

@@ -1,5 +1,5 @@
 import { MouseEventHandler } from "react";
-import { SvgIcon } from "src/ui/SvgIcon/SvgIcon";
+import { SvgIcon } from "../SvgIcon/SvgIcon";
 import searchIcon from "./search.svg";
 import classes from "./SearchButton.module.scss";
 

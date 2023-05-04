@@ -1,15 +1,14 @@
-import classes from "./MenuItemMobile.module.scss";
 import { NavLink } from "react-router-dom";
-import { FC } from "react";
 import { PagePath } from "types/types";
-import { SvgIcon } from "src/ui/SvgIcon/SvgIcon";
+import { SvgIcon } from "ui/SvgIcon/SvgIcon";
+import classes from "./MenuItemMobile.module.scss";
 
 interface MenuItemProps {
   linkPath: PagePath;
   iconHref: string;
 }
 
-export const MenuItemMobile: FC<MenuItemProps> = ({ linkPath, iconHref }) => {
+export const MenuItemMobile = ({ linkPath, iconHref }: MenuItemProps) => {
   return (
     <li>
       <NavLink

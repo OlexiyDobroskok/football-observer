@@ -8,8 +8,8 @@ import {
 } from "modules/fixtures";
 import { HiddenElement } from "ui/HiddenElement/HiddenElement";
 import { Tab } from "ui/Tab/Tab";
+import { Fixture } from "api/types/fixtures-types";
 import classes from "./Fixtures.module.scss";
-import { Fixture } from "src/api/types/fixtures-types";
 
 type FixturesTab = "Results" | "Fixtures";
 

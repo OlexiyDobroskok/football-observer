@@ -1,6 +1,6 @@
 import { Outlet } from "react-router-dom";
 import { Container } from "ui/Container/Container";
-import { NavMenuMobile } from "src/components/NavMenu";
+import { NavMenuMobile } from "components/NavMenu";
 import { LeaguesFilter } from "modules/leagues-filter";
 import classes from "./Root.module.scss";
 

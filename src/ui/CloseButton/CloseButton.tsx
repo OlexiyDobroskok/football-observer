@@ -1,5 +1,5 @@
 import { MouseEventHandler } from "react";
-import { SvgIcon } from "src/ui/SvgIcon/SvgIcon";
+import { SvgIcon } from "../SvgIcon/SvgIcon";
 import closeIcon from "./close-icon.svg";
 import classes from "./CloseButton.module.scss";
 
