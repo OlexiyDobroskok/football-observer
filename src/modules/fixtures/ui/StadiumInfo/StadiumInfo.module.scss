@@ -1,0 +1,17 @@
+@use "styles/functions" as fn;
+
+.container {
+  display: flex;
+  align-items: center;
+  gap: fn.px-to-rem(10px);
+}
+
+.icon {
+  width: fn.px-to-rem(25px);
+  height: fn.px-to-rem(25px);
+}
+
+.description {
+  margin: 0;
+  color: var(--text-color);
+}
