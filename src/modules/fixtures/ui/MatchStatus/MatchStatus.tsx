@@ -3,13 +3,20 @@ import classes from "./MatchStatus.module.scss";
 
 export interface MatchStatusProps {
   matchStatus: FixtureStatus;
+  isLive: boolean;
 }
 
 export const MatchStatus = ({
-  matchStatus: { short: statusDescription, elapsed: elapsedTime },
+  matchStatus: { short: matchStatus, elapsed: elapsedTime },
+  isLive,
 }: MatchStatusProps) => (
   <div className={classes.container}>
-    {elapsedTime && <p className={classes.time}>{`${elapsedTime}'`}</p>}
-    <p className={classes.status}>({statusDescription})</p>
+    {isLive && (
+      <>
+        <p className={classes.time}>{`${elapsedTime}'`}</p>
+        <p className={classes.status}>({matchStatus})</p>
+      </>
+    )}
+    {!isLive && <p className={classes["status-lg"]}>{matchStatus}</p>}
   </div>
 );
