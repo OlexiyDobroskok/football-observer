@@ -123,6 +123,10 @@ export interface FixtureEvent {
   comments: string | null;
 }
 
+export interface FixtureEventApp extends FixtureEvent {
+  id: string | number;
+}
+
 export interface ShapeColor {
   primary: string;
   number: string;
@@ -207,7 +211,7 @@ export interface PlayerTacklesStat {
   interceptions: number;
 }
 
-export interface PlyerDuelsStat {
+export interface PlayerDuelsStat {
   total: number | null;
   won: number | null;
 }
@@ -243,7 +247,7 @@ export interface PlayerGameStat {
   goals: PlayerGoalsStat;
   passes: PlayerPassesStat;
   tackles: PlayerTacklesStat;
-  duels: PlyerDuelsStat;
+  duels: PlayerDuelsStat;
   dribbles: PlayerDribblesStat;
   fouls: PlayerFoulsStat;
   cards: PlayerCardsStat;
@@ -270,9 +274,31 @@ export interface FixtureTeamStat {
   statistics: TeamStatForm[];
 }
 
-export interface FixtureDetail extends Fixture {
-  events: FixtureEvent[];
+export interface FixtureDetailInfo extends Fixture {
   lineups: FixtureTeamLineup[];
   players: FixtureTeamPlayersStat[];
-  statistics: FixtureTeamStat[]
+  statistics: FixtureTeamStat[];
+}
+
+export interface FixtureDetailInfoApi extends FixtureDetailInfo {
+  events: FixtureEvent[];
+}
+
+export interface TeamEventsDefinition {
+  locationStatus: "HOME" | "AWAY";
+  events: FixtureEventApp[];
+}
+
+export interface SortedEvents {
+  homeTeam: TeamEventsDefinition;
+  awayTeam: TeamEventsDefinition;
+}
+
+export interface FixtureDetailInfoApp extends FixtureDetailInfo {
+  events: SortedEvents;
+}
+
+export interface HeadToHeadArgs {
+  firstTeamId: number;
+  secondTeamId: number;
 }
