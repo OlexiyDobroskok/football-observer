@@ -4,6 +4,9 @@ const getFormattedDate = (date: Date, opt: Intl.DateTimeFormatOptions) =>
 const getWeekDayLF = (date: Date) =>
   getFormattedDate(date, { weekday: "long" });
 
+const getWeekDaySF = (date: Date) =>
+  getFormattedDate(date, { weekday: "short" });
+
 const getMonthLF = (date: Date) => getFormattedDate(date, { month: "long" });
 
 const getMonthSF = (date: Date) => getFormattedDate(date, { month: "2-digit" });
@@ -33,3 +36,10 @@ export const getDateLongFormat = (date: Date) =>
 
 export const getValidDateTimeStrYMDFormat = (date: Date) =>
   `${date.getFullYear()}-${getMonthSF(date)}-${getMonthDayLF(date)}`;
+
+export const twoDigitsFormat = (num:number|string) => `0${num}`.slice(-2)
+
+export const getDateMediumFormat = (date: Date) =>
+  `${getWeekDaySF(date)} ${getMonthDaySF(date)} ${getMonthLF(
+    date
+  )} ${date.getFullYear()}`;
