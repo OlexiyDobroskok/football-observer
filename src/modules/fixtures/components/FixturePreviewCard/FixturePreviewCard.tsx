@@ -1,11 +1,12 @@
 import { Link } from "react-router-dom";
 import { Fixture } from "api/types/fixtures-types";
 import { Container } from "ui/Container/Container";
-import { fixtureStatus } from "api/helpers/consts";
 import { PreviewTeamMark } from "../../ui/PreviewTeamMark/PreviewTeamMark";
 import { Scoreboard } from "../../ui/Scoreboard/Scoreboard";
 import { MatchStatus } from "../../ui/MatchStatus/MatchStatus";
 import { MatchDatePreview } from "../../ui/MatchDatePreview/MatchDatePreview";
+import { checkIsMatchFinished } from "../../helpers/checkIsMatchFinished";
+import { checkIsMatchLive } from "../../helpers/checkIsMatchLive";
 import classes from "./FixturePreviewCard.module.scss";
 
 export interface FixturePreviewCardProps {
@@ -23,11 +24,8 @@ export const FixturePreviewCard = ({
   } = league;
   const { home: homeTeam, away: awayTeam } = teams;
 
-  const isMatchResult = goals.home !== null && goals.away !== null;
-  const isMatchFinished =
-    status.short === fixtureStatus.FT ||
-    status.short === fixtureStatus.PEN ||
-    status.short === fixtureStatus.AET;
+  const isMatchFinished = checkIsMatchFinished(status.short);
+  const isMatchLive = checkIsMatchLive(status.short);
 
   return (
     <article className={classes.card}>
@@ -37,11 +35,13 @@ export const FixturePreviewCard = ({
       <Container className={classes["match-information"]}>
         <PreviewTeamMark team={homeTeam} />
         <Container className={classes["match-status"]}>
-          {isMatchResult && <Scoreboard matchScore={goals} boardSize={"MD"} />}
-          {status.elapsed && !isMatchFinished && (
-            <MatchStatus matchStatus={status} />
+          {(isMatchFinished || isMatchLive) && (
+            <>
+              <Scoreboard matchScore={goals} boardSize={"MD"} />
+              <MatchStatus matchStatus={status} isLive={isMatchLive} />
+            </>
           )}
-          {!status.elapsed && <MatchDatePreview date={date} />}
+          {!isMatchLive && !isMatchFinished && <MatchDatePreview date={date} />}
         </Container>
         <PreviewTeamMark team={awayTeam} />
       </Container>
