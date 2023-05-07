@@ -7,7 +7,8 @@ import {
 import {
   AvailableFixtureParams,
   Fixture,
-  FixtureDetail,
+  FixtureDetailInfoApi,
+  HeadToHeadArgs,
 } from "api/types/fixtures-types";
 
 interface FootballApiData<T> {
@@ -94,8 +95,8 @@ export class FootballService {
     return data.response;
   }
 
-  static async getDetailFixtureInfo(fixtureId: number) {
-    const { data }: FootballApiResponse<FixtureDetail[]> =
+  static async getDetailFixtureInfo(fixtureId: number | string) {
+    const { data }: FootballApiResponse<FixtureDetailInfoApi[]> =
       await footballApi.get("fixtures", {
         params: {
           id: fixtureId,
@@ -103,5 +104,21 @@ export class FootballService {
       });
     const [fixtureDetail] = data.response;
     return fixtureDetail;
+  }
+
+  static async getHeadToHeadFixtureInfo({
+    firstTeamId,
+    secondTeamId,
+  }: HeadToHeadArgs) {
+    const headToHeadParam = `${firstTeamId}-${secondTeamId}`;
+    const { data }: FootballApiResponse<Fixture[]> = await footballApi.get(
+      "fixtures/headtohead",
+      {
+        params: {
+          h2h: headToHeadParam,
+        },
+      }
+    );
+    return data.response;
   }
 }
