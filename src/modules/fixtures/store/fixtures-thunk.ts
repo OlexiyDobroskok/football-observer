@@ -1,11 +1,13 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
 import { FootballService } from "api/football-service";
 import { AvailableFixtureParams, Fixture } from "api/types/fixtures-types";
-import { fixtureStatus } from "api/helpers/consts";
 import {
   DayFixtures,
   dayFixturesConverter,
 } from "../helpers/day-fixtures-converter";
+import { checkIsMatchFinished } from "../helpers/checkIsMatchFinished";
+import { checkIsMatchScheduled } from "../helpers/checkIsMatchScheduled";
+import { checkIsMatchLive } from "../helpers/checkIsMatchLive";
 
 export interface FixturesData {
   allFixtures: Fixture[];
@@ -25,31 +27,20 @@ export const fetchFixtures = createAsyncThunk<
     const fixtures = await FootballService.getAvailableFixtures(params);
 
     const finishedMatches = dayFixturesConverter(
-      fixtures.filter(
-        ({ fixture: { status } }) =>
-          status.short === fixtureStatus.FT ||
-          status.short === fixtureStatus.AET ||
-          status.short === fixtureStatus.PEN
+      fixtures.filter(({ fixture: { status } }) =>
+        checkIsMatchFinished(status.short)
       ),
       "DESCENDING"
     );
 
     const scheduledMatches = dayFixturesConverter(
-      fixtures.filter(
-        ({ fixture: { status } }) =>
-          status.short === fixtureStatus.NS ||
-          status.short === fixtureStatus.TBD
+      fixtures.filter(({ fixture: { status } }) =>
+        checkIsMatchScheduled(status.short)
       )
     );
 
-    const liveMatches = fixtures.filter(
-      ({ fixture: { status } }) =>
-        status.short === fixtureStatus["1H"] ||
-        status.short === fixtureStatus["2H"] ||
-        status.short === fixtureStatus.HT ||
-        status.short === fixtureStatus.ET ||
-        status.short === fixtureStatus.BT ||
-        status.short === fixtureStatus.INT
+    const liveMatches = fixtures.filter(({ fixture: { status } }) =>
+      checkIsMatchLive(status.short)
     );
 
     let timeToNextLiveMatch: number | null;
