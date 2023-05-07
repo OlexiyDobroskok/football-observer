@@ -1,0 +1,22 @@
+@use "styles/functions" as fn;
+
+.event {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: fn.px-to-rem(5px);
+}
+
+.description {
+  margin: 0;
+  font-size: fn.px-to-rem(14px);
+}
+
+.icon {
+  width: fn.px-to-rem(18px);
+  height: fn.px-to-rem(18px);
+}
+
+.away {
+  order: -1;
+}
