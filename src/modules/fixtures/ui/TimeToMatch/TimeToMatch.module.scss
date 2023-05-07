@@ -1,0 +1,24 @@
+@use 'styles/functions' as fn;
+
+.count-down {
+  display: flex;
+  gap: fn.px-to-rem(10px);
+}
+
+.count {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: fn.px-to-rem(5px);
+}
+
+.digits{
+  font-size: fn.px-to-rem(20px);
+  font-weight: 700;
+}
+
+.description {
+  font-size: fn.px-to-rem(12px);
+  text-transform: uppercase;
+}
