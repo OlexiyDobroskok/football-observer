@@ -1,0 +1,55 @@
+@use "styles/functions" as fn;
+
+.fixture {
+  position: relative;
+  padding: fn.px-to-rem(5px) fn.px-to-rem(10px);
+  border-radius: 10px;
+  background-color: var(--secondary-color);
+}
+
+.score {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  margin-bottom: fn.px-to-rem(10px);
+}
+
+.scoreboard {
+  justify-self: center;
+  display: flex;
+  flex-direction: column;
+  gap: fn.px-to-rem(5px);
+  padding: fn.px-to-rem(5px) fn.px-to-rem(15px) 0;
+}
+
+.common-info {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: fn.px-to-rem(5px);
+  font-size: fn.px-to-rem(14px);
+  margin-bottom: fn.px-to-rem(20px);
+}
+
+.date {
+  margin: 0;
+}
+
+.referee {
+  margin: 0 fn.px-to-rem(15px);
+}
+
+.match-time {
+  margin: 0 0 fn.px-to-rem(10px);
+  font-size: fn.px-to-rem(14px);
+  text-align: center;
+}
+
+.match-status {
+  position: absolute;
+}
+
+.match-events {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  column-gap: fn.px-to-rem(50px);
+}
