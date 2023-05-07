@@ -2,7 +2,11 @@ import { configureStore } from "@reduxjs/toolkit";
 import { standingsReducer } from "modules/standings";
 import { leaguesReducer } from "modules/leagues-filter";
 import { modalsReducer } from "store/modals-slice";
-import { fixturesReducer } from "modules/fixtures";
+import {
+  fixtureDetailReducer,
+  fixturesReducer,
+  headToHeadReducer,
+} from "modules/fixtures";
 
 export const store = configureStore({
   reducer: {
@@ -10,6 +14,8 @@ export const store = configureStore({
     leagues: leaguesReducer,
     standings: standingsReducer,
     fixtures: fixturesReducer,
+    fixtureDetail: fixtureDetailReducer,
+    headToHead: headToHeadReducer,
   },
 });
 
