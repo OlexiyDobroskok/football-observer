@@ -1,26 +1,25 @@
 import { useEffect, useState } from "react";
+import { getTimeToMatch } from "../helpers/getTimeToMatch";
 
 export interface TimeToMatch {
   days: number;
   hrs: number;
   mins: number;
   secs: number;
-  isStarted: boolean;
 }
 
-export const useCountDown = (eventDate: string): TimeToMatch => {
-  const [timeToMatch, setTimeToMatch] = useState(0);
+export const useCountDown = (eventDate: string): TimeToMatch | null => {
+  const [timeToMatch, setTimeToMatch] = useState(() =>
+    getTimeToMatch(eventDate)
+  );
 
   useEffect(() => {
-    const matchTime = new Date(eventDate).getTime();
     const intervalId = window.setInterval(() => {
-      const timeNow = Date.now();
-      const timeDiff = matchTime - timeNow;
-      if (timeDiff <= 0) {
-        setTimeToMatch(-1);
+      const timeDiff = getTimeToMatch(eventDate);
+      setTimeToMatch(timeDiff);
+      if (!timeDiff) {
         clearInterval(intervalId);
       }
-      if (timeDiff > 0) setTimeToMatch(timeDiff);
     }, 1000);
 
     return () => clearInterval(intervalId);
@@ -31,16 +30,18 @@ export const useCountDown = (eventDate: string): TimeToMatch => {
   const minute = 1000 * 60;
   const sec = 1000;
 
-  const daysToMatch = Math.floor(timeToMatch / day);
-  const hoursToMatch = Math.floor((timeToMatch % day) / hour);
-  const minutesToMatch = Math.floor((timeToMatch % hour) / minute);
-  const secondsToMatch = Math.floor((timeToMatch % minute) / sec);
+  if (timeToMatch) {
+    const daysToMatch = Math.floor(timeToMatch / day);
+    const hoursToMatch = Math.floor((timeToMatch % day) / hour);
+    const minutesToMatch = Math.floor((timeToMatch % hour) / minute);
+    const secondsToMatch = Math.floor((timeToMatch % minute) / sec);
 
-  return {
-    days: daysToMatch,
-    hrs: hoursToMatch,
-    mins: minutesToMatch,
-    secs: secondsToMatch,
-    isStarted: timeToMatch < 0,
-  };
+    return {
+      days: daysToMatch,
+      hrs: hoursToMatch,
+      mins: minutesToMatch,
+      secs: secondsToMatch,
+    };
+  }
+  return null;
 };
