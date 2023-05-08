@@ -8,7 +8,7 @@ interface FixturesState {
   finishedMatches: DayFixtures[];
   liveMatches: Fixture[];
   scheduledMatches: DayFixtures[];
-  timeToNextLiveMatch: number | null | undefined;
+  timeToNextLiveMatch: number | null;
   isLive: boolean | undefined;
   isLoading: boolean;
   error: string | null;
@@ -19,7 +19,7 @@ const initialState: FixturesState = {
   finishedMatches: [],
   liveMatches: [],
   scheduledMatches: [],
-  timeToNextLiveMatch: undefined,
+  timeToNextLiveMatch: null,
   isLive: undefined,
   isLoading: false,
   error: null,
