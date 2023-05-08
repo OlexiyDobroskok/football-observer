@@ -8,8 +8,6 @@
   position: relative;
 }
 
-.tabs-group {
-  display: flex;
-  gap: fn.px-to-rem(5px);
-  padding: 0 fn.px-to-rem(5px) 0 fn.px-to-rem(15px);
+.tabs {
+  margin-left: fn.px-to-rem(15px);
 }

@@ -1,20 +1,27 @@
 import { ChangeEvent, useEffect, useState } from "react";
 import { useAppDispatch, useAppSelector } from "hooks/redux";
-import { useLocation } from "react-router-dom";
 import {
   fetchFixtures,
   FixturesList,
   PreviewMatchesList,
 } from "modules/fixtures";
 import { HiddenElement } from "ui/HiddenElement/HiddenElement";
-import { Tab } from "ui/Tab/Tab";
 import { Fixture } from "api/types/fixtures-types";
+import { TabList } from "ui/TabList/TabList";
 import classes from "./Fixtures.module.scss";
 
-type FixturesTab = "Results" | "Fixtures";
+const fixturesTabs = {
+  results: "Results",
+  fixtures: "Fixtures",
+} as const;
+
+type FixturesTabsKey = keyof typeof fixturesTabs;
+type FixturesTab = (typeof fixturesTabs)[FixturesTabsKey];
 
 export const Fixtures = () => {
-  const [selectedTab, setSelectedTab] = useState<FixturesTab>("Fixtures");
+  const [selectedTab, setSelectedTab] = useState<FixturesTab>(
+    fixturesTabs.fixtures
+  );
   const {
     finishedMatches,
     scheduledMatches,
@@ -26,14 +33,14 @@ export const Fixtures = () => {
     ({ leagues }) => leagues
   );
   const dispatch = useAppDispatch();
-  const location = useLocation();
 
   useEffect(() => {
     dispatch(
       fetchFixtures({ leagueId: currentLeagueId, season: currentSeason })
     );
 
-    let timerId: number | null;
+    let timerId: number | null = null;
+    let intervalId: number | null = null;
 
     if (!isLive && timeToNextLiveMatch) {
       timerId = window.setTimeout(() => {
@@ -44,7 +51,7 @@ export const Fixtures = () => {
     }
 
     if (isLive) {
-      timerId = window.setTimeout(
+      intervalId = window.setInterval(
         () =>
           dispatch(
             fetchFixtures({ leagueId: currentLeagueId, season: currentSeason })
@@ -55,36 +62,30 @@ export const Fixtures = () => {
 
     return () => {
       if (timerId) window.clearTimeout(timerId);
+      if (intervalId) window.clearInterval(intervalId);
     };
-  }, [isLive, currentLeagueId, currentSeason, location.pathname]);
+  }, [isLive, currentLeagueId, currentSeason]);
 
-  const availableTabs: FixturesTab[] = ["Results", "Fixtures"];
+  const availableTabs: FixturesTab[] = [
+    fixturesTabs.results,
+    fixturesTabs.fixtures,
+  ];
 
-  const changeTabs = ({ target }: ChangeEvent<HTMLInputElement>) => {
+  const changeTab = ({ target }: ChangeEvent<HTMLInputElement>) => {
     setSelectedTab(target.value as FixturesTab);
   };
 
-  const tabsList = availableTabs.map((tabName) => (
-    <Tab
-      key={tabName}
-      tabName={tabName}
-      groupName={"calendar"}
-      isChecked={selectedTab === tabName}
-      onChange={changeTabs}
-    />
-  ));
-
   let previewMatches: Fixture[];
-  if (selectedTab === "Fixtures" && liveMatches.length) {
+  if (selectedTab === fixturesTabs.fixtures && liveMatches.length) {
     previewMatches = liveMatches;
   } else if (
-    selectedTab === "Fixtures" &&
+    selectedTab === fixturesTabs.fixtures &&
     !liveMatches.length &&
     scheduledMatches.length
   ) {
     const [upcomingMatchDay] = scheduledMatches;
     previewMatches = upcomingMatchDay.fixtures;
-  } else if (selectedTab === "Results" && finishedMatches.length) {
+  } else if (selectedTab === fixturesTabs.results && finishedMatches.length) {
     const [latestMatchDay] = finishedMatches;
     previewMatches = latestMatchDay.fixtures;
   } else {
@@ -97,9 +98,18 @@ export const Fixtures = () => {
       <div className={classes["live-place"]}>
         <PreviewMatchesList matches={previewMatches} />
       </div>
-      <div className={classes["tabs-group"]}>{tabsList}</div>
-      {selectedTab === "Results" && <FixturesList fixtures={finishedMatches} />}
-      {selectedTab === "Fixtures" && (
+      <div className={classes.tabs}>
+        <TabList
+          tabs={availableTabs}
+          checkedTab={selectedTab}
+          groupName={"fixtures-tabs"}
+          onChange={changeTab}
+        />
+      </div>
+      {selectedTab === fixturesTabs.results && (
+        <FixturesList fixtures={finishedMatches} />
+      )}
+      {selectedTab === fixturesTabs.fixtures && (
         <FixturesList fixtures={scheduledMatches} />
       )}
     </>
