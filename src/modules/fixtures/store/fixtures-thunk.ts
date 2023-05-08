@@ -8,6 +8,7 @@ import {
 import { checkIsMatchFinished } from "../helpers/checkIsMatchFinished";
 import { checkIsMatchScheduled } from "../helpers/checkIsMatchScheduled";
 import { checkIsMatchLive } from "../helpers/checkIsMatchLive";
+import { getTimeToMatch } from "../helpers/getTimeToMatch";
 
 export interface FixturesData {
   allFixtures: Fixture[];
@@ -48,9 +49,7 @@ export const fetchFixtures = createAsyncThunk<
     if (!liveMatches.length && scheduledMatches.length) {
       const [nextMatchDay] = scheduledMatches;
       const [nextLiveMatch] = nextMatchDay.fixtures;
-      const currentDate = Date.now();
-      const nextLiveMatchDate = new Date(nextLiveMatch.fixture.date);
-      timeToNextLiveMatch = nextLiveMatchDate.getTime() - currentDate;
+      timeToNextLiveMatch = getTimeToMatch(nextLiveMatch.fixture.date);
       isLive = false;
     } else {
       timeToNextLiveMatch = null;
