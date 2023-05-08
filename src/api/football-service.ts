@@ -10,11 +10,17 @@ import {
   FixtureDetailInfoApi,
   HeadToHeadArgs,
 } from "api/types/fixtures-types";
+import { throwDataError } from "./helpers/throwDataError";
 
-interface FootballApiData<T> {
+export interface DataError {
+  [key: string]: string;
+}
+
+export interface FootballApiData<T> {
+  errors: unknown[] | DataError;
   response: T;
 }
-interface FootballApiResponse<T> {
+export interface FootballApiResponse<T> {
   data: FootballApiData<T>;
   status: number;
   statusText: string;
@@ -41,6 +47,11 @@ export class FootballService {
           search,
         },
       });
+
+    if (data.errors.length !== 0) {
+      throwDataError(data.errors as DataError);
+    }
+
     return data.response;
   }
 
@@ -57,6 +68,11 @@ export class FootballService {
           season,
         },
       });
+
+    if (data.errors.length !== 0) {
+      throwDataError(data.errors as DataError);
+    }
+
     const [standingsResp] = data.response;
     return standingsResp.league;
   }
@@ -92,6 +108,11 @@ export class FootballService {
         },
       }
     );
+
+    if (data.errors.length !== 0) {
+      throwDataError(data.errors as DataError);
+    }
+
     return data.response;
   }
 
@@ -102,6 +123,11 @@ export class FootballService {
           id: fixtureId,
         },
       });
+
+    if (data.errors.length !== 0) {
+      throwDataError(data.errors as DataError);
+    }
+
     const [fixtureDetail] = data.response;
     return fixtureDetail;
   }
@@ -119,6 +145,11 @@ export class FootballService {
         },
       }
     );
+
+    if (data.errors.length !== 0) {
+      throwDataError(data.errors as DataError);
+    }
+
     return data.response;
   }
 }
