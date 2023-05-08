@@ -24,18 +24,22 @@
 .common-info {
   display: flex;
   flex-wrap: wrap;
-  align-items: center;
+  flex-direction: column;
+  justify-content: center;
   gap: fn.px-to-rem(5px);
   font-size: fn.px-to-rem(14px);
   margin-bottom: fn.px-to-rem(20px);
 }
 
-.date {
-  margin: 0;
+.common-wrap {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: fn.px-to-rem(15px);
 }
 
-.referee {
-  margin: 0 fn.px-to-rem(15px);
+.date {
+  margin: 0;
 }
 
 .match-time {

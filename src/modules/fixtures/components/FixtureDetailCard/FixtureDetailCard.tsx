@@ -29,16 +29,14 @@ export const FixtureDetailCard = () => {
     return (
       <div className={classes.fixture}>
         <Container className={classes["common-info"]}>
-          <p className={classes.date}>
-            <time dateTime={getValidDateTimeStrYMDFormat(matchDate)}>
-              {matchDateFormatted}
-            </time>
-          </p>
-          {!!referee && (
-            <div className={classes.referee}>
-              <RefereeInfo refereeName={referee} />
-            </div>
-          )}
+          <div className={classes["common-wrap"]}>
+            <p className={classes.date}>
+              <time dateTime={getValidDateTimeStrYMDFormat(matchDate)}>
+                {matchDateFormatted}
+              </time>
+            </p>
+            {!!referee && <RefereeInfo refereeName={referee} />}
+          </div>
           <StadiumInfo stadium={venue} />
         </Container>
         <Container className={classes.score}>
