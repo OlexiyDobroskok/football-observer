@@ -40,7 +40,6 @@ export const Fixtures = () => {
     );
 
     let timerId: number | null = null;
-    let intervalId: number | null = null;
 
     if (!isLive && timeToNextLiveMatch) {
       timerId = window.setTimeout(() => {
@@ -51,7 +50,7 @@ export const Fixtures = () => {
     }
 
     if (isLive) {
-      intervalId = window.setInterval(
+      timerId = window.setInterval(
         () =>
           dispatch(
             fetchFixtures({ leagueId: currentLeagueId, season: currentSeason })
@@ -62,7 +61,6 @@ export const Fixtures = () => {
 
     return () => {
       if (timerId) window.clearTimeout(timerId);
-      if (intervalId) window.clearInterval(intervalId);
     };
   }, [isLive, currentLeagueId, currentSeason]);
 
