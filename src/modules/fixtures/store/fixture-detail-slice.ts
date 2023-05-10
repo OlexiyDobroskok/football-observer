@@ -9,6 +9,8 @@ import { getTimeToMatch } from "../helpers/getTimeToMatch";
 
 interface FixtureDetailState {
   fixtureDetail: FixtureDetailInfoApp | undefined;
+  homeTeamId: number | undefined;
+  awayTeamId: number | undefined;
   isLive: boolean;
   isScheduled: boolean;
   timeToMatch: number | null;
@@ -19,6 +21,8 @@ interface FixtureDetailState {
 
 const initialState: FixtureDetailState = {
   fixtureDetail: undefined,
+  homeTeamId: undefined,
+  awayTeamId: undefined,
   isLive: false,
   isScheduled: false,
   timeToMatch: null,
@@ -40,6 +44,8 @@ export const fixtureDetailSlice = createSlice({
       .addCase(fetchFixtureDetail.fulfilled, (state, { payload }) => {
         const homeTeamId = payload.teams.home.id;
         const awayTeamId = payload.teams.away.id;
+        state.homeTeamId = homeTeamId;
+        state.awayTeamId = awayTeamId;
         state.fixtureDetail = {
           ...payload,
           events: convertEvents({
