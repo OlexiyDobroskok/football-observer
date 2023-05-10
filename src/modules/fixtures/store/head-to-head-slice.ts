@@ -1,15 +1,30 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { Fixture } from "src/api/types/fixtures-types";
+import { Fixture, GameStatistics } from "src/api/types/fixtures-types";
 import { fetchHeadToHeadFixtureInfo } from "./head-to-head-thunk";
 
+export interface TeamWinStats extends GameStatistics {
+  total: number;
+  home: number;
+  away: number;
+}
+
+export interface H2HStats {
+  played: number;
+  draws: number;
+  homeTeamWinStats: TeamWinStats;
+  awayTeamWinStats: TeamWinStats;
+}
+
 interface HeadToHeadState {
-  headToHeadInfo: Fixture[];
+  headToHeadFixtures: Fixture[] | undefined;
+  headToHeadStats: H2HStats | undefined;
   isLoading: boolean;
   error: string | null;
 }
 
 const initialState: HeadToHeadState = {
-  headToHeadInfo: [],
+  headToHeadFixtures: undefined,
+  headToHeadStats: undefined,
   isLoading: false,
   error: null,
 };
@@ -25,7 +40,8 @@ const headToHeadSlice = createSlice({
         state.error = null;
       })
       .addCase(fetchHeadToHeadFixtureInfo.fulfilled, (state, { payload }) => {
-        state.headToHeadInfo = payload;
+        state.headToHeadFixtures = payload.fixtures;
+        state.headToHeadStats = payload.stats;
         state.isLoading = false;
         state.error = null;
       })
