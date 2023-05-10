@@ -1,0 +1,35 @@
+@use "styles/functions" as fn;
+
+.table {
+  width: 100%;
+}
+
+.table-header {
+  font-size: fn.px-to-rem(14px);
+  text-transform: capitalize;
+}
+
+.home-team,
+.away-team {
+  width: 40%;
+}
+
+.value {
+  min-width: 15px;
+}
+
+.home-data,
+.away-data {
+  display: flex;
+  align-items: center;
+  gap: fn.px-to-rem(5px);
+  padding: fn.px-to-rem(5px) fn.px-to-rem(10px);
+}
+
+.home-data {
+  text-align: right;
+}
+
+.scale {
+  flex-grow: 1;
+}
