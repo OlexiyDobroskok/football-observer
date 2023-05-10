@@ -133,10 +133,10 @@ export class FootballService {
   }
 
   static async getHeadToHeadFixtureInfo({
-    firstTeamId,
-    secondTeamId,
+    homeTeamId,
+    awayTeamId,
   }: HeadToHeadArgs) {
-    const headToHeadParam = `${firstTeamId}-${secondTeamId}`;
+    const headToHeadParam = `${homeTeamId}-${awayTeamId}`;
     const { data }: FootballApiResponse<Fixture[]> = await footballApi.get(
       "fixtures/headtohead",
       {

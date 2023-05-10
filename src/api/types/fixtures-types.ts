@@ -299,6 +299,10 @@ export interface FixtureDetailInfoApp extends FixtureDetailInfo {
 }
 
 export interface HeadToHeadArgs {
-  firstTeamId: number;
-  secondTeamId: number;
+  homeTeamId: number;
+  awayTeamId: number;
+}
+
+export interface GameStatistics {
+  [key: string]: number | string | null;
 }
