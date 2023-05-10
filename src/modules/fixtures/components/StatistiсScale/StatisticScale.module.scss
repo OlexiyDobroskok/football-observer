@@ -1,0 +1,16 @@
+@use "styles/functions" as fn;
+
+.container {
+  display: flex;
+  border: 2px solid var(--accent-color);
+  border-radius: 3px;
+}
+
+.scale {
+  height: fn.px-to-rem(5px);
+  background-color: var(--accent-color-extra-light);
+}
+
+.right {
+  justify-content: flex-end;
+}
