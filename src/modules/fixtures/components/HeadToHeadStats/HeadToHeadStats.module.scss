@@ -1,0 +1,38 @@
+@use "styles/functions" as fn;
+
+.h2h-stats {
+  padding: fn.px-to-rem(10px) 0;
+  border-radius: 5px;
+  background-color: var(--secondary-color-dark);
+}
+
+.title {
+  margin: 0 0 fn.px-to-rem(10px);
+  font-size: fn.px-to-rem(18px);
+  font-weight: 700;
+  text-align: center;
+}
+
+.message {
+  margin: 0;
+  text-align: center;
+}
+
+.common {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin: 0 0 fn.px-to-rem(10px);
+}
+
+.total,
+.draws {
+  font-size: fn.px-to-rem(18px);
+  font-weight: 700;
+  color: var(--accent-color-extra-light);
+}
+
+.description {
+  font-size: fn.px-to-rem(14px);
+}
