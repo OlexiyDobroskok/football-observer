@@ -11,14 +11,14 @@ import { fetchLeagueStandings } from "./standings-thunk";
 export interface StandingsState {
   leagueData: LeagueStandingsReformed | undefined;
   isLoading: boolean;
-  error: string;
+  error: string | null;
   reqStatus: RequestStatus | undefined;
 }
 
 const initialState: StandingsState = {
   leagueData: undefined,
   isLoading: false,
-  error: "",
+  error: null,
   reqStatus: undefined,
 };
 
@@ -33,6 +33,7 @@ const standingsSlice = createSlice({
         const reqKey = leagueId.toString() + season.toString();
         state.reqStatus = { [reqKey]: "loading" };
         state.isLoading = true;
+        state.error = null;
       })
       .addCase(fetchLeagueStandings.fulfilled, (state, { payload, meta }) => {
         const { leagueId, season } = meta.arg;
@@ -49,7 +50,7 @@ const standingsSlice = createSlice({
         );
         state.leagueData = { ...payload, standings: reformedStandings };
         state.isLoading = false;
-        state.error = "";
+        state.error = null;
       })
       .addCase(
         fetchLeagueStandings.rejected,
