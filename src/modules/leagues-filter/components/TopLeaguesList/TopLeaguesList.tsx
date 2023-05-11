@@ -6,7 +6,6 @@ import { setCurrentLeague } from "../../store/leagues-slice";
 import { LeagueFilterButton } from "../../ui/LeagueFilterButton/LeagueFilterButton";
 import classes from "./TopLeaguesList.module.scss";
 
-
 const topLeaguesIdList = [39, 78, 140, 135, 61];
 
 export const TopLeaguesList = () => {
