@@ -4,13 +4,22 @@
   overflow: hidden;
 }
 
-.list {
+.leagues-list {
   display: flex;
   gap: fn.px-to-rem(5px);
   overflow-x: scroll;
   -webkit-overflow-scrolling: touch;
 }
 
-.list::-webkit-scrollbar {
+.leagues-list::-webkit-scrollbar {
   display: none;
+}
+
+.top-list {
+  display: flex;
+  gap: fn.px-to-rem(5px);
+}
+
+.message {
+  text-align: center;
 }
