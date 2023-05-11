@@ -1,17 +1,27 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
 import { LeagueInformation } from "api/types/leagues-types";
 import { FootballService } from "api/football-service";
-
-type FetchLeaguesError = string;
+import { LeaguesState } from "./leagues-slice";
 
 export const fetchLeagues = createAsyncThunk<
   LeagueInformation[],
   void,
-  { rejectValue: FetchLeaguesError }
->("leagues/fetchLeagues", async (_, { rejectWithValue }) => {
-  try {
-    return await FootballService.getLeagues();
-  } catch (error) {
-    return rejectWithValue((error as Error).message);
+  { rejectValue: string; state: { leagues: LeaguesState } }
+>(
+  "leagues/fetchLeagues",
+  async (_, { rejectWithValue }) => {
+    try {
+      return await FootballService.getLeagues();
+    } catch (error) {
+      return rejectWithValue((error as Error).message);
+    }
+  },
+  {
+    condition: (_, { getState }) => {
+      const { leagues } = getState();
+      const isLoading = leagues.reqStatus === "loading";
+      const isSucceed = leagues.reqStatus === "succeeded";
+      if (isLoading || isSucceed) return false;
+    },
   }
-});
+);
