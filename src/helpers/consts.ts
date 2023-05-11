@@ -8,3 +8,6 @@ export const PAGE_ROUTES = {
   TEAM_INFO: "/teams/:teamId",
   PROFILE: "/profile",
 } as const;
+
+export type Page = keyof typeof PAGE_ROUTES;
+export type PagePath = (typeof PAGE_ROUTES)[Page];
