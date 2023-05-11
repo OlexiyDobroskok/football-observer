@@ -7,23 +7,32 @@ export interface SelectOption {
 }
 
 interface SelectProps {
-  name: string;
-  optList: SelectOption[];
-  selected: string;
-  onChange: (event: ChangeEvent<HTMLSelectElement>) => void;
+  name?: string;
+  optList?: SelectOption[];
+  selected?: string;
+  onChange?: (event: ChangeEvent<HTMLSelectElement>) => void;
+  disabled?: boolean;
 }
 
-export const Select = ({ name, optList, selected, onChange }: SelectProps) => (
+export const Select = ({
+  name,
+  optList,
+  selected,
+  onChange,
+  disabled,
+}: SelectProps) => (
   <select
     className={classes.select}
     name={name}
     value={selected}
     onChange={onChange}
+    disabled={disabled}
   >
-    {optList.map(({ title, value }) => (
-      <option key={value} value={value}>
-        {title}
-      </option>
-    ))}
+    {optList &&
+      optList.map(({ title, value }) => (
+        <option key={value} value={value}>
+          {title}
+        </option>
+      ))}
   </select>
 );
