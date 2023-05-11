@@ -11,18 +11,11 @@ interface SelectProps {
   optList: SelectOption[];
   selected: string;
   onChange: (event: ChangeEvent<HTMLSelectElement>) => void;
-  className?: string;
 }
 
-export const Select = ({
-  name,
-  optList,
-  selected,
-  className,
-  onChange,
-}: SelectProps) => (
+export const Select = ({ name, optList, selected, onChange }: SelectProps) => (
   <select
-    className={[classes.select, className].join(" ")}
+    className={classes.select}
     name={name}
     value={selected}
     onChange={onChange}
