@@ -1,40 +1,42 @@
-import { ChangeEvent, useMemo } from "react";
+import { ChangeEvent, useEffect, useMemo } from "react";
 import { useAppDispatch, useAppSelector } from "hooks/redux";
 import { Select, SelectOption } from "ui/Select/Select";
 import { setCurrentSeason } from "../../store/leagues-slice";
+import { fetchLeagues } from "../../store/leagues-thunk";
 
-interface SeasonsSelectProps {
-  className?: string;
-}
-
-export const SeasonsSelect = ({ className }: SeasonsSelectProps) => {
+export const SeasonsSelect = () => {
   const { availableSeasons, currentSeason } = useAppSelector(
     ({ leagues }) => leagues
   );
   const dispatch = useAppDispatch();
 
-  const optList = useMemo(
-    () =>
-      availableSeasons.map(
-        ({ year }): SelectOption => ({
-          title: `${year} - ${year + 1}`,
-          value: year.toString(),
-        })
-      ),
-    [availableSeasons]
-  );
+  useEffect(() => {
+    dispatch(fetchLeagues());
+  }, []);
 
-  const handleChange = ({ target }: ChangeEvent<HTMLSelectElement>) => {
-    dispatch(setCurrentSeason(+target.value));
-  };
+  if (availableSeasons && currentSeason) {
+    const optList = useMemo(
+      () =>
+        availableSeasons.map(
+          ({ year }): SelectOption => ({
+            title: `${year} - ${year + 1}`,
+            value: year.toString(),
+          })
+        ),
+      [availableSeasons]
+    );
 
-  return (
-    <Select
-      className={className}
-      name="seasons"
-      optList={optList}
-      selected={currentSeason.toString()}
-      onChange={handleChange}
-    />
-  );
+    const handleChange = ({ target }: ChangeEvent<HTMLSelectElement>) => {
+      dispatch(setCurrentSeason(+target.value));
+    };
+
+    return (
+      <Select
+        name="seasons"
+        optList={optList}
+        selected={currentSeason.toString()}
+        onChange={handleChange}
+      />
+    );
+  }
 };
