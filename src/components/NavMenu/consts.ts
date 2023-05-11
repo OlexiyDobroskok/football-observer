@@ -1,6 +1,5 @@
-import { Page, PagePath } from "types/types";
-import { PAGE_ROUTES } from "helpers/consts";
-import svgSprite from "components/NavMenu/nav-menu-sprite.svg";
+import { Page, PAGE_ROUTES, PagePath } from "helpers/consts";
+import navMenuIcons from "./nav-menu-sprite.svg";
 
 export interface MenuElement {
   id: string;
@@ -14,24 +13,24 @@ export const menuList: MenuElement[] = [
     id: "h1",
     title: "HOME",
     path: PAGE_ROUTES.HOME,
-    iconHref: `${svgSprite}#home`,
+    iconHref: `${navMenuIcons}#home`,
   },
   {
     id: "c2",
     title: "FIXTURES",
     path: PAGE_ROUTES.FIXTURES,
-    iconHref: `${svgSprite}#calendar`,
+    iconHref: `${navMenuIcons}#calendar`,
   },
   {
     id: "s3",
     title: "STANDINGS",
     path: PAGE_ROUTES.STANDINGS,
-    iconHref: `${svgSprite}#standings`,
+    iconHref: `${navMenuIcons}#standings`,
   },
   {
     id: "p4",
     title: "PROFILE",
     path: PAGE_ROUTES.PROFILE,
-    iconHref: `${svgSprite}#profile`,
+    iconHref: `${navMenuIcons}#profile`,
   },
 ];
