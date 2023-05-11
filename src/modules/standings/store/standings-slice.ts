@@ -5,14 +5,14 @@ import {
   LeagueStandingsReformed,
   PositionReformed,
 } from "../types/types";
-import { RequestStatus } from "api/types/global";
+import { DynamicRequestStatus } from "api/types/global";
 import { fetchLeagueStandings } from "./standings-thunk";
 
 export interface StandingsState {
   leagueData: LeagueStandingsReformed | undefined;
   isLoading: boolean;
   error: string | null;
-  reqStatus: RequestStatus | undefined;
+  reqStatus: DynamicRequestStatus | undefined;
 }
 
 const initialState: StandingsState = {
