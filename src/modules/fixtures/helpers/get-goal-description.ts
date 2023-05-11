@@ -9,5 +9,5 @@ export const getGoalDescription = ({ time, detail }: FixtureEventApp) => {
       : detail.toLowerCase() === fixtureGoalType.OWN.toLowerCase()
       ? "(A)"
       : "";
-  return `${goalTime}'${goalDetail}`;
+  return `${goalTime}' ${goalDetail}`;
 };
