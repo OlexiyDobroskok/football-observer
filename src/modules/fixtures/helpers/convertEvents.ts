@@ -17,22 +17,10 @@ export const sortEventsByTeamsLocationStatus = ({
   events: FixtureEvent[];
 }): SortedEventsByTeamsLocationStatus => {
   const homeTeamEvents = events
-    .filter(
-      ({ team, type, detail }) =>
-        team.id === homeTeamId ||
-        (team.id === awayTeamId &&
-          type.toLowerCase() === fixtureEventType.GOAL.toLowerCase() &&
-          detail.toLowerCase() === fixtureGoalType.OWN.toLowerCase())
-    )
+    .filter(({ team }) => team.id === homeTeamId)
     .map((event): FixtureEventApp => ({ ...event, id: uuidv4() }));
   const awayTeamEvents = events
-    .filter(
-      ({ team, type, detail }) =>
-        team.id === awayTeamId ||
-        (team.id === homeTeamId &&
-          type.toLowerCase() === fixtureEventType.GOAL.toLowerCase() &&
-          detail.toLowerCase() === fixtureGoalType.OWN.toLowerCase())
-    )
+    .filter(({ team }) => team.id === awayTeamId)
     .map((event): FixtureEventApp => ({ ...event, id: uuidv4() }));
 
   return {
@@ -41,7 +29,7 @@ export const sortEventsByTeamsLocationStatus = ({
   };
 };
 
-export const sortEventsByType = (events: FixtureEventApp[]) => {
+export const sortPlayerEventsByType = (events: FixtureEventApp[]) => {
   const players = new Set<number>();
   events.forEach(({ player }) => players.add(player.id));
 
@@ -54,7 +42,7 @@ export const sortEventsByType = (events: FixtureEventApp[]) => {
           type.toLowerCase() === fixtureEventType.GOAL.toLowerCase() &&
           (detail.toLowerCase() === fixtureGoalType.NORMAL.toLowerCase() ||
             detail.toLowerCase() === fixtureGoalType.PEN.toLowerCase() ||
-            detail.toLowerCase() === fixtureGoalType.OWN)
+            detail.toLowerCase() === fixtureGoalType.OWN.toLowerCase())
       ),
       cards: allEvents.filter(
         ({ type }) => type.toLowerCase() === fixtureEventType.CARD.toLowerCase()

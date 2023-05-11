@@ -1,8 +1,9 @@
 import { useMemo } from "react";
 import { TeamEventsDefinition } from "api/types/fixtures-types";
 import { GoalEvent } from "../../ui/GoalEvent/GoalEvent";
-import { sortEventsByType } from "../../helpers/convertEvents";
+import { sortPlayerEventsByType } from "../../helpers/convertEvents";
 import classes from "./TeamEvents.module.scss";
+
 export interface TeamEventsProps {
   eventsDefinition: TeamEventsDefinition;
 }
@@ -10,7 +11,10 @@ export interface TeamEventsProps {
 export const TeamEvents = ({
   eventsDefinition: { events, locationStatus },
 }: TeamEventsProps) => {
-  const sortedPlayersEvents = useMemo(() => sortEventsByType(events), [events]);
+  const sortedPlayersEvents = useMemo(
+    () => sortPlayerEventsByType(events),
+    [events]
+  );
 
   const goalsList = sortedPlayersEvents.map(({ goals }) =>
     goals.length ? (
