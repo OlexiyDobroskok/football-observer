@@ -5,18 +5,21 @@ import {
   LeagueStandingsReformed,
   PositionReformed,
 } from "../types/types";
+import { RequestStatus } from "api/types/global";
 import { fetchLeagueStandings } from "./standings-thunk";
 
 export interface StandingsState {
   leagueData: LeagueStandingsReformed | undefined;
   isLoading: boolean;
   error: string;
+  reqStatus: RequestStatus | undefined;
 }
 
 const initialState: StandingsState = {
   leagueData: undefined,
   isLoading: false,
   error: "",
+  reqStatus: undefined,
 };
 
 const standingsSlice = createSlice({
@@ -25,10 +28,16 @@ const standingsSlice = createSlice({
   reducers: {},
   extraReducers: (builder) => {
     builder
-      .addCase(fetchLeagueStandings.pending, (state) => {
+      .addCase(fetchLeagueStandings.pending, (state, { meta }) => {
+        const { leagueId, season } = meta.arg;
+        const reqKey = leagueId.toString() + season.toString();
+        state.reqStatus = { [reqKey]: "loading" };
         state.isLoading = true;
       })
-      .addCase(fetchLeagueStandings.fulfilled, (state, { payload }) => {
+      .addCase(fetchLeagueStandings.fulfilled, (state, { payload, meta }) => {
+        const { leagueId, season } = meta.arg;
+        const reqKey = leagueId.toString() + season.toString();
+        state.reqStatus = { [reqKey]: "succeeded" };
         const reformedStandings = payload.standings.flat().map(
           (position) =>
             ({
@@ -42,10 +51,16 @@ const standingsSlice = createSlice({
         state.isLoading = false;
         state.error = "";
       })
-      .addCase(fetchLeagueStandings.rejected, (state, { payload, error }) => {
-        state.isLoading = false;
-        state.error = payload ? payload : error.message ? error.message : "";
-      });
+      .addCase(
+        fetchLeagueStandings.rejected,
+        (state, { payload, meta, error }) => {
+          const { leagueId, season } = meta.arg;
+          const reqKey = leagueId.toString() + season.toString();
+          state.reqStatus = { [reqKey]: "failed" };
+          state.isLoading = false;
+          state.error = payload ? payload : error.message ? error.message : "";
+        }
+      );
   },
 });
 
