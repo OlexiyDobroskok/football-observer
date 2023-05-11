@@ -1,5 +1,5 @@
 import { NavLink } from "react-router-dom";
-import { PagePath } from "types/types";
+import { PagePath } from "helpers/consts";
 import { SvgIcon } from "ui/SvgIcon/SvgIcon";
 import classes from "./MenuItemMobile.module.scss";
 
