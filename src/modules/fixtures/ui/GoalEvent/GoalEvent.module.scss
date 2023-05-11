@@ -3,7 +3,6 @@
 .event {
   display: flex;
   align-items: center;
-  justify-content: space-between;
   gap: fn.px-to-rem(5px);
 }
 
@@ -19,4 +18,5 @@
 
 .away {
   order: -1;
+  justify-content: flex-end;
 }
