@@ -1,7 +1,7 @@
 import { Button, ButtonProps } from "ui/Button/Button";
 import classes from "./LeagueFilterButton.module.scss";
 
-interface LeagueButtonProps extends ButtonProps {
+interface LeagueFilterButtonProps extends ButtonProps {
   leagueName: string;
   logo: string;
 }
@@ -11,7 +11,7 @@ export const LeagueFilterButton = ({
   logo,
   onClick,
   isCurrent,
-}: LeagueButtonProps) => (
+}: LeagueFilterButtonProps) => (
   <Button onClick={onClick} isCurrent={isCurrent}>
     <div className={classes.wrap}>
       <img className={classes.logo} src={logo} alt="" />
