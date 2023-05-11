@@ -4,7 +4,7 @@ import { fetchFixtureDetail } from "./fixture-detail-thunk";
 import { checkIsMatchLive } from "../helpers/checkIsMatchLive";
 import { checkIsMatchScheduled } from "../helpers/checkIsMatchScheduled";
 import { checkIsMatchFinished } from "../helpers/checkIsMatchFinished";
-import { convertEvents } from "../helpers/convertEvents";
+import { sortEventsByTeamsLocationStatus } from "../helpers/convertEvents";
 import { getTimeToMatch } from "../helpers/getTimeToMatch";
 
 interface FixtureDetailState {
@@ -48,7 +48,7 @@ export const fixtureDetailSlice = createSlice({
         state.awayTeamId = awayTeamId;
         state.fixtureDetail = {
           ...payload,
-          events: convertEvents({
+          events: sortEventsByTeamsLocationStatus({
             homeTeamId,
             awayTeamId,
             events: payload.events,

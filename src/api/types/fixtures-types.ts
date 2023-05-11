@@ -289,13 +289,20 @@ export interface TeamEventsDefinition {
   events: FixtureEventApp[];
 }
 
-export interface SortedEvents {
+export interface SortedEventsByTeamsLocationStatus {
   homeTeam: TeamEventsDefinition;
   awayTeam: TeamEventsDefinition;
 }
 
+export interface SortedEventsByTypes {
+  goals: FixtureEventApp[];
+  cards: FixtureEventApp[];
+  subst: FixtureEventApp[];
+  var: FixtureEventApp[];
+}
+
 export interface FixtureDetailInfoApp extends FixtureDetailInfo {
-  events: SortedEvents;
+  events: SortedEventsByTeamsLocationStatus;
 }
 
 export interface HeadToHeadArgs {
