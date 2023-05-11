@@ -39,4 +39,6 @@ export const SeasonsSelect = () => {
       />
     );
   }
+
+  return <Select name="seasons" disabled={true} />;
 };
