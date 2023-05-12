@@ -48,7 +48,7 @@ export class FootballService {
     return data.response;
   }
 
-  static async getStandings({ leagueId, teamId, season }: StandingsParams) {
+  static async getStandings({ leagueId, season }: StandingsParams) {
     const { data }: FootballApiResponse<StandingsResponse[]> =
       await footballApi.get("standings", {
         params: {
