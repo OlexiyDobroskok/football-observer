@@ -1,13 +1,10 @@
 import { createSlice } from "@reduxjs/toolkit";
 import { FixtureDetailInfoApp } from "src/api/types/fixtures-types";
 import { fetchFixtureDetail } from "./fixture-detail-thunk";
-import { checkIsMatchLive } from "../helpers/checkIsMatchLive";
-import { checkIsMatchScheduled } from "../helpers/checkIsMatchScheduled";
-import { checkIsMatchFinished } from "../helpers/checkIsMatchFinished";
-import { sortEventsByTeamsLocationStatus } from "../helpers/convertEvents";
-import { getTimeToMatch } from "../helpers/getTimeToMatch";
+import { DynamicRequestStatus } from "api/types/global";
+import { generateDynamicReqStatus } from "api/helpers/generateDynamicReqStatus";
 
-interface FixtureDetailState {
+export interface FixtureDetailState {
   fixtureDetail: FixtureDetailInfoApp | undefined;
   homeTeamId: number | undefined;
   awayTeamId: number | undefined;
@@ -17,6 +14,9 @@ interface FixtureDetailState {
   isFinished: boolean;
   isLoading: boolean;
   error: string | null;
+  timerId: number | null;
+  reqStatus: DynamicRequestStatus | null;
+  reqLocation: string | null;
 }
 
 const initialState: FixtureDetailState = {
@@ -29,44 +29,70 @@ const initialState: FixtureDetailState = {
   isFinished: false,
   isLoading: false,
   error: null,
+  timerId: null,
+  reqStatus: null,
+  reqLocation: null,
 };
 
 export const fixtureDetailSlice = createSlice({
   name: "fixture-detail",
   initialState,
-  reducers: {},
+  reducers: {
+    resetFixtureDetailReqStatus: (state) => {
+      state.reqStatus = null;
+    },
+  },
   extraReducers: (builder) => {
     builder
-      .addCase(fetchFixtureDetail.pending, (state) => {
+      .addCase(fetchFixtureDetail.pending, (state, { meta }) => {
+        state.reqLocation = window.location.pathname;
+        state.reqStatus = generateDynamicReqStatus({
+          params: meta.arg,
+          status: "loading",
+        });
         state.isLoading = true;
         state.error = null;
       })
-      .addCase(fetchFixtureDetail.fulfilled, (state, { payload }) => {
-        const homeTeamId = payload.teams.home.id;
-        const awayTeamId = payload.teams.away.id;
+      .addCase(fetchFixtureDetail.fulfilled, (state, { payload, meta }) => {
+        state.reqStatus = generateDynamicReqStatus({
+          params: meta.arg,
+          status: "succeeded",
+        });
+        const {
+          fixtureDetail,
+          homeTeamId,
+          awayTeamId,
+          isLive,
+          isFinished,
+          isScheduled,
+          timeToMatch,
+          timerId,
+        } = payload;
+        state.fixtureDetail = fixtureDetail;
         state.homeTeamId = homeTeamId;
         state.awayTeamId = awayTeamId;
-        state.fixtureDetail = {
-          ...payload,
-          events: sortEventsByTeamsLocationStatus({
-            homeTeamId,
-            awayTeamId,
-            events: payload.events,
-          }),
-        };
-        const matchStatus = payload.fixture.status.short;
-        state.isLive = checkIsMatchLive(matchStatus);
-        state.isScheduled = checkIsMatchScheduled(matchStatus);
-        state.timeToMatch = getTimeToMatch(payload.fixture.date);
-        state.isFinished = checkIsMatchFinished(matchStatus);
+        state.isLive = isLive;
+        state.isFinished = isFinished;
+        state.isScheduled = isScheduled;
+        state.timeToMatch = timeToMatch;
+        state.timerId = timerId;
         state.isLoading = false;
         state.error = null;
       })
-      .addCase(fetchFixtureDetail.rejected, (state, { payload, error }) => {
-        state.isLoading = false;
-        state.error = payload ? payload : error.message ? error.message : "";
-      });
+      .addCase(
+        fetchFixtureDetail.rejected,
+        (state, { payload, error, meta }) => {
+          state.reqStatus = generateDynamicReqStatus({
+            params: meta.arg,
+            status: "succeeded",
+          });
+          state.isLoading = false;
+          state.error = payload ? payload : error.message ? error.message : "";
+        }
+      );
   },
 });
+
+export const { resetFixtureDetailReqStatus } = fixtureDetailSlice.actions;
 
 export const fixtureDetailReducer = fixtureDetailSlice.reducer;
