@@ -2,7 +2,8 @@ import { createAsyncThunk } from "@reduxjs/toolkit";
 import { Fixture, HeadToHeadArgs } from "api/types/fixtures-types";
 import { FootballService } from "api/football-service";
 import { getH2HStats } from "../helpers/getH2HStats";
-import { H2HStats } from "./head-to-head-slice";
+import { H2HStats, HeadToHeadState } from "./head-to-head-slice";
+import { generateDynamicKey } from "api/helpers/generateDynamicReqStatus";
 
 interface HeadToHeadData {
   fixtures: Fixture[];
@@ -12,7 +13,7 @@ interface HeadToHeadData {
 export const fetchHeadToHeadFixtureInfo = createAsyncThunk<
   HeadToHeadData,
   HeadToHeadArgs,
-  { rejectValue: string }
+  { state: { headToHead: HeadToHeadState }; rejectValue: string }
 >(
   "headToHead/fetchHeadToHeadFixtureInfo",
   async ({ homeTeamId, awayTeamId }, { rejectWithValue }) => {
@@ -34,5 +35,16 @@ export const fetchHeadToHeadFixtureInfo = createAsyncThunk<
     } catch (error) {
       return rejectWithValue((error as Error).message);
     }
+  },
+  {
+    condition: (params, { getState }) => {
+      const {
+        headToHead: { reqStatus },
+      } = getState();
+      const reqKey = generateDynamicKey({ params });
+      const isLoading = !!reqStatus && reqStatus[reqKey] === "loading";
+      const isSucceed = !!reqStatus && reqStatus[reqKey] === "succeeded";
+      if (isLoading || isSucceed) return false;
+    },
   }
 );
