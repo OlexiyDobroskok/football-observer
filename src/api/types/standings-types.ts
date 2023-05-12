@@ -1,20 +1,9 @@
-interface StandingsParams {
-  leagueId?: number;
-  teamId?: number;
+import { ApiParams } from "./global";
+
+export interface StandingsParams extends ApiParams {
+  leagueId: number;
   season: number;
 }
-
-type LeagueOrTeam =
-  | {
-      leagueId: number;
-      teamId?: number;
-    }
-  | {
-      leagueId?: number;
-      teamId: number;
-    };
-
-export type RequiredStandingsParams = StandingsParams & LeagueOrTeam;
 
 export interface Goals {
   for: number;

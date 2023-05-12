@@ -1,14 +1,12 @@
 import axios from "axios";
 import { LeagueInformation, LeaguesParams } from "api/types/leagues-types";
+import { StandingsParams, StandingsResponse } from "api/types/standings-types";
 import {
-  RequiredStandingsParams,
-  StandingsResponse,
-} from "api/types/standings-types";
-import {
-  AvailableFixtureParams,
+  FixturesParams,
   Fixture,
   FixtureDetailInfoApi,
   HeadToHeadArgs,
+  DetailedFixtureParams,
 } from "api/types/fixtures-types";
 import { throwDataError } from "./helpers/throwDataError";
 
@@ -35,16 +33,11 @@ export const footballApi = axios.create({
 
 export class FootballService {
   static async getLeagues(params?: Partial<LeaguesParams>) {
-    const { leagueId, teamId, season, type, current, search } = params || {};
+    const type = params?.type;
     const { data }: FootballApiResponse<LeagueInformation[]> =
       await footballApi.get("leagues", {
         params: {
-          id: leagueId,
-          team: teamId,
-          season,
           type,
-          current,
-          search,
         },
       });
 
@@ -55,16 +48,11 @@ export class FootballService {
     return data.response;
   }
 
-  static async getStandings({
-    leagueId,
-    teamId,
-    season,
-  }: RequiredStandingsParams) {
+  static async getStandings({ leagueId, teamId, season }: StandingsParams) {
     const { data }: FootballApiResponse<StandingsResponse[]> =
       await footballApi.get("standings", {
         params: {
           league: leagueId,
-          team: teamId,
           season,
         },
       });
@@ -77,34 +65,13 @@ export class FootballService {
     return standingsResp.league;
   }
 
-  static async getAvailableFixtures({
-    leagueId,
-    teamId,
-    season,
-    status,
-    from,
-    to,
-    live,
-    date,
-    nextFixtures,
-    lastFixtures,
-    round,
-  }: Partial<AvailableFixtureParams>) {
+  static async getAvailableFixtures({ leagueId, season }: FixturesParams) {
     const { data }: FootballApiResponse<Fixture[]> = await footballApi.get(
       "fixtures",
       {
         params: {
           league: leagueId,
-          team: teamId,
-          last: lastFixtures,
-          next: nextFixtures,
           season,
-          status,
-          from,
-          to,
-          live,
-          date,
-          round,
         },
       }
     );
@@ -116,7 +83,7 @@ export class FootballService {
     return data.response;
   }
 
-  static async getDetailFixtureInfo(fixtureId: number | string) {
+  static async getDetailFixtureInfo({ fixtureId }: DetailedFixtureParams) {
     const { data }: FootballApiResponse<FixtureDetailInfoApi[]> =
       await footballApi.get("fixtures", {
         params: {

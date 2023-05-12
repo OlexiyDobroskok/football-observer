@@ -6,19 +6,20 @@ import {
   FixtureStatisticType,
   FixtureVarType,
 } from "api/helpers/consts";
+import { ApiParams } from "./global";
 
-export interface AvailableFixtureParams {
-  live: "all" | string;
-  date: string;
+export interface FixturesParams extends ApiParams {
   leagueId: number;
   season: number;
-  teamId: number;
-  from: string;
-  to: string;
-  nextFixtures: number;
-  lastFixtures: number;
-  round: string;
-  status: FixtureShortStatus | string;
+}
+
+export interface DetailedFixtureParams extends ApiParams {
+  fixtureId: number | string;
+}
+
+export interface HeadToHeadArgs extends ApiParams {
+  homeTeamId: number;
+  awayTeamId: number;
 }
 
 export interface FixturePeriods {
@@ -303,11 +304,6 @@ export interface SortedEventsByTypes {
 
 export interface FixtureDetailInfoApp extends FixtureDetailInfo {
   events: SortedEventsByTeamsLocationStatus;
-}
-
-export interface HeadToHeadArgs {
-  homeTeamId: number;
-  awayTeamId: number;
 }
 
 export interface GameStatistics {

@@ -1,10 +1,7 @@
-export interface LeaguesParams {
-  leagueId: number;
-  teamId: number;
-  season: number;
+import { ApiParams } from "./global";
+
+export interface LeaguesParams extends ApiParams {
   type: "league" | "cup";
-  current: boolean;
-  search: string;
 }
 
 export interface LeagueDefinition {
