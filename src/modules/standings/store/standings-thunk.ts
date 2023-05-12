@@ -1,35 +1,33 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
-import { LeagueStandingsApiResponse } from "api/types/standings-types";
+import {
+  LeagueStandingsApiResponse,
+  StandingsParams,
+} from "api/types/standings-types";
 import { FootballService } from "api/football-service";
 import { StandingsState } from "./standings-slice";
-
-export type StandingsFetchError = string;
-interface LeagueStandingsArgs {
-  leagueId: number;
-  season: number;
-}
+import { generateDynamicKey } from "api/helpers/generateDynamicReqStatus";
 
 export const fetchLeagueStandings = createAsyncThunk<
   LeagueStandingsApiResponse,
-  LeagueStandingsArgs,
-  { rejectValue: StandingsFetchError; state: { standings: StandingsState } }
+  StandingsParams,
+  { rejectValue: string; state: { standings: StandingsState } }
 >(
   "standings/fetchLeagueStandings",
-  async ({ leagueId, season }, { rejectWithValue }) => {
+  async (params, { rejectWithValue }) => {
     try {
-      return await FootballService.getStandings({ leagueId, season });
+      return await FootballService.getStandings(params);
     } catch (error) {
       return rejectWithValue((error as Error).message);
     }
   },
   {
-    condition: ({ leagueId, season }, { getState }) => {
-      const { standings } = getState();
-      const reqKey = leagueId.toString() + season.toString();
-      const isLoading =
-        !!standings.reqStatus && standings.reqStatus[reqKey] === "loading";
-      const isSucceed =
-        !!standings.reqStatus && standings.reqStatus[reqKey] === "succeeded";
+    condition: (params, { getState }) => {
+      const {
+        standings: { reqStatus },
+      } = getState();
+      const reqKey = generateDynamicKey({ params });
+      const isLoading = !!reqStatus && reqStatus[reqKey] === "loading";
+      const isSucceed = !!reqStatus && reqStatus[reqKey] === "succeeded";
       if (isLoading || isSucceed) return false;
     },
   }

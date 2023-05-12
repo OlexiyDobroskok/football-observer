@@ -7,19 +7,20 @@ import {
 } from "../types/types";
 import { DynamicRequestStatus } from "api/types/global";
 import { fetchLeagueStandings } from "./standings-thunk";
+import { generateDynamicReqStatus } from "api/helpers/generateDynamicReqStatus";
 
 export interface StandingsState {
   leagueData: LeagueStandingsReformed | undefined;
   isLoading: boolean;
   error: string | null;
-  reqStatus: DynamicRequestStatus | undefined;
+  reqStatus: DynamicRequestStatus | null;
 }
 
 const initialState: StandingsState = {
   leagueData: undefined,
   isLoading: false,
   error: null,
-  reqStatus: undefined,
+  reqStatus: null,
 };
 
 const standingsSlice = createSlice({
@@ -29,16 +30,18 @@ const standingsSlice = createSlice({
   extraReducers: (builder) => {
     builder
       .addCase(fetchLeagueStandings.pending, (state, { meta }) => {
-        const { leagueId, season } = meta.arg;
-        const reqKey = leagueId.toString() + season.toString();
-        state.reqStatus = { [reqKey]: "loading" };
+        state.reqStatus = generateDynamicReqStatus({
+          params: meta.arg,
+          status: "loading",
+        });
         state.isLoading = true;
         state.error = null;
       })
       .addCase(fetchLeagueStandings.fulfilled, (state, { payload, meta }) => {
-        const { leagueId, season } = meta.arg;
-        const reqKey = leagueId.toString() + season.toString();
-        state.reqStatus = { [reqKey]: "succeeded" };
+        state.reqStatus = generateDynamicReqStatus({
+          params: meta.arg,
+          status: "succeeded",
+        });
         const reformedStandings = payload.standings.flat().map(
           (position) =>
             ({
@@ -55,9 +58,10 @@ const standingsSlice = createSlice({
       .addCase(
         fetchLeagueStandings.rejected,
         (state, { payload, meta, error }) => {
-          const { leagueId, season } = meta.arg;
-          const reqKey = leagueId.toString() + season.toString();
-          state.reqStatus = { [reqKey]: "failed" };
+          state.reqStatus = generateDynamicReqStatus({
+            params: meta.arg,
+            status: "failed",
+          });
           state.isLoading = false;
           state.error = payload ? payload : error.message ? error.message : "";
         }
