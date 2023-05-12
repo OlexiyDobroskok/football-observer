@@ -11,79 +11,46 @@ import { TabList } from "ui/TabList/TabList";
 import classes from "./Fixtures.module.scss";
 
 const fixturesTabs = {
-  results: "Results",
-  fixtures: "Fixtures",
+  resultsTab: "Results",
+  fixturesTab: "Fixtures",
 } as const;
 
 type FixturesTabsKey = keyof typeof fixturesTabs;
 type FixturesTab = (typeof fixturesTabs)[FixturesTabsKey];
 
 export const Fixtures = () => {
-  const [selectedTab, setSelectedTab] = useState<FixturesTab>(
-    fixturesTabs.fixtures
-  );
-  const {
-    finishedMatches,
-    scheduledMatches,
-    liveMatches,
-    timeToNextLiveMatch,
-    isLive,
-  } = useAppSelector(({ fixtures }) => fixtures);
+  const { resultsTab, fixturesTab } = fixturesTabs;
+  const [selectedTab, setSelectedTab] = useState<FixturesTab>(fixturesTab);
+  const { finishedMatches, scheduledMatches, liveMatches, timerId } =
+    useAppSelector(({ fixtures }) => fixtures);
   const { currentLeagueId, currentSeason } = useAppSelector(
     ({ leagues }) => leagues
   );
   const dispatch = useAppDispatch();
-
   useEffect(() => {
-    dispatch(
-      fetchFixtures({ leagueId: currentLeagueId, season: currentSeason })
-    );
-
-    let timerId: number | null = null;
-
-    if (!isLive && timeToNextLiveMatch) {
-      timerId = window.setTimeout(() => {
-        dispatch(
-          fetchFixtures({ leagueId: currentLeagueId, season: currentSeason })
-        );
-      }, timeToNextLiveMatch);
-    }
-
-    if (isLive) {
-      timerId = window.setInterval(
-        () =>
-          dispatch(
-            fetchFixtures({ leagueId: currentLeagueId, season: currentSeason })
-          ),
-        30000
+    if (currentLeagueId && currentSeason)
+      dispatch(
+        fetchFixtures({ leagueId: currentLeagueId, season: currentSeason })
       );
-    }
+  }, [currentLeagueId, currentSeason]);
 
-    return () => {
-      if (timerId) window.clearTimeout(timerId);
-    };
-  }, [isLive, currentLeagueId, currentSeason]);
-
-  const availableTabs: FixturesTab[] = [
-    fixturesTabs.results,
-    fixturesTabs.fixtures,
-  ];
+  const availableTabs: FixturesTab[] = [resultsTab, fixturesTab];
 
   const changeTab = ({ target }: ChangeEvent<HTMLInputElement>) => {
     setSelectedTab(target.value as FixturesTab);
   };
 
   let previewMatches: Fixture[];
-  if (selectedTab === fixturesTabs.fixtures && liveMatches.length) {
+  if (selectedTab === fixturesTab && liveMatches.length) {
     previewMatches = liveMatches;
   } else if (
-    selectedTab === fixturesTabs.fixtures &&
+    selectedTab === fixturesTab &&
     !liveMatches.length &&
     scheduledMatches.length
   ) {
     const [upcomingMatchDay] = scheduledMatches;
     previewMatches = upcomingMatchDay.fixtures;
-  } else if (selectedTab === fixturesTabs.results && finishedMatches.length) {
+  } else if (selectedTab === resultsTab && finishedMatches.length) {
     const [latestMatchDay] = finishedMatches;
     previewMatches = latestMatchDay.fixtures;
   } else {
@@ -104,10 +71,10 @@ export const Fixtures = () => {
           onChange={changeTab}
         />
       </div>
-      {selectedTab === fixturesTabs.results && (
+      {selectedTab === resultsTab && (
         <FixturesList fixtures={finishedMatches} />
       )}
-      {selectedTab === fixturesTabs.fixtures && (
+      {selectedTab === fixturesTab && (
         <FixturesList fixtures={scheduledMatches} />
       )}
     </>
