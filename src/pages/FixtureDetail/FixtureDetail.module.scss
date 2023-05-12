@@ -1,0 +1,20 @@
+@use "styles/functions" as fn;
+
+.detail-card {
+  margin-bottom: fn.px-to-rem(40px);
+}
+
+.tabs {
+  display: flex;
+  justify-content: center;
+  padding: 0 fn.px-to-rem(5px);
+}
+
+.h2h {
+  display: flex;
+  flex-direction: column;
+  gap: fn.px-to-rem(15px);
+  padding: fn.px-to-rem(15px) fn.px-to-rem(5px);
+  border-radius: 5px;
+  background-color: var(--secondary-color);
+}
