@@ -18,9 +18,11 @@ export const fetchLeagues = createAsyncThunk<
   },
   {
     condition: (_, { getState }) => {
-      const { leagues } = getState();
-      const isLoading = leagues.reqStatus === "loading";
-      const isSucceed = leagues.reqStatus === "succeeded";
+      const {
+        leagues: { reqStatus },
+      } = getState();
+      const isLoading = reqStatus === "loading";
+      const isSucceed = reqStatus === "succeeded";
       if (isLoading || isSucceed) return false;
     },
   }
