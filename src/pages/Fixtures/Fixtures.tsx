@@ -21,8 +21,9 @@ type FixturesTab = (typeof fixturesTabs)[FixturesTabsKey];
 export const Fixtures = () => {
   const { resultsTab, fixturesTab } = fixturesTabs;
   const [selectedTab, setSelectedTab] = useState<FixturesTab>(fixturesTab);
-  const { finishedMatches, scheduledMatches, liveMatches, timerId } =
-    useAppSelector(({ fixtures }) => fixtures);
+  const { finishedMatches, scheduledMatches, liveMatches } = useAppSelector(
+    ({ fixtures }) => fixtures
+  );
   const { currentLeagueId, currentSeason } = useAppSelector(
     ({ leagues }) => leagues
   );
