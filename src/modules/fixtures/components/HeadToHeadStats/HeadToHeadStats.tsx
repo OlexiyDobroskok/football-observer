@@ -1,12 +1,20 @@
-import { useAppSelector } from "hooks/redux";
+import { useEffect } from "react";
+import { useAppDispatch, useAppSelector } from "hooks/redux";
+import { fetchHeadToHeadFixtureInfo } from "../../store/head-to-head-thunk";
 import { StatisticTable } from "../StatisticTable/StatisticTable";
 import classes from "./HeadToHeadStats.module.scss";
 
 export const HeadToHeadStats = () => {
   const { headToHeadStats } = useAppSelector(({ headToHead }) => headToHead);
-  const { fixtureDetail } = useAppSelector(
+  const { fixtureDetail, homeTeamId, awayTeamId } = useAppSelector(
     ({ fixtureDetail }) => fixtureDetail
   );
+  const dispatch = useAppDispatch();
+
+  useEffect(() => {
+    if (homeTeamId && awayTeamId)
+      dispatch(fetchHeadToHeadFixtureInfo({ homeTeamId, awayTeamId }));
+  }, [homeTeamId, awayTeamId]);
 
   if (headToHeadStats && fixtureDetail) {
     const { played, draws, homeTeamWinStats, awayTeamWinStats } =
