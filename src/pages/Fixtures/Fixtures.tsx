@@ -1,83 +1,79 @@
-import { ChangeEvent, useEffect, useState } from "react";
-import { useAppDispatch, useAppSelector } from "hooks/redux";
-import {
-  fetchFixtures,
-  FixturesList,
-  PreviewMatchesList,
-} from "modules/fixtures";
+import { ChangeEvent, useState } from "react";
+import { useAppSelector } from "hooks/redux";
+import { FixturesList, PreviewMatchesList } from "modules/fixtures";
 import { HiddenElement } from "ui/HiddenElement/HiddenElement";
-import { Fixture } from "api/types/fixtures-types";
-import { TabList } from "ui/TabList/TabList";
+import { TabsList } from "ui/TabsList/TabsList";
 import classes from "./Fixtures.module.scss";
 
 const fixturesTabs = {
   resultsTab: "Results",
-  fixturesTab: "Fixtures",
+  scheduledTab: "Scheduled",
 } as const;
 
 type FixturesTabsKey = keyof typeof fixturesTabs;
 type FixturesTab = (typeof fixturesTabs)[FixturesTabsKey];
 
 export const Fixtures = () => {
-  const { resultsTab, fixturesTab } = fixturesTabs;
-  const [selectedTab, setSelectedTab] = useState<FixturesTab>(fixturesTab);
-  const { finishedMatches, scheduledMatches, liveMatches } = useAppSelector(
-    ({ fixtures }) => fixtures
-  );
-  const { currentLeagueId, currentSeason } = useAppSelector(
-    ({ leagues }) => leagues
-  );
-  const dispatch = useAppDispatch();
-  useEffect(() => {
-    if (currentLeagueId && currentSeason)
-      dispatch(
-        fetchFixtures({ leagueId: currentLeagueId, season: currentSeason })
-      );
-  }, [currentLeagueId, currentSeason]);
+  const { resultsTab, scheduledTab } = fixturesTabs;
+  const [selectedTab, setSelectedTab] = useState<FixturesTab>(scheduledTab);
+  const pageTabs: FixturesTab[] = [resultsTab, scheduledTab];
 
-  const availableTabs: FixturesTab[] = [resultsTab, fixturesTab];
+  const { isLive } = useAppSelector(({ fixtures }) => fixtures);
 
   const changeTab = ({ target }: ChangeEvent<HTMLInputElement>) => {
     setSelectedTab(target.value as FixturesTab);
   };
 
-  let previewMatches: Fixture[];
-  if (selectedTab === fixturesTab && liveMatches.length) {
-    previewMatches = liveMatches;
-  } else if (
-    selectedTab === fixturesTab &&
-    !liveMatches.length &&
-    scheduledMatches.length
-  ) {
-    const [upcomingMatchDay] = scheduledMatches;
-    previewMatches = upcomingMatchDay.fixtures;
-  } else if (selectedTab === resultsTab && finishedMatches.length) {
-    const [latestMatchDay] = finishedMatches;
-    previewMatches = latestMatchDay.fixtures;
-  } else {
-    previewMatches = [];
-  }
+  const isResultTab = selectedTab === resultsTab;
+  const isScheduledTab = selectedTab === scheduledTab;
 
   return (
     <>
       <HiddenElement as={"h1"}>League Fixtures</HiddenElement>
-      <div className={classes["live-place"]}>
-        <PreviewMatchesList matches={previewMatches} />
-      </div>
+      <section className={classes["preview-place"]}>
+        {isLive && (
+          <>
+            <h2 className={classes.title}>Live</h2>
+            <PreviewMatchesList matchesType={"LIVE"} />
+          </>
+        )}
+        {!isLive && isResultTab && (
+          <>
+            <h2 className={classes.title}>Upcoming Matches</h2>
+            <PreviewMatchesList matchesType={"SCHEDULED"} />
+          </>
+        )}
+        {!isLive && isScheduledTab && (
+          <>
+            <h2 className={classes.title}>Latest Matches</h2>
+            <PreviewMatchesList matchesType={"FINISHED"} />
+          </>
+        )}
+      </section>
       <div className={classes.tabs}>
-        <TabList
-          tabs={availableTabs}
+        <TabsList
+          tabs={pageTabs}
           checkedTab={selectedTab}
           groupName={"fixtures-tabs"}
           onChange={changeTab}
         />
       </div>
-      {selectedTab === resultsTab && (
-        <FixturesList fixtures={finishedMatches} />
-      )}
-      {selectedTab === fixturesTab && (
-        <FixturesList fixtures={scheduledMatches} />
-      )}
+      <section className="matchesList">
+        {isResultTab && (
+          <>
+            <HiddenElement as={"h2"}>Season Match Results</HiddenElement>
+            <FixturesList fixturesType={"FINISHED"} />
+          </>
+        )}
+        {isScheduledTab && (
+          <>
+            <HiddenElement as={"h2"}>
+              Scheduled matches of the season
+            </HiddenElement>
+            <FixturesList fixturesType={"SCHEDULED"} />
+          </>
+        )}
+      </section>
     </>
   );
 };

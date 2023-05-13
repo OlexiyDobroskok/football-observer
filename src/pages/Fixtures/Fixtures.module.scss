@@ -1,7 +1,13 @@
 @use "styles/functions" as fn;
 
-.live-place {
+.preview-place {
   margin-bottom: fn.px-to-rem(40px);
+}
+
+.title {
+  padding: 0 fn.px-to-rem(10px);
+  margin: 0 0 fn.px-to-rem(15px);
+  font-size: fn.px-to-rem(20px);
 }
 
 .fixtures-place {
