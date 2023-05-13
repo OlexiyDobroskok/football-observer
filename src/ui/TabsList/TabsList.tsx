@@ -1,17 +1,17 @@
 import { Tab, TabProps } from "../Tab/Tab";
-import classes from "./TabList.module.scss";
+import classes from "./TabsList.module.scss";
 
-export interface TabListProps extends Omit<TabProps, "tabName" | "isChecked"> {
+export interface TabsListProps extends Omit<TabProps, "tabName" | "isChecked"> {
   tabs: string[];
   checkedTab: string;
 }
 
-export const TabList = ({
+export const TabsList = ({
   tabs,
   groupName,
   checkedTab,
   onChange,
-}: TabListProps) => {
+}: TabsListProps) => {
   const tabList = tabs.map((tabName) => (
     <Tab
       key={tabName}

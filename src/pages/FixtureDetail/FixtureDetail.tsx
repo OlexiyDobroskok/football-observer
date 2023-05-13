@@ -5,7 +5,7 @@ import {
   HeadToHeadMatchesList,
   HeadToHeadStats,
 } from "modules/fixtures";
-import { TabList } from "ui/TabList/TabList";
+import { TabsList } from "ui/TabsList/TabsList";
 import { HiddenElement } from "ui/HiddenElement/HiddenElement";
 import classes from "./FixtureDetail.module.scss";
 
@@ -43,7 +43,7 @@ export const FixtureDetail = () => {
         <FixtureDetailCard />
       </div>
       <div className={classes.tabs}>
-        <TabList
+        <TabsList
           tabs={tabs}
           checkedTab={selectedTab}
           groupName={"fixture-detail-tabs"}
