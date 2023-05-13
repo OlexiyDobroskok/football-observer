@@ -280,7 +280,3 @@ export interface FixtureDetailInfo extends Fixture {
 export interface FixtureDetailInfoApi extends FixtureDetailInfo {
   events: FixtureEvent[];
 }
-
-export interface GameStatistics {
-  [key: string]: number | string | null;
-}

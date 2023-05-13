@@ -1,11 +1,12 @@
 import { getGoalDescription } from "../../helpers/get-goal-description";
 import { FixtureEventApp } from "../../types/types";
 import ballIcon from "./ball.svg";
+import { TeamLocationStatus } from "api/types/global";
 import classes from "./GoalEvent.module.scss";
 
 export interface GoalEventProps {
   events: FixtureEventApp[];
-  teamLocationStatus: "HOME" | "AWAY";
+  teamLocationStatus: TeamLocationStatus;
 }
 
 export const GoalEvent = ({ events, teamLocationStatus }: GoalEventProps) => {

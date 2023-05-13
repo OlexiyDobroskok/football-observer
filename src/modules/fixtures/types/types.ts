@@ -1,15 +1,12 @@
-import {
-  FixtureDetailInfo,
-  FixtureEvent,
-  GameStatistics,
-} from "api/types/fixtures-types";
+import { FixtureDetailInfo, FixtureEvent } from "api/types/fixtures-types";
+import { GameStatistics, TeamLocationStatus } from "api/types/global";
 
 export interface FixtureEventApp extends FixtureEvent {
   id: string | number;
 }
 
 export interface TeamEventsDefinition {
-  locationStatus: "HOME" | "AWAY";
+  locationStatus: TeamLocationStatus;
   events: FixtureEventApp[];
 }
 

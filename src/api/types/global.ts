@@ -7,3 +7,11 @@ export interface DynamicRequestStatus {
 export interface ApiParams {
   [key: string]: number | string | undefined;
 }
+
+export type GameStatisticValue = number | string | null;
+
+export interface GameStatistics {
+  [key: string]: GameStatisticValue;
+}
+
+export type TeamLocationStatus = "HOME" | "AWAY";
