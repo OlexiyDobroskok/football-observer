@@ -1,3 +1,10 @@
+import { PlayerPosition } from "../helpers/consts";
+import { ApiParams } from "./global";
+
+export interface TeamSquadParams extends ApiParams {
+  teamId: number;
+}
+
 export interface TeamDefinition {
   id: number;
   name: string;
@@ -48,4 +55,18 @@ export interface CoachInformation {
   photo: string;
   team: Pick<TeamDefinition, "id" | "name" | "logo">;
   career: TeamCareer[];
+}
+
+export interface TeamPlayerDefinition {
+  id: number;
+  name: string;
+  age: number;
+  number: number | null;
+  position: PlayerPosition;
+  photo: string;
+}
+
+export interface TeamSquad {
+  team: Pick<TeamDefinition, "id" | "name" | "logo">;
+  players: TeamPlayerDefinition[];
 }
