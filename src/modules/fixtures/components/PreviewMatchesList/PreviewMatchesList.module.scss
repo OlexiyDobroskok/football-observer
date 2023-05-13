@@ -14,10 +14,19 @@
   -webkit-overflow-scrolling: touch;
 }
 
+.list::-webkit-scrollbar {
+  display: none;
+}
+
 .single-match {
   justify-content: center;
 }
 
 .card {
   display: flex;
+}
+
+.message {
+  font-size: fn.px-to-rem(18px);
+  text-align: center;
 }
