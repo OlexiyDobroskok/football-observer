@@ -9,6 +9,7 @@ import {
   DetailedFixtureParams,
 } from "api/types/fixtures-types";
 import { throwDataError } from "./helpers/throwDataError";
+import { TeamSquad, TeamSquadParams } from "./types/team-types";
 
 export interface DataError {
   [key: string]: string;
@@ -118,5 +119,23 @@ export class FootballService {
     }
 
     return data.response;
+  }
+
+  static async getTeamSquad({ teamId }: TeamSquadParams) {
+    const { data }: FootballApiResponse<TeamSquad[]> = await footballApi.get(
+      "players/squads",
+      {
+        params: {
+          team: teamId,
+        },
+      }
+    );
+
+    if (data.errors.length !== 0) {
+      throwDataError(data.errors as DataError);
+    }
+
+    const [teamSquad] = data.response;
+    return teamSquad;
   }
 }
