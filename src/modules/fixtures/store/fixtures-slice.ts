@@ -6,10 +6,10 @@ import { DynamicRequestStatus } from "api/types/global";
 import { generateDynamicReqStatus } from "api/helpers/generateDynamicReqStatus";
 
 export interface FixturesState {
-  availableFixtures: Fixture[];
-  finishedMatches: DayFixtures[];
-  liveMatches: Fixture[];
-  scheduledMatches: DayFixtures[];
+  availableFixtures: Fixture[] | undefined;
+  finishedMatches: DayFixtures[] | undefined;
+  liveMatches: Fixture[] | undefined;
+  scheduledMatches: DayFixtures[] | undefined;
   timeToNextLiveMatch: number | null;
   isLive: boolean | undefined;
   timerId: number | null;
@@ -20,10 +20,10 @@ export interface FixturesState {
 }
 
 const initialState: FixturesState = {
-  availableFixtures: [],
-  finishedMatches: [],
-  liveMatches: [],
-  scheduledMatches: [],
+  availableFixtures: undefined,
+  finishedMatches: undefined,
+  liveMatches: undefined,
+  scheduledMatches: undefined,
   timeToNextLiveMatch: null,
   isLive: undefined,
   timerId: null,
