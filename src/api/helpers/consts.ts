@@ -78,6 +78,16 @@ export const fixtureStatisticType = {
   passesPercent: "Passes %",
 } as const;
 
-type FixtureStatisticTypeKey = keyof typeof fixtureStatisticType
+type FixtureStatisticTypeKey = keyof typeof fixtureStatisticType;
 export type FixtureStatisticType =
   (typeof fixtureStatisticType)[FixtureStatisticTypeKey];
+
+export const playerPositions = {
+  GK: "Goalkeeper",
+  DEF: "Defender",
+  MF: "Midfielder",
+  ATT: "Attacker",
+} as const;
+
+export type PlayerPosition =
+  (typeof playerPositions)[keyof typeof playerPositions];
