@@ -1,5 +1,5 @@
 import { Fixture } from "api/types/fixtures-types";
-import { H2HStats } from "../store/head-to-head-slice";
+import { H2HStats } from "../types/types";
 
 interface H2HStatsArgs {
   homeTeamId: number;

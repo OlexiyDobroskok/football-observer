@@ -1,5 +1,5 @@
 import { useMemo } from "react";
-import { TeamEventsDefinition } from "api/types/fixtures-types";
+import { TeamEventsDefinition } from "../../types/types";
 import { GoalEvent } from "../../ui/GoalEvent/GoalEvent";
 import { sortPlayerEventsByType } from "../../helpers/convertEvents";
 import classes from "./TeamEvents.module.scss";

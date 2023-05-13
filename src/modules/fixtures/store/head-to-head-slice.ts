@@ -1,21 +1,9 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { Fixture, GameStatistics } from "src/api/types/fixtures-types";
+import { Fixture } from "src/api/types/fixtures-types";
 import { fetchHeadToHeadFixtureInfo } from "./head-to-head-thunk";
 import { DynamicRequestStatus } from "api/types/global";
 import { generateDynamicReqStatus } from "api/helpers/generateDynamicReqStatus";
-
-export interface TeamWinStats extends GameStatistics {
-  total: number;
-  home: number;
-  away: number;
-}
-
-export interface H2HStats {
-  played: number;
-  draws: number;
-  homeTeamWinStats: TeamWinStats;
-  awayTeamWinStats: TeamWinStats;
-}
+import { H2HStats } from "../types/types";
 
 export interface HeadToHeadState {
   headToHeadFixtures: Fixture[] | undefined;

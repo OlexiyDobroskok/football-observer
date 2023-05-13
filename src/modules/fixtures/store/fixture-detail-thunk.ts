@@ -1,8 +1,6 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
-import {
-  DetailedFixtureParams,
-  FixtureDetailInfoApp,
-} from "api/types/fixtures-types";
+import { DetailedFixtureParams } from "api/types/fixtures-types";
+import { FixtureDetailInfoApp } from "../types/types";
 import { FootballService } from "api/football-service";
 import {
   FixtureDetailState,

@@ -5,7 +5,7 @@ import {
   FixtureShortStatus,
   FixtureStatisticType,
   FixtureVarType,
-} from "api/helpers/consts";
+} from "../helpers/consts";
 import { ApiParams } from "./global";
 
 export interface FixturesParams extends ApiParams {
@@ -122,10 +122,6 @@ export interface FixtureEvent {
   type: FixtureEventType;
   detail: FixtureGoalType | FixtureCardType | FixtureVarType | string;
   comments: string | null;
-}
-
-export interface FixtureEventApp extends FixtureEvent {
-  id: string | number;
 }
 
 export interface ShapeColor {
@@ -283,27 +279,6 @@ export interface FixtureDetailInfo extends Fixture {
 
 export interface FixtureDetailInfoApi extends FixtureDetailInfo {
   events: FixtureEvent[];
-}
-
-export interface TeamEventsDefinition {
-  locationStatus: "HOME" | "AWAY";
-  events: FixtureEventApp[];
-}
-
-export interface SortedEventsByTeamsLocationStatus {
-  homeTeam: TeamEventsDefinition;
-  awayTeam: TeamEventsDefinition;
-}
-
-export interface SortedEventsByTypes {
-  goals: FixtureEventApp[];
-  cards: FixtureEventApp[];
-  subst: FixtureEventApp[];
-  var: FixtureEventApp[];
-}
-
-export interface FixtureDetailInfoApp extends FixtureDetailInfo {
-  events: SortedEventsByTeamsLocationStatus;
 }
 
 export interface GameStatistics {

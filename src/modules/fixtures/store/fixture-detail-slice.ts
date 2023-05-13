@@ -1,5 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { FixtureDetailInfoApp } from "src/api/types/fixtures-types";
+import { FixtureDetailInfoApp } from "../types/types";
 import { fetchFixtureDetail } from "./fixture-detail-thunk";
 import { DynamicRequestStatus } from "api/types/global";
 import { generateDynamicReqStatus } from "api/helpers/generateDynamicReqStatus";

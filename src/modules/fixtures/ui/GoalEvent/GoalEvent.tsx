@@ -1,5 +1,5 @@
 import { getGoalDescription } from "../../helpers/get-goal-description";
-import { FixtureEventApp } from "api/types/fixtures-types";
+import { FixtureEventApp } from "../../types/types";
 import ballIcon from "./ball.svg";
 import classes from "./GoalEvent.module.scss";
 

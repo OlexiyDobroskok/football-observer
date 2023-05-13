@@ -1,9 +1,9 @@
+import { FixtureEvent } from "api/types/fixtures-types";
 import {
-  SortedEventsByTeamsLocationStatus,
-  FixtureEvent,
   FixtureEventApp,
+  SortedEventsByTeamsLocationStatus,
   SortedEventsByTypes,
-} from "api/types/fixtures-types";
+} from "../types/types";
 import { v4 as uuidv4 } from "uuid";
 import { fixtureEventType, fixtureGoalType } from "api/helpers/consts";
 

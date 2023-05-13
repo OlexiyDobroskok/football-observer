@@ -1,4 +1,4 @@
-import { FixtureEventApp } from "api/types/fixtures-types";
+import { FixtureEventApp } from "../types/types";
 import { fixtureGoalType } from "api/helpers/consts";
 
 export const getGoalDescription = ({ time, detail }: FixtureEventApp) => {
