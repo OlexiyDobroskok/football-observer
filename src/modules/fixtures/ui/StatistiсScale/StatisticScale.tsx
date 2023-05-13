@@ -1,5 +1,5 @@
-import classes from "./StatisticScale.module.scss";
 import { TeamLocationStatus } from "api/types/global";
+import classes from "./StatisticScale.module.scss";
 
 export interface StatisticScaleProps {
   width: string | null;
