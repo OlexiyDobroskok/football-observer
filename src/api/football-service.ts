@@ -9,7 +9,12 @@ import {
   DetailedFixtureParams,
 } from "api/types/fixtures-types";
 import { throwDataError } from "./helpers/throwDataError";
-import { TeamSquad, TeamSquadParams } from "./types/team-types";
+import {
+  ComparativeTeamsSquad,
+  ComparativeTeamsSquadParams,
+  TeamSquad,
+  TeamSquadParams,
+} from "./types/team-types";
 
 export interface DataError {
   [key: string]: string;
@@ -137,5 +142,15 @@ export class FootballService {
 
     const [teamSquad] = data.response;
     return teamSquad;
+  }
+
+  static async getComparativeTeamsSquad({
+    homeTeamId,
+    awayTeamId,
+  }: ComparativeTeamsSquadParams): Promise<ComparativeTeamsSquad> {
+    return await Promise.all([
+      FootballService.getTeamSquad({ teamId: homeTeamId }),
+      FootballService.getTeamSquad({ teamId: awayTeamId }),
+    ]);
   }
 }
