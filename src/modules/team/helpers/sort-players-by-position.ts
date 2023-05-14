@@ -9,7 +9,7 @@ export const sortPlayersByPosition = (
     goalkeepers: [],
     defenders: [],
     midfielders: [],
-    attackers: [],
+    forwards: [],
   };
 
   players.forEach((player) => {
@@ -20,7 +20,7 @@ export const sortPlayersByPosition = (
     if (player.position.toLowerCase() === playerPositions.MF.toLowerCase())
       squad.midfielders = [...squad.midfielders, player];
     if (player.position.toLowerCase() === playerPositions.ATT.toLowerCase())
-      squad.attackers = [...squad.attackers, player];
+      squad.forwards = [...squad.forwards, player];
   });
 
   return squad;

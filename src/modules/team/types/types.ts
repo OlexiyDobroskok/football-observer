@@ -4,7 +4,7 @@ export interface SortedTeamSquad {
   goalkeepers: TeamPlayerDefinition[];
   defenders: TeamPlayerDefinition[];
   midfielders: TeamPlayerDefinition[];
-  attackers: TeamPlayerDefinition[];
+  forwards: TeamPlayerDefinition[];
 }
 
 export interface TeamSquadApp extends Pick<TeamSquad, "team"> {
