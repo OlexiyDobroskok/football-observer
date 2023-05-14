@@ -5,6 +5,11 @@ export interface TeamSquadParams extends ApiParams {
   teamId: number;
 }
 
+export interface ComparativeTeamsSquadParams extends ApiParams {
+  homeTeamId: number;
+  awayTeamId: number;
+}
+
 export interface TeamDefinition {
   id: number;
   name: string;
@@ -70,3 +75,8 @@ export interface TeamSquad {
   team: Pick<TeamDefinition, "id" | "name" | "logo">;
   players: TeamPlayerDefinition[];
 }
+
+export type ComparativeTeamsSquad = [
+  homeTeamSquad: TeamSquad,
+  awayTeamSquad: TeamSquad
+];

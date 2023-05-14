@@ -10,3 +10,8 @@ export interface SortedTeamSquad {
 export interface TeamSquadApp extends Pick<TeamSquad, "team"> {
   players: SortedTeamSquad;
 }
+
+export interface ComparativeTeamsSquadApp {
+  homeTeamSquad: TeamSquadApp;
+  awayTeamSquad: TeamSquadApp;
+}
