@@ -1,4 +1,4 @@
-import { TeamPlayerDefinition, TeamSquad } from "api/types/team-types";
+import { TeamPlayerDefinition, TeamSquadApi } from "api/types/team-types";
 
 export interface SortedTeamSquad {
   goalkeepers: TeamPlayerDefinition[];
@@ -7,7 +7,7 @@ export interface SortedTeamSquad {
   forwards: TeamPlayerDefinition[];
 }
 
-export interface TeamSquadApp extends Pick<TeamSquad, "team"> {
+export interface TeamSquadApp extends Pick<TeamSquadApi, "team"> {
   players: SortedTeamSquad;
 }
 

@@ -71,12 +71,12 @@ export interface TeamPlayerDefinition {
   photo: string;
 }
 
-export interface TeamSquad {
+export interface TeamSquadApi {
   team: Pick<TeamDefinition, "id" | "name" | "logo">;
   players: TeamPlayerDefinition[];
 }
 
 export type ComparativeTeamsSquad = [
-  homeTeamSquad: TeamSquad,
-  awayTeamSquad: TeamSquad
+  homeTeamSquad: TeamSquadApi,
+  awayTeamSquad: TeamSquadApi
 ];

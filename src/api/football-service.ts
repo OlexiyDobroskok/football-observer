@@ -12,7 +12,7 @@ import { throwDataError } from "./helpers/throwDataError";
 import {
   ComparativeTeamsSquad,
   ComparativeTeamsSquadParams,
-  TeamSquad,
+  TeamSquadApi,
   TeamSquadParams,
 } from "./types/team-types";
 
@@ -127,7 +127,7 @@ export class FootballService {
   }
 
   static async getTeamSquad({ teamId }: TeamSquadParams) {
-    const { data }: FootballApiResponse<TeamSquad[]> = await footballApi.get(
+    const { data }: FootballApiResponse<TeamSquadApi[]> = await footballApi.get(
       "players/squads",
       {
         params: {
