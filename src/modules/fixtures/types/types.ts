@@ -1,5 +1,14 @@
-import { FixtureDetailInfo, FixtureEvent } from "api/types/fixtures-types";
+import {
+  Fixture,
+  FixtureDetailInfo,
+  FixtureEvent,
+} from "api/types/fixtures-types";
 import { GameStatistics, TeamLocationStatus } from "api/types/global";
+
+export interface DayFixtures {
+  date: string;
+  fixtures: Fixture[];
+}
 
 export interface FixtureEventApp extends FixtureEvent {
   id: string | number;

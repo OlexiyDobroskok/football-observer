@@ -1,9 +1,5 @@
 import { Fixture } from "api/types/fixtures-types";
-
-export interface DayFixtures {
-  date: string;
-  fixtures: Fixture[];
-}
+import { DayFixtures } from "../types/types";
 
 type SortMethod = "ASCENDING" | "DESCENDING";
 
