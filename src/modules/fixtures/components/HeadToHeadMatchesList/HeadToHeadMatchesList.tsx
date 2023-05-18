@@ -1,7 +1,7 @@
 import { useEffect } from "react";
 import { useAppDispatch, useAppSelector } from "hooks/redux";
+import { FinishedMatchItem } from "../FinishedMatchItem/FinishedMatchItem";
 import { fetchHeadToHeadFixtureInfo } from "../../store/head-to-head-thunk";
-import { FixtureItem } from "../FixtureItem/FixtureItem";
 import {
   getDateLongFormat,
   getValidDateTimeStrYMDFormat,
@@ -31,15 +31,16 @@ export const HeadToHeadMatchesList = ({
     const fixturesList = headToHeadFixtures
       .slice(0, numberRecentMatches)
       .map(({ fixture, teams, goals }, index) => {
-        const { id, date, status, venue } = fixture;
+        const { id, date, venue } = fixture;
         const matchDate = new Date(date);
         const formattedDate = getDateLongFormat(matchDate);
         const stadium = `${venue.name}, ${venue.city}`;
         return (
           <li
-            className={[classes.item, checkIsEven(index) && classes.dark].join(
-              " "
-            )}
+            className={[
+              classes.item,
+              checkIsEven(index) && classes.lightBg,
+            ].join(" ")}
             key={id}
           >
             <p className={classes.description}>
@@ -48,10 +49,8 @@ export const HeadToHeadMatchesList = ({
               </time>
             </p>
             <p className={classes.description}>{stadium}</p>
-            <FixtureItem
+            <FinishedMatchItem
               fixtureId={id}
-              date={date}
-              matchStatus={status.short}
               teamsOfMatch={teams}
               matchScore={goals}
             />
