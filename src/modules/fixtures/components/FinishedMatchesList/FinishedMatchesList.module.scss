@@ -1,0 +1,21 @@
+@use "styles/functions" as fn;
+
+.fixturesList {
+  padding: 0 fn.px-to-rem(5px) fn.px-to-rem(10px) fn.px-to-rem(5px);
+  border-radius: 5px;
+  background-color: var(--secondary-color);
+}
+
+.date {
+  margin: 0 0 1rem;
+  padding: 1rem 0.5rem 0;
+  font-size: 1.3rem;
+  font-weight: 700;
+  text-align: center;
+  color: var(--accent-color-extra-light);
+}
+
+.message {
+  font-size: fn.px-to-rem(18px);
+  text-align: center;
+}
