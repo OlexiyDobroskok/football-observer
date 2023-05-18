@@ -9,23 +9,23 @@ export const Standings = () => {
   const { currentLeagueInformation } = useAppSelector(({ leagues }) => leagues);
 
   const leagueName = currentLeagueInformation
-    ? `${currentLeagueInformation.league.name} (${currentLeagueInformation.country.name}) `
-    : "League Information Not Found...";
+    ? `${currentLeagueInformation.league.name} (${currentLeagueInformation.country.name})`
+    : "";
 
   return (
     <>
       <HiddenElement as="h1">League Standings</HiddenElement>
       {currentLeagueInformation && (
-        <>
-          <Container className={classes.container}>
+        <section className="standings">
+          <header className={classes.header}>
             <h2 className={classes.title}>{leagueName}</h2>
             <SeasonsSelect />
-          </Container>
+          </header>
           <LeagueTableMobile />
-        </>
+        </section>
       )}
       {!currentLeagueInformation && (
-        <p className={classes.title}>{leagueName}</p>
+        <p className={classes.message}>League Information Not Found...</p>
       )}
     </>
   );
