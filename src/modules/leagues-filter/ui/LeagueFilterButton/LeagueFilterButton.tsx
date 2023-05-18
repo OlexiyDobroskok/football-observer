@@ -13,8 +13,8 @@ export const LeagueFilterButton = ({
   isCurrent,
 }: LeagueFilterButtonProps) => (
   <Button onClick={onClick} isCurrent={isCurrent}>
-    <div className={classes.wrap}>
-      <img className={classes.logo} src={logo} alt="" />
+    <div className={classes.logo}>
+      <img className={classes.logoIcon} src={logo} alt="" />
     </div>
     {leagueName}
   </Button>
