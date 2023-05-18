@@ -1,17 +1,17 @@
-@use 'styles/functions' as fn;
+@use "styles/functions" as fn;
 
-.container {
+.referee {
   display: flex;
   align-items: center;
-  gap: fn.px-to-rem(5px)
+  gap: fn.px-to-rem(5px);
 }
 
-.icon {
+.refereeIcon {
   width: fn.px-to-rem(20px);
   height: fn.px-to-rem(20px);
 }
 
-.name {
+.refereeName {
   margin: 0;
-  color: var(--text-color)
+  color: var(--text-color);
 }

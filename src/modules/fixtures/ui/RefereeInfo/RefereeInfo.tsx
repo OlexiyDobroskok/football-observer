@@ -6,8 +6,8 @@ export interface RefereeInfoProps {
 }
 
 export const RefereeInfo = ({ refereeName }: RefereeInfoProps) => (
-  <div className={classes.container}>
-    <img className={classes.icon} src={whistleIcon} alt="" />
-    <p className={classes.name}>{refereeName}</p>
+  <div className={classes.referee}>
+    <img className={classes.refereeIcon} src={whistleIcon} alt="" />
+    <p className={classes.refereeName}>{refereeName}</p>
   </div>
 );
