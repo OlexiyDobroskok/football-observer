@@ -25,14 +25,14 @@ export const GoalEvent = ({ events, teamLocationStatus }: GoalEventProps) => {
   }
 
   return (
-    <div className={classes.event}>
+    <div className={classes.goalEvent}>
       <p
-        className={classes.description}
+        className={classes.goalDescription}
       >{`${playerName} ${goalDescription}`}</p>
       <img
         className={[
-          classes.icon,
-          teamLocationStatus === "AWAY" && classes.away,
+          classes.goalIcon,
+          teamLocationStatus === "AWAY" && classes.reverse,
         ].join(" ")}
         src={ballIcon}
         alt=""

@@ -1,22 +1,21 @@
 @use "styles/functions" as fn;
 
-.event {
+.goalEvent {
   display: flex;
   align-items: center;
   gap: fn.px-to-rem(5px);
 }
 
-.description {
+.goalDescription {
   margin: 0;
   font-size: fn.px-to-rem(14px);
 }
 
-.icon {
+.goalIcon {
   width: fn.px-to-rem(18px);
   height: fn.px-to-rem(18px);
 }
 
-.away {
+.reverse {
   order: -1;
-  justify-content: flex-end;
 }
