@@ -1,0 +1,12 @@
+@use "styles/functions" as fn;
+
+.compSquad {
+  padding-block-start: fn.px-to-rem(15px);
+  background-color: var(--secondary-color);
+}
+
+.buttonsGroup {
+  display: flex;
+  justify-content: center;
+  margin-block-end: fn.px-to-rem(10px);
+}
