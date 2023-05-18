@@ -5,9 +5,9 @@ import classes from "./NavMenuMobile.module.scss";
 
 export const NavMenuMobile = () => {
   return (
-    <nav className={classes["nav-menu"]}>
+    <nav className={classes.navMenu}>
       <List
-        className={classes.list}
+        className={classes.menuList}
         listItems={menuList}
         renderItem={({ id, path, iconHref }) => (
           <MenuItemMobile key={id} linkPath={path} iconHref={iconHref} />
