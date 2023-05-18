@@ -36,10 +36,25 @@ export const Fixtures = () => {
   return (
     <>
       <HiddenElement as={"h1"}>League Fixtures</HiddenElement>
-      <section className={classes["preview-place"]}>
-        {isLiveMatches && <LiveMatchesPreviewList />}
-        {!isLiveMatches && isResultTab && <ScheduledMatchesPreviewList />}
-        {!isLiveMatches && isScheduledTab && <FinishedMatchesPreviewList />}
+      <section className={classes.preview}>
+        {isLiveMatches && (
+          <>
+            <h2 className={classes.previewTitle}>Live</h2>
+            <LiveMatchesPreviewList />
+          </>
+        )}
+        {!isLiveMatches && isResultTab && (
+          <>
+            <h2 className={classes.previewTitle}>Upcoming Matches</h2>
+            <ScheduledMatchesPreviewList />
+          </>
+        )}
+        {!isLiveMatches && isScheduledTab && (
+          <>
+            <h2 className={classes.previewTitle}>Latest Matches</h2>
+            <FinishedMatchesPreviewList />
+          </>
+        )}
       </section>
       <div className={classes.tabs}>
         <TabsList

@@ -56,8 +56,7 @@ export const FinishedMatchesPreviewList = () => {
     const isSingleMatch = previewList.length === 1;
 
     return (
-      <section className={classes.preview}>
-        <h2 className={classes.previewTitle}>Latest Matches</h2>
+      <>
         {!!previewList.length && (
           <div
             className={[
@@ -71,7 +70,7 @@ export const FinishedMatchesPreviewList = () => {
         {!previewList.length && (
           <p className={classes.message}>Sorry, no matches were played...</p>
         )}
-      </section>
+      </>
     );
   }
 

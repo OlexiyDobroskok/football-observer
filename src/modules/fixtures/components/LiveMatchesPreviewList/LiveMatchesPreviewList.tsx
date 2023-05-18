@@ -51,8 +51,7 @@ export const LiveMatchesPreviewList = () => {
     const isSingleMatch = previewList.length === 1;
 
     return (
-      <section className={classes.preview}>
-        <h2 className={classes.previewTitle}>Live</h2>
+      <>
         {!!previewList.length && (
           <div
             className={[
@@ -68,7 +67,7 @@ export const LiveMatchesPreviewList = () => {
             Sorry, there is not a single live match...
           </p>
         )}
-      </section>
+      </>
     );
   }
 

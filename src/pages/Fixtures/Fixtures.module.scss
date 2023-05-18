@@ -4,6 +4,12 @@
   margin-bottom: fn.px-to-rem(40px);
 }
 
+.previewTitle {
+  margin: 0 0 fn.px-to-rem(15px);
+  padding-inline: fn.px-to-rem(10px);
+  font-size: fn.px-to-rem(20px);
+}
+
 .fixtures-place {
   position: relative;
 }
