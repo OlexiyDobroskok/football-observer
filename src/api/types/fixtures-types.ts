@@ -67,7 +67,7 @@ export interface FixtureTeam {
   winner: boolean | null;
 }
 
-export interface FixtureTeamResult {
+export interface FixtureTeamsLocationStatus {
   home: FixtureTeam;
   away: FixtureTeam;
 }
@@ -92,7 +92,7 @@ export interface FixtureScore {
 export interface Fixture {
   fixture: FixtureDefinition;
   league: FixtureLeague;
-  teams: FixtureTeamResult;
+  teams: FixtureTeamsLocationStatus;
   goals: FixtureGoals;
   score: FixtureScore;
 }
