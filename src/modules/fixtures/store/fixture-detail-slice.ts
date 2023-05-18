@@ -10,13 +10,10 @@ export interface FixtureDetailState {
   awayTeamId: number | undefined;
   isLive: boolean;
   isScheduled: boolean;
-  timeToMatch: number | null;
   isFinished: boolean;
   isLoading: boolean;
   error: string | null;
-  timerId: number | null;
   reqStatus: DynamicRequestStatus | null;
-  reqLocation: string | null;
 }
 
 const initialState: FixtureDetailState = {
@@ -25,13 +22,10 @@ const initialState: FixtureDetailState = {
   awayTeamId: undefined,
   isLive: false,
   isScheduled: false,
-  timeToMatch: null,
   isFinished: false,
   isLoading: false,
   error: null,
-  timerId: null,
   reqStatus: null,
-  reqLocation: null,
 };
 
 export const fixtureDetailSlice = createSlice({
@@ -45,7 +39,6 @@ export const fixtureDetailSlice = createSlice({
   extraReducers: (builder) => {
     builder
       .addCase(fetchFixtureDetail.pending, (state, { meta }) => {
-        state.reqLocation = window.location.pathname;
         state.reqStatus = generateDynamicReqStatus({
           params: meta.arg,
           status: "loading",
@@ -65,8 +58,6 @@ export const fixtureDetailSlice = createSlice({
           isLive,
           isFinished,
           isScheduled,
-          timeToMatch,
-          timerId,
         } = payload;
         state.fixtureDetail = fixtureDetail;
         state.homeTeamId = homeTeamId;
@@ -74,8 +65,6 @@ export const fixtureDetailSlice = createSlice({
         state.isLive = isLive;
         state.isFinished = isFinished;
         state.isScheduled = isScheduled;
-        state.timeToMatch = timeToMatch;
-        state.timerId = timerId;
         state.isLoading = false;
         state.error = null;
       })
