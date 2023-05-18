@@ -14,11 +14,11 @@ export const StatisticScale = ({
     {width && (
       <div
         className={[
-          classes.container,
-          teamLocationStatus === "HOME" && classes.right,
+          classes.scale,
+          teamLocationStatus === "HOME" && classes.rightSide,
         ].join(" ")}
       >
-        <div className={classes.scale} style={{ width }}></div>
+        <div className={classes.scaleResult} style={{ width }}></div>
       </div>
     )}
   </>

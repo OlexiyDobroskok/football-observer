@@ -1,16 +1,16 @@
 @use "styles/functions" as fn;
 
-.container {
+.scale {
   display: flex;
   border: 2px solid var(--accent-color);
   border-radius: 3px;
 }
 
-.scale {
+.scaleResult {
   height: fn.px-to-rem(5px);
   background-color: var(--accent-color-extra-light);
 }
 
-.right {
+.rightSide {
   justify-content: flex-end;
 }
