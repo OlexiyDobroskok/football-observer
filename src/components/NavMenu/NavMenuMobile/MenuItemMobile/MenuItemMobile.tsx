@@ -10,12 +10,12 @@ interface MenuItemProps {
 
 export const MenuItemMobile = ({ linkPath, iconHref }: MenuItemProps) => {
   return (
-    <li>
+    <li className="menuItem">
       <NavLink
         className={({ isActive }) => (isActive ? classes.active : "")}
         to={linkPath}
       >
-        <SvgIcon className={classes.icon} href={iconHref} />
+        <SvgIcon className={classes.menuIcon} href={iconHref} />
       </NavLink>
     </li>
   );

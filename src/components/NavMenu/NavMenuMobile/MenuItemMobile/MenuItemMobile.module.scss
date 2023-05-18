@@ -1,12 +1,12 @@
 @use "styles/functions" as fn;
 
-.icon {
+.menuIcon {
   padding: fn.px-to-rem(7px) fn.px-to-rem(10px);
   width: fn.px-to-rem(25px);
   height: fn.px-to-rem(25px);
   fill: white;
 }
 
-.active > .icon {
+.active > .menuIcon {
   fill: var(--active-nav-color);
 }
