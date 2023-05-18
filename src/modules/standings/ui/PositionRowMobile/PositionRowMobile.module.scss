@@ -1,9 +1,5 @@
 @use "styles/functions" as fn;
 
-.bi-color {
-  background-color: var(--secondary-color-light);
-}
-
 .team {
   display: flex;
   align-items: center;
@@ -11,7 +7,7 @@
   padding-left: fn.px-to-rem(3px);
 }
 
-.link {
+.teamLink {
   flex-shrink: 10;
   color: var(--text-color);
   text-decoration: none;
@@ -19,4 +15,8 @@
 
 .data {
   text-align: center;
+}
+
+.altBg {
+  background-color: var(--secondary-color-light);
 }

@@ -24,12 +24,12 @@ export const PositionRowMobile = ({
   formList,
   isEven,
 }: PositionRowMobileProps) => (
-  <tr className={isEven ? classes["bi-color"] : ""}>
+  <tr className={isEven ? classes.altBg : ""}>
     <td className={classes.data}>{rank}</td>
     <td>
       <div className={classes.team}>
         <ClubLogo logo={logo} logoSize="SM" />
-        <Link className={classes.link} to={`/teams/${id}`}>
+        <Link className={classes.teamLink} to={`/teams/${id}`}>
           {name}
         </Link>
       </div>
