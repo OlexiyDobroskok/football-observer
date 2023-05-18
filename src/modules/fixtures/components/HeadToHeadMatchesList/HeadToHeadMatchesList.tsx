@@ -37,10 +37,9 @@ export const HeadToHeadMatchesList = ({
         const stadium = `${venue.name}, ${venue.city}`;
         return (
           <li
-            className={[
-              classes.item,
-              checkIsEven(index) && classes.lightBg,
-            ].join(" ")}
+            className={[classes.item, checkIsEven(index) && classes.altBg].join(
+              " "
+            )}
             key={id}
           >
             <p className={classes.description}>
@@ -59,7 +58,7 @@ export const HeadToHeadMatchesList = ({
       });
 
     return (
-      <section className={classes["recent-meetings"]}>
+      <section className={classes.meetings}>
         <h3 className={classes.title}>Recent Meetings</h3>
         <ul className={classes.list}>{fixturesList}</ul>
       </section>
@@ -67,7 +66,7 @@ export const HeadToHeadMatchesList = ({
   }
 
   return (
-    <section>
+    <section className="meetings">
       <h3 className={classes.title}>Recent Meetings</h3>
       <p className={classes.message}>Not Found!</p>
     </section>

@@ -1,6 +1,6 @@
 @use "styles/functions" as fn;
 
-.recent-meetings {
+.meetings {
   padding-top: fn.px-to-rem(10px);
   border-radius: 5px;
   background-color: var(--secondary-color-dark);
@@ -33,7 +33,7 @@
   text-align: center;
 }
 
-.lightBg {
+.altBg {
   border-radius: 3px;
   background-color: var(--secondary-color-light);
 }
