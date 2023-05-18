@@ -23,8 +23,8 @@ export const TopLeaguesList = () => {
     };
 
     return (
-      <div className={classes["list-wrap"]}>
-        <div className={classes["leagues-list"]}>
+      <div className={classes.container}>
+        <div className={classes.leaguesList}>
           {!currentLeagueIsTop && (
             <LeagueFilterButton
               leagueName={currentLeagueName}
@@ -34,7 +34,7 @@ export const TopLeaguesList = () => {
             />
           )}
           <List
-            className={classes["top-list"]}
+            className={classes.topLeaguesList}
             listItems={topLeaguesInfo}
             renderItem={({ league: { id, name, logo } }) => (
               <LeagueFilterButton

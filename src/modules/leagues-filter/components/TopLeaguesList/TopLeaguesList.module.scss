@@ -1,21 +1,21 @@
 @use "styles/functions" as fn;
 
-.list-wrap {
+.container {
   overflow: hidden;
 }
 
-.leagues-list {
+.leaguesList {
   display: flex;
   gap: fn.px-to-rem(5px);
   overflow-x: scroll;
   -webkit-overflow-scrolling: touch;
 }
 
-.leagues-list::-webkit-scrollbar {
+.leaguesList::-webkit-scrollbar {
   display: none;
 }
 
-.top-list {
+.topLeaguesList {
   display: flex;
   gap: fn.px-to-rem(5px);
 }
