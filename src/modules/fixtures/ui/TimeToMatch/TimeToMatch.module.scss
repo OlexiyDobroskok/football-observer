@@ -1,6 +1,6 @@
-@use 'styles/functions' as fn;
+@use "styles/functions" as fn;
 
-.count-down {
+.countDown {
   display: flex;
   gap: fn.px-to-rem(10px);
 }
@@ -13,7 +13,7 @@
   gap: fn.px-to-rem(5px);
 }
 
-.digits{
+.digits {
   font-size: fn.px-to-rem(20px);
   font-weight: 700;
 }

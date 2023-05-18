@@ -12,7 +12,7 @@ export const TimeToMatch = ({ fixtureDate }: TimeToMatchProps) => {
   if (downCounter) {
     const { days, hrs, mins, secs } = downCounter;
     return (
-      <div className={classes["count-down"]}>
+      <div className={classes.countDown}>
         <div className={classes.count}>
           <div className={classes.digits}>{twoDigitsFormat(days)}</div>
           <div className={classes.description}>Days</div>
