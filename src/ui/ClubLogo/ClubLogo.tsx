@@ -8,7 +8,7 @@ export interface ClubLogoProps {
 export const ClubLogo = ({ logo, logoSize }: ClubLogoProps) => (
   <div
     className={[
-      classes.container,
+      classes.logo,
       logoSize === "SM"
         ? classes.sm
         : logoSize === "MD"
@@ -16,6 +16,6 @@ export const ClubLogo = ({ logo, logoSize }: ClubLogoProps) => (
         : classes.lg,
     ].join(" ")}
   >
-    <img className={classes.icon} src={logo} alt="" />
+    <img className={classes.logoIcon} src={logo} alt="" />
   </div>
 );
