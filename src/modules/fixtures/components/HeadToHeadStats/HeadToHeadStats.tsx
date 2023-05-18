@@ -33,7 +33,7 @@ export const HeadToHeadStats = () => {
       );
 
     return (
-      <section className={classes["h2h-stats"]}>
+      <section className={classes.h2HStats}>
         <h3 className={classes.title}>Head-to-Head</h3>
         {played === 1 && (
           <p className={classes.common}>
