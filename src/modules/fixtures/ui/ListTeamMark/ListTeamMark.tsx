@@ -12,11 +12,16 @@ export const ListTeamMark = ({
   team: { name, logo },
   teamStatus,
 }: ListTeamMarkProps) => (
-  <div className={classes.card}>
+  <div
+    className={[classes.team, teamStatus === "AWAY" && classes.awayTeam].join(
+      " "
+    )}
+  >
     <p
-      className={[classes.name, teamStatus === "AWAY" && classes.away].join(
-        " "
-      )}
+      className={[
+        classes.teamName,
+        teamStatus === "AWAY" && classes.reverse,
+      ].join(" ")}
     >
       {name}
     </p>

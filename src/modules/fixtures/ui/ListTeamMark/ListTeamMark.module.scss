@@ -1,24 +1,23 @@
 @use "styles/functions" as fn;
 
-.card {
+.team {
   display: flex;
   justify-content: flex-end;
   align-items: center;
   gap: fn.px-to-rem(5px);
 
-  &:has(.away) {
+  &.awayTeam {
     justify-content: flex-start;
   }
 }
 
-.name {
+.teamName {
   flex-shrink: 10;
   margin: 0;
-  padding: 0;
   font-weight: 500;
   text-align: center;
 }
 
-.away {
+.reverse {
   order: 1;
 }
