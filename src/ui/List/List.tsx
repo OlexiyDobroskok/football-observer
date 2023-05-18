@@ -3,11 +3,11 @@ import { ReactNode } from "react";
 
 interface ListProps<T> {
   listItems: T[];
-  renderItem: (item: T) => ReactNode;
+  renderItem: (item: T, index: number) => ReactNode;
   className?: string;
 }
 
-export const List = <T extends unknown>({
+export const List = <T,>({
   listItems,
   renderItem,
   className,
