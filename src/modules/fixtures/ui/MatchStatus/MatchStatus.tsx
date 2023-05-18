@@ -11,14 +11,16 @@ export const MatchStatus = ({
 }: MatchStatusProps) => {
   const isLive = checkIsMatchLive(matchStatus);
   return (
-    <div className={classes.container}>
+    <div className={classes.matchInfo}>
       {isLive && (
         <>
-          <p className={classes.time}>{`${elapsedTime}'`}</p>
-          <p className={classes.status}>({matchStatus})</p>
+          <span className={classes.time}>{`${elapsedTime}'`}</span>
+          <span className={classes.status}>({matchStatus})</span>
         </>
       )}
-      {!isLive && <p className={classes["status-lg"]}>{matchStatus}</p>}
+      {!isLive && (
+        <span className={classes.matchStatusLarge}>{matchStatus}</span>
+      )}
     </div>
   );
 };
