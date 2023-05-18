@@ -7,8 +7,8 @@ export interface StadiumInfoProps {
 }
 
 export const StadiumInfo = ({ stadium: { name, city } }: StadiumInfoProps) => (
-  <div className={classes.container}>
-    <img className={classes.icon} src={stadiumIcon} alt="" />
-    <p className={classes.description}>{`${name}, ${city}`}</p>
+  <div className={classes.stadium}>
+    <img className={classes.stadiumIcon} src={stadiumIcon} alt="" />
+    <p className={classes.stadiumDescription}>{`${name}, ${city}`}</p>
   </div>
 );
