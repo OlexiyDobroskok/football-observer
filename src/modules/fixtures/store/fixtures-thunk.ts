@@ -1,26 +1,20 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
 import { FootballService } from "api/football-service";
 import { FixturesParams, Fixture } from "api/types/fixtures-types";
-import {
-  DayFixtures,
-  dayFixturesConverter,
-} from "../helpers/day-fixtures-converter";
+import { DayFixtures } from "../types/types";
+import { FixturesState } from "./fixtures-slice";
+import { dayFixturesConverter } from "../helpers/day-fixtures-converter";
 import { checkIsMatchFinished } from "../helpers/checkIsMatchFinished";
 import { checkIsMatchScheduled } from "../helpers/checkIsMatchScheduled";
 import { checkIsMatchLive } from "../helpers/checkIsMatchLive";
-import { getTimeToMatch } from "../helpers/getTimeToMatch";
-import { FixturesState, resetFixturesReqStatus } from "./fixtures-slice";
-import { AppDispatch } from "store/store";
 import { generateDynamicKey } from "api/helpers/generateDynamicReqStatus";
 
 export interface FixturesData {
-  allFixtures: Fixture[];
   finished: DayFixtures[];
   scheduled: DayFixtures[];
   live: Fixture[];
-  timeToNextLiveMatch: number | null;
-  isLive: boolean;
-  timerId: number | null;
+  nextLiveMatch: Fixture | null;
+  isLiveMatches: boolean;
 }
 
 export const fetchFixtures = createAsyncThunk<
@@ -28,16 +22,12 @@ export const fetchFixtures = createAsyncThunk<
   FixturesParams,
   {
     state: { fixtures: FixturesState };
-    dispatch: AppDispatch;
     rejectValue: string;
   }
 >(
   "fixtures/fetchFixtures",
-  async (params, { getState, dispatch, rejectWithValue }) => {
+  async (params, { rejectWithValue }) => {
     try {
-      const { fixtures: fixturesState } = getState();
-      if (fixturesState.timerId) window.clearTimeout(fixturesState.timerId);
-
       const fixtures = await FootballService.getAvailableFixtures(params);
 
       const finishedMatches = dayFixturesConverter(
@@ -57,42 +47,20 @@ export const fetchFixtures = createAsyncThunk<
         checkIsMatchLive(status.short)
       );
 
-      let timeToNextLiveMatch: number | null;
-      let isLive: boolean;
-      if (!liveMatches.length && scheduledMatches.length) {
+      const isLiveMatches = !!liveMatches.length;
+      let nextLiveMatch: Fixture | null = null;
+
+      if (!isLiveMatches && scheduledMatches.length) {
         const [nextMatchDay] = scheduledMatches;
-        const [nextLiveMatch] = nextMatchDay.fixtures;
-        timeToNextLiveMatch = getTimeToMatch(nextLiveMatch.fixture.date);
-        isLive = false;
-      } else {
-        timeToNextLiveMatch = null;
-        isLive = true;
-      }
-
-      let timerId: number | null = null;
-
-      if (!isLive && timeToNextLiveMatch) {
-        timerId = window.setTimeout(() => {
-          dispatch(resetFixturesReqStatus());
-          dispatch(fetchFixtures(params));
-        }, timeToNextLiveMatch);
-      }
-
-      if (isLive) {
-        timerId = window.setTimeout(() => {
-          dispatch(resetFixturesReqStatus());
-          dispatch(fetchFixtures(params));
-        }, 30000);
+        [nextLiveMatch] = nextMatchDay.fixtures;
       }
 
       return {
-        allFixtures: fixtures,
         finished: finishedMatches,
         scheduled: scheduledMatches,
         live: liveMatches,
-        timeToNextLiveMatch,
-        isLive,
-        timerId,
+        nextLiveMatch,
+        isLiveMatches,
       };
     } catch (error) {
       return rejectWithValue((error as Error).message);
@@ -101,16 +69,11 @@ export const fetchFixtures = createAsyncThunk<
   {
     condition: (params, { getState }) => {
       const {
-        fixtures: { reqStatus, reqLocation, timerId },
+        fixtures: { reqStatus },
       } = getState();
       const reqKey = generateDynamicKey({ params });
       const isLoading = !!reqStatus && reqStatus[reqKey] === "loading";
       const isSucceed = !!reqStatus && reqStatus[reqKey] === "succeeded";
-      const currentLocation = window.location.pathname;
-      if (!!reqLocation && !!timerId && currentLocation !== reqLocation) {
-        window.clearTimeout(timerId);
-        return false;
-      }
       if (isLoading || isSucceed) return false;
     },
   }
