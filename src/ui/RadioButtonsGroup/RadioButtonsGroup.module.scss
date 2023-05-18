@@ -1,0 +1,27 @@
+@use "styles/functions" as fn;
+
+.buttonGroup {
+  display: inline-flex;
+  justify-content: center;
+  align-items: stretch;
+  gap: fn.px-to-rem(10px);
+  padding: fn.px-to-rem(5px);
+  border-radius: 5px;
+  background-color: var(--accent-color-dark);
+}
+
+.button {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  max-width: fn.px-to-rem(100px);
+  font-size: fn.px-to-rem(14px);
+  font-weight: 700;
+  text-align: center;
+  padding: fn.px-to-rem(5px) fn.px-to-rem(10px);
+  border-radius: 5px;
+}
+
+.selected {
+  background-color: var(--accent-color-light);
+}
