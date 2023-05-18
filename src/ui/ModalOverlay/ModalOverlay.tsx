@@ -17,14 +17,14 @@ export const ModalOverlay = ({ children }: ModalOverlayProps) => {
 
   useEffect(() => {
     const body = document.querySelector("body") as HTMLBodyElement;
-    body.classList.add(classes["scroll-hidden"]);
+    body.classList.add(classes.hiddenScroll);
 
-    return () => body.classList.remove(classes["scroll-hidden"]);
+    return () => body.classList.remove(classes.hiddenScroll);
   }, []);
 
   return (
     <div className={classes.modal}>
-      <div className={classes["close-button"]}>
+      <div className={classes.closeButton}>
         <CloseButton onClick={closeModalHandler} />
       </div>
       {children}
