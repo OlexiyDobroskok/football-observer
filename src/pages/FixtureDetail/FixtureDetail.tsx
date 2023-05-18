@@ -40,7 +40,7 @@ export const FixtureDetail = () => {
   return (
     <>
       <HiddenElement as={"h1"}>Details of the Match</HiddenElement>
-      <div className={classes["detail-card"]}>
+      <div className={classes.detailCard}>
         <FixtureDetailCard />
       </div>
       <div className={classes.tabs}>
@@ -53,11 +53,11 @@ export const FixtureDetail = () => {
       </div>
       <div>
         {selectedTab === fixtureDetailTabs.h2h && (
-          <article className={classes.h2h}>
+          <section className={classes.h2h}>
             <HiddenElement as={"h2"}>Head to Head Tab</HiddenElement>
             <HeadToHeadStats />
             <HeadToHeadMatchesList numberRecentMatches={5} />
-          </article>
+          </section>
         )}
         {selectedTab === fixtureDetailTabs.squads && <ComparativeTeamsSquad />}
       </div>
