@@ -58,7 +58,7 @@ export const ScheduledMatchesList = () => {
   const matchesList = fixturesPage.map(({ date, fixtures }) => {
     const matchesDate = new Date(date);
     const formattedDate = getDateLongFormat(matchesDate);
-    const dayMatchesList = fixtures.map(({ fixture, teams, goals }, index) => (
+    const dayMatchesList = fixtures.map(({ fixture, teams }, index) => (
       <ScheduledMatchItem
         key={fixture.id}
         fixtureId={fixture.id}
