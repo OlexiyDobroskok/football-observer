@@ -29,7 +29,7 @@ export const ScheduledMatchItem = ({
     matchStatus === fixtureStatus.TBD ? `- : -` : getTimeShortFormat(matchDate);
 
   return (
-    <div className={[classes.fixture, isEven && classes.lightBg].join(" ")}>
+    <div className={[classes.fixture, isEven && classes.altBg].join(" ")}>
       <ListTeamMark team={homeTeam} teamStatus={"HOME"} />
       <div className={classes.fixtureTime}>
         <time dateTime={getValidDateTimeStrYMDFormat(matchDate)}>
