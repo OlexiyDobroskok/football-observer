@@ -41,7 +41,7 @@ export const LeagueSearchPlace = () => {
         onChange={handleQueryChange}
       />
       <List
-        className={classes["result-list"]}
+        className={classes.searchResults}
         listItems={filteredLeagues}
         renderItem={({
           league: { id, name: leagueName },
