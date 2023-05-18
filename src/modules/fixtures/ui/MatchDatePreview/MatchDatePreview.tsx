@@ -16,7 +16,7 @@ export const MatchDatePreview = ({ date }: MatchDatePreviewProps) => {
   const formattedTime = getTimeShortFormat(matchDate);
 
   return (
-    <div className={classes.container}>
+    <div className={classes.datePreview}>
       <time dateTime={date} className={classes.time}>
         {formattedTime}
       </time>
