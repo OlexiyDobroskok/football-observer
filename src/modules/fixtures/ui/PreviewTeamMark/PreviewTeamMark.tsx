@@ -8,8 +8,8 @@ export interface PreviewTeamMarkProps {
 export const PreviewTeamMark = ({
   team: { name, logo },
 }: PreviewTeamMarkProps) => (
-  <div className={classes.card}>
-    <img className={classes.logo} src={logo} alt="" />
-    <p className={classes.name}>{name}</p>
+  <div className={classes.team}>
+    <img className={classes.teamLogo} src={logo} alt="" />
+    <p className={classes.teamName}>{name}</p>
   </div>
 );
