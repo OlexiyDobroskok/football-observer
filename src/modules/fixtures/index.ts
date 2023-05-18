@@ -1,4 +1,11 @@
 export { fixturesReducer } from "./store/fixtures-slice";
-export { fetchFixtures } from "./store/fixtures-thunk";
-export { FixturesList } from "./components/FixturesList/FixturesList";
-export { PreviewMatchesList } from "./components/PreviewMatchesList/PreviewMatchesList";
+export { fixtureDetailReducer } from "./store/fixture-detail-slice";
+export { headToHeadReducer } from "./store/head-to-head-slice";
+export { ScheduledMatchesList } from "./components/ScheduledMatchesList/ScheduledMatchesList";
+export { FinishedMatchesList } from "./components/FinishedMatchesList/FinishedMatchesList";
+export { LiveMatchesPreviewList } from "./components/LiveMatchesPreviewList/LiveMatchesPreviewList";
+export { ScheduledMatchesPreviewList } from "./components/ScheduleMatchesPreviewList/ScheduleMatchesPreviewList";
+export { FinishedMatchesPreviewList } from "./components/FinishedMatchesPreviewList/FinishedMatchesPreviewList";
+export { FixtureDetailCard } from "./components/FixtureDetailCard/FixtureDetailCard";
+export { HeadToHeadMatchesList } from "./components/HeadToHeadMatchesList/HeadToHeadMatchesList";
+export { HeadToHeadStats } from "./components/HeadToHeadStats/HeadToHeadStats";
