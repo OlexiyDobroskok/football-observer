@@ -27,9 +27,9 @@ export const StatisticTable = <T extends GameStatistics>({
       awayTeamValue: awayTeamStats[fieldName],
     });
     return (
-      <tr key={fieldName.toString()} className={classes["stat-row"]}>
+      <tr key={fieldName.toString()}>
         <td>
-          <div className={classes["home-data"]}>
+          <div className={classes.homeData}>
             <div className={classes.scale}>
               <StatisticScale
                 width={homeTeamPercent}
@@ -39,9 +39,9 @@ export const StatisticTable = <T extends GameStatistics>({
             <span className={classes.value}>{homeTeamStats[fieldName]}</span>
           </div>
         </td>
-        <th className={classes["table-header"]}>{fieldName.toString()}</th>
+        <th className={classes.tableHeader}>{fieldName.toString()}</th>
         <td>
-          <div className={classes["away-data"]}>
+          <div className={classes.awayData}>
             <span className={classes.value}>{awayTeamStats[fieldName]}</span>
             <div className={classes.scale}>
               <StatisticScale
@@ -59,11 +59,11 @@ export const StatisticTable = <T extends GameStatistics>({
     <table className={classes.table}>
       <thead>
         <tr>
-          <th className={classes["home-team"]}>
+          <th className={classes.homeTeam}>
             <ListTeamMark team={homeTeam} teamStatus={"HOME"} />
           </th>
           <th>{statisticName}</th>
-          <th className={classes["away-team"]}>
+          <th className={classes.awayTeam}>
             <ListTeamMark team={awayTeam} teamStatus={"AWAY"} />
           </th>
         </tr>

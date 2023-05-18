@@ -4,13 +4,13 @@
   width: 100%;
 }
 
-.table-header {
+.tableHeader {
   font-size: fn.px-to-rem(14px);
   text-transform: capitalize;
 }
 
-.home-team,
-.away-team {
+.homeTeam,
+.awayTeam {
   width: 40%;
 }
 
@@ -18,15 +18,15 @@
   min-width: 15px;
 }
 
-.home-data,
-.away-data {
+.homeData,
+.awayData {
   display: flex;
   align-items: center;
   gap: fn.px-to-rem(5px);
   padding: fn.px-to-rem(5px) fn.px-to-rem(10px);
 }
 
-.home-data {
+.homeData {
   text-align: right;
 }
 
