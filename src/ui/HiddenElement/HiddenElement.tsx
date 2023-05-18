@@ -10,5 +10,5 @@ export const HiddenElement = ({
   as: Component = "div",
   children,
 }: HiddenElementProps) => (
-  <Component className={classes["visually-hidden"]}>{children}</Component>
+  <Component className={classes.visuallyHidden}>{children}</Component>
 );
