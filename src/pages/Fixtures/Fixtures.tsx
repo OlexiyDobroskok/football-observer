@@ -1,6 +1,12 @@
 import { ChangeEvent, useState } from "react";
 import { useAppSelector } from "hooks/redux";
-import { FixturesList, PreviewMatchesList } from "modules/fixtures";
+import {
+  FinishedMatchesList,
+  FinishedMatchesPreviewList,
+  LiveMatchesPreviewList,
+  ScheduledMatchesList,
+  ScheduledMatchesPreviewList,
+} from "modules/fixtures";
 import { HiddenElement } from "ui/HiddenElement/HiddenElement";
 import { TabsList } from "ui/TabsList/TabsList";
 import classes from "./Fixtures.module.scss";
@@ -18,7 +24,7 @@ export const Fixtures = () => {
   const [selectedTab, setSelectedTab] = useState<FixturesTab>(scheduledTab);
   const pageTabs: FixturesTab[] = [resultsTab, scheduledTab];
 
-  const { isLive } = useAppSelector(({ fixtures }) => fixtures);
+  const { isLiveMatches } = useAppSelector(({ fixtures }) => fixtures);
 
   const changeTab = ({ target }: ChangeEvent<HTMLInputElement>) => {
     setSelectedTab(target.value as FixturesTab);
@@ -31,24 +37,9 @@ export const Fixtures = () => {
     <>
       <HiddenElement as={"h1"}>League Fixtures</HiddenElement>
       <section className={classes["preview-place"]}>
-        {isLive && (
-          <>
-            <h2 className={classes.title}>Live</h2>
-            <PreviewMatchesList matchesType={"LIVE"} />
-          </>
-        )}
-        {!isLive && isResultTab && (
-          <>
-            <h2 className={classes.title}>Upcoming Matches</h2>
-            <PreviewMatchesList matchesType={"SCHEDULED"} />
-          </>
-        )}
-        {!isLive && isScheduledTab && (
-          <>
-            <h2 className={classes.title}>Latest Matches</h2>
-            <PreviewMatchesList matchesType={"FINISHED"} />
-          </>
-        )}
+        {isLiveMatches && <LiveMatchesPreviewList />}
+        {!isLiveMatches && isResultTab && <ScheduledMatchesPreviewList />}
+        {!isLiveMatches && isScheduledTab && <FinishedMatchesPreviewList />}
       </section>
       <div className={classes.tabs}>
         <TabsList
@@ -62,7 +53,7 @@ export const Fixtures = () => {
         {isResultTab && (
           <>
             <HiddenElement as={"h2"}>Season Match Results</HiddenElement>
-            <FixturesList fixturesType={"FINISHED"} />
+            <FinishedMatchesList />
           </>
         )}
         {isScheduledTab && (
@@ -70,7 +61,7 @@ export const Fixtures = () => {
             <HiddenElement as={"h2"}>
               Scheduled matches of the season
             </HiddenElement>
-            <FixturesList fixturesType={"SCHEDULED"} />
+            <ScheduledMatchesList />
           </>
         )}
       </section>
