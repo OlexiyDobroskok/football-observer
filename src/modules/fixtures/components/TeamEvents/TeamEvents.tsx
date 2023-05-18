@@ -29,8 +29,8 @@ export const TeamEvents = ({
   );
 
   return (
-    <div>
-      <div className={classes.list}>{goalsList}</div>
+    <div className="events">
+      <div className={classes.eventsList}>{goalsList}</div>
     </div>
   );
 };
