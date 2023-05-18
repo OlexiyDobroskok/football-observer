@@ -7,6 +7,7 @@ import {
 } from "modules/fixtures";
 import { TabsList } from "ui/TabsList/TabsList";
 import { HiddenElement } from "ui/HiddenElement/HiddenElement";
+import { ComparativeTeamsSquad } from "modules/team";
 import classes from "./FixtureDetail.module.scss";
 
 const fixtureDetailTabs = {
@@ -16,8 +17,8 @@ const fixtureDetailTabs = {
   squads: "Squads",
 } as const;
 
-type DetailTabsKey = keyof typeof fixtureDetailTabs;
-type FixtureDetailTab = (typeof fixtureDetailTabs)[DetailTabsKey];
+type FixtureDetailTab =
+  (typeof fixtureDetailTabs)[keyof typeof fixtureDetailTabs];
 
 export const FixtureDetail = () => {
   const { isLive, isScheduled } = useAppSelector(
@@ -58,6 +59,7 @@ export const FixtureDetail = () => {
             <HeadToHeadMatchesList numberRecentMatches={5} />
           </article>
         )}
+        {selectedTab === fixtureDetailTabs.squads && <ComparativeTeamsSquad />}
       </div>
     </>
   );
