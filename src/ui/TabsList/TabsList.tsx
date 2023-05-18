@@ -22,5 +22,5 @@ export const TabsList = ({
     />
   ));
 
-  return <div className={classes["tabs-group"]}>{tabList}</div>;
+  return <div className={classes.tabsList}>{tabList}</div>;
 };

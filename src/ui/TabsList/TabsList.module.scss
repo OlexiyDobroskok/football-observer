@@ -1,6 +1,6 @@
 @use "styles/functions" as fn;
 
-.tabs-group {
+.tabsList {
   display: flex;
   gap: fn.px-to-rem(5px);
 }
