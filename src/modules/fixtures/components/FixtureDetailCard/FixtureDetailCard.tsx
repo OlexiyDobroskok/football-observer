@@ -1,6 +1,8 @@
 import { useEffect } from "react";
 import { useParams } from "react-router-dom";
 import { useAppDispatch, useAppSelector } from "hooks/redux";
+import { fetchFixtureDetail } from "../../store/fixture-detail-thunk";
+import { resetFixtureDetailReqStatus } from "../../store/fixture-detail-slice";
 import { TeamEvents } from "../TeamEvents/TeamEvents";
 import { RefereeInfo } from "../../ui/RefereeInfo/RefereeInfo";
 import { StadiumInfo } from "../../ui/StadiumInfo/StadiumInfo";
@@ -14,19 +16,34 @@ import { PreviewTeamMark } from "../../ui/PreviewTeamMark/PreviewTeamMark";
 import { Scoreboard } from "../../ui/Scoreboard/Scoreboard";
 import { TimeToMatch } from "../../ui/TimeToMatch/TimeToMatch";
 import { MatchStatus } from "../../ui/MatchStatus/MatchStatus";
-import { fetchFixtureDetail } from "../../store/fixture-detail-thunk";
 import classes from "./FixtureDetailCard.module.scss";
 
 export const FixtureDetailCard = () => {
   const { fixtureId } = useParams<"fixtureId">();
-  const dispatch = useAppDispatch();
   const { fixtureDetail, isLive, isScheduled } = useAppSelector(
     ({ fixtureDetail }) => fixtureDetail
   );
+  const dispatch = useAppDispatch();
 
   useEffect(() => {
-    if (fixtureId) dispatch(fetchFixtureDetail({ fixtureId }));
-  }, [fixtureId]);
+    let intervalId: number | null;
+
+    if (fixtureId) {
+      dispatch(fetchFixtureDetail({ fixtureId }));
+
+      if (isLive) {
+        intervalId = window.setInterval(() => {
+          dispatch(resetFixtureDetailReqStatus());
+          dispatch(fetchFixtureDetail({ fixtureId }));
+        }, 30000);
+      }
+    }
+
+    return () => {
+      if (isLive) dispatch(resetFixtureDetailReqStatus());
+      if (intervalId) window.clearInterval(intervalId);
+    };
+  }, [fixtureId, isLive]);
 
   if (fixtureDetail) {
     const { fixture, teams, goals, events } = fixtureDetail;
@@ -37,24 +54,24 @@ export const FixtureDetailCard = () => {
     const matchTime = getTimeShortFormat(matchDate);
     return (
       <div className={classes.fixture}>
-        <Container className={classes["common-info"]}>
-          <div className={classes["common-wrap"]}>
-            <p className={classes.date}>
+        <Container className={classes.fixtureCommonInfo}>
+          <div className={classes.commonInfoWrap}>
+            <div className={classes.date}>
               <time dateTime={getValidDateTimeStrYMDFormat(matchDate)}>
                 {matchDateFormatted}
               </time>
-            </p>
+            </div>
             {!!referee && <RefereeInfo refereeName={referee} />}
           </div>
           <StadiumInfo stadium={venue} />
         </Container>
-        <Container className={classes.score}>
+        <Container className={classes.fixtureScore}>
           <PreviewTeamMark team={homeTeam} />
           <div className={classes.scoreboard}>
             {!isScheduled && (
               <>
                 <Scoreboard matchScore={goals} boardSize={"LG"} />
-                <MatchStatus matchStatus={status} isLive={isLive} />
+                <MatchStatus matchStatus={status} />
               </>
             )}
             {isScheduled && <TimeToMatch fixtureDate={date} />}
@@ -62,9 +79,9 @@ export const FixtureDetailCard = () => {
           <PreviewTeamMark team={awayTeam} />
         </Container>
         {isScheduled && (
-          <p className={classes["match-time"]}>{`Kick Off: ${matchTime}`}</p>
+          <p className={classes.fixtureStartTime}>{`Kick Off: ${matchTime}`}</p>
         )}
-        <Container className={classes["match-events"]}>
+        <Container className={classes.fixtureEvents}>
           <TeamEvents eventsDefinition={events.homeTeam} />
           <TeamEvents eventsDefinition={events.awayTeam} />
         </Container>
@@ -72,5 +89,5 @@ export const FixtureDetailCard = () => {
     );
   }
 
-  return <div>Not found</div>;
+  return <div>Not Found!</div>;
 };
