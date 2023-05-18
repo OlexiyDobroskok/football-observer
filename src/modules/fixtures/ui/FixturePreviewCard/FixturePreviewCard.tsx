@@ -21,12 +21,12 @@ export const FixturePreviewCard = ({
   } = leagueInfo;
 
   return (
-    <article className={classes.card}>
-      <h3 className={classes.title}>{leagueName}</h3>
-      <p className={classes.subtitle}>({leagueCountry})</p>
-      <p className={classes.subtitle}>{leagueRound}</p>
+    <article className={classes.fixture}>
+      <h3 className={classes.fixtureTitle}>{leagueName}</h3>
+      <p className={classes.fixtureSubtitle}>({leagueCountry})</p>
+      <p className={classes.fixtureSubtitle}>{leagueRound}</p>
       <div>{children}</div>
-      <Link className={classes.link} to={`/fixtures/${fixtureId}`} />
+      <Link className={classes.fixtureLink} to={`/fixtures/${fixtureId}`} />
     </article>
   );
 };

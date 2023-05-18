@@ -1,6 +1,6 @@
 @use "styles/functions" as fn;
 
-.card {
+.fixture {
   position: relative;
   box-sizing: border-box;
   width: 70vw;
@@ -10,17 +10,17 @@
   border-radius: 10px;
 }
 
-.title {
+.fixtureTitle {
   margin: 0 0 fn.px-to-rem(5px);
   font-size: 1rem;
 }
 
-.subtitle {
+.fixtureSubtitle {
   margin: 0 0 fn.px-to-rem(10px);
   font-size: fn.px-to-rem(14px);
 }
 
-.link {
+.fixtureLink {
   position: absolute;
   inset: 0;
 }
