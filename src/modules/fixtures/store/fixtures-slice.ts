@@ -1,36 +1,30 @@
 import { createSlice } from "@reduxjs/toolkit";
 import { Fixture } from "api/types/fixtures-types";
 import { fetchFixtures } from "./fixtures-thunk";
-import { DayFixtures } from "../helpers/day-fixtures-converter";
+import { DayFixtures } from "../types/types";
 import { DynamicRequestStatus } from "api/types/global";
 import { generateDynamicReqStatus } from "api/helpers/generateDynamicReqStatus";
 
 export interface FixturesState {
-  availableFixtures: Fixture[] | undefined;
   finishedMatches: DayFixtures[] | undefined;
   liveMatches: Fixture[] | undefined;
   scheduledMatches: DayFixtures[] | undefined;
-  timeToNextLiveMatch: number | null;
-  isLive: boolean | undefined;
-  timerId: number | null;
+  isLiveMatches: boolean | undefined;
+  nextLiveMatch: Fixture | null | undefined;
   isLoading: boolean;
   error: string | null;
   reqStatus: DynamicRequestStatus | null;
-  reqLocation: string | null;
 }
 
 const initialState: FixturesState = {
-  availableFixtures: undefined,
   finishedMatches: undefined,
   liveMatches: undefined,
   scheduledMatches: undefined,
-  timeToNextLiveMatch: null,
-  isLive: undefined,
-  timerId: null,
+  isLiveMatches: undefined,
+  nextLiveMatch: undefined,
   isLoading: false,
   error: null,
   reqStatus: null,
-  reqLocation: null,
 };
 
 const fixturesSlice = createSlice({
@@ -44,7 +38,6 @@ const fixturesSlice = createSlice({
   extraReducers: (builder) => {
     builder
       .addCase(fetchFixtures.pending, (state, { meta }) => {
-        state.reqLocation = window.location.pathname;
         state.reqStatus = generateDynamicReqStatus({
           params: meta.arg,
           status: "loading",
@@ -57,22 +50,13 @@ const fixturesSlice = createSlice({
           params: meta.arg,
           status: "succeeded",
         });
-        const {
-          allFixtures,
-          finished,
-          scheduled,
-          live,
-          timeToNextLiveMatch,
-          isLive,
-          timerId,
-        } = payload;
-        state.availableFixtures = allFixtures;
+        const { finished, scheduled, live, nextLiveMatch, isLiveMatches } =
+          payload;
         state.finishedMatches = finished;
         state.scheduledMatches = scheduled;
         state.liveMatches = live;
-        state.timeToNextLiveMatch = timeToNextLiveMatch;
-        state.isLive = isLive;
-        state.timerId = timerId;
+        state.nextLiveMatch = nextLiveMatch;
+        state.isLiveMatches = isLiveMatches;
         state.isLoading = false;
         state.error = null;
       })
