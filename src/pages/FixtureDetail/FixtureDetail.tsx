@@ -1,5 +1,4 @@
 import { ChangeEvent, useState } from "react";
-import { useAppSelector } from "hooks/redux";
 import {
   FixtureDetailCard,
   HeadToHeadMatchesList,
@@ -9,6 +8,7 @@ import { TabsList } from "ui/TabsList/TabsList";
 import { HiddenElement } from "ui/HiddenElement/HiddenElement";
 import { ComparativeTeamsSquad } from "modules/team";
 import classes from "./FixtureDetail.module.scss";
+import { useFixtureDetail } from "modules/fixtures/hooks/use-fixture-detail";
 
 const fixtureDetailTabs = {
   lineUps: "Line-ups",
@@ -21,15 +21,15 @@ type FixtureDetailTab =
   (typeof fixtureDetailTabs)[keyof typeof fixtureDetailTabs];
 
 export const FixtureDetail = () => {
-  const { isLive, isScheduled } = useAppSelector(
-    ({ fixtureDetail }) => fixtureDetail
-  );
+  const { fixtureDetail, isScheduled } = useFixtureDetail();
   const [selectedTab, setSelectedTab] = useState<FixtureDetailTab>(
-    isLive ? fixtureDetailTabs.matchStats : fixtureDetailTabs.h2h
+    !isScheduled ? fixtureDetailTabs.matchStats : fixtureDetailTabs.h2h
   );
   const { lineUps, squads, h2h, matchStats } = fixtureDetailTabs;
+  const isLineUps = !!fixtureDetail && !!fixtureDetail.lineups.length;
+
   const tabs: FixtureDetailTab[] = [
-    isScheduled ? squads : lineUps,
+    isLineUps ? lineUps : squads,
     h2h,
     matchStats,
   ];

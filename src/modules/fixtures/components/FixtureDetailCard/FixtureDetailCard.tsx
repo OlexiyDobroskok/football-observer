@@ -1,8 +1,4 @@
-import { useEffect } from "react";
-import { useParams } from "react-router-dom";
-import { useAppDispatch, useAppSelector } from "hooks/redux";
-import { fetchFixtureDetail } from "../../store/fixture-detail-thunk";
-import { resetFixtureDetailReqStatus } from "../../store/fixture-detail-slice";
+import { useFixtureDetail } from "../../hooks/use-fixture-detail";
 import { TeamEvents } from "../TeamEvents/TeamEvents";
 import { RefereeInfo } from "../../ui/RefereeInfo/RefereeInfo";
 import { StadiumInfo } from "../../ui/StadiumInfo/StadiumInfo";
@@ -19,31 +15,7 @@ import { MatchStatus } from "../../ui/MatchStatus/MatchStatus";
 import classes from "./FixtureDetailCard.module.scss";
 
 export const FixtureDetailCard = () => {
-  const { fixtureId } = useParams<"fixtureId">();
-  const { fixtureDetail, isLive, isScheduled } = useAppSelector(
-    ({ fixtureDetail }) => fixtureDetail
-  );
-  const dispatch = useAppDispatch();
-
-  useEffect(() => {
-    let intervalId: number | null;
-
-    if (fixtureId) {
-      dispatch(fetchFixtureDetail({ fixtureId }));
-
-      if (isLive) {
-        intervalId = window.setInterval(() => {
-          dispatch(resetFixtureDetailReqStatus());
-          dispatch(fetchFixtureDetail({ fixtureId }));
-        }, 30000);
-      }
-    }
-
-    return () => {
-      if (isLive) dispatch(resetFixtureDetailReqStatus());
-      if (intervalId) window.clearInterval(intervalId);
-    };
-  }, [fixtureId, isLive]);
+  const { fixtureDetail, isScheduled } = useFixtureDetail();
 
   if (fixtureDetail) {
     const { fixture, teams, goals, events } = fixtureDetail;
