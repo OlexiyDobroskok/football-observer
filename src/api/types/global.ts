@@ -1,3 +1,5 @@
+import { FixtureStatisticType } from "../helpers/consts";
+
 export type RequestStatus = "idle" | "loading" | "succeeded" | "failed";
 
 export interface DynamicRequestStatus {
@@ -10,8 +12,12 @@ export interface ApiParams {
 
 export type GameStatisticValue = number | string | null;
 
-export interface GameStatistics {
-  [key: string]: GameStatisticValue;
-}
-
 export type TeamLocationStatus = "HOME" | "AWAY";
+
+export type WinStatistic = "Total" | "Home" | "Away";
+export type MatchStatisticType = WinStatistic | FixtureStatisticType;
+
+export interface MatchStatistic {
+  type: MatchStatisticType;
+  value: GameStatisticValue;
+}
