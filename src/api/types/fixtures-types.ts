@@ -6,7 +6,7 @@ import {
   FixtureStatisticType,
   FixtureVarType,
 } from "../helpers/consts";
-import { ApiParams, GameStatisticValue, MatchStatistic } from "./global";
+import { ApiParams, GameStatisticValue, GameStatistic } from "./global";
 
 export interface FixturesParams extends ApiParams {
   leagueId: number;
@@ -261,7 +261,7 @@ export interface FixtureTeamPlayersStat {
   players: StatPlayerDefinition[];
 }
 
-export interface TeamStatForm extends MatchStatistic {
+export interface TeamStatForm extends GameStatistic {
   type: FixtureStatisticType;
   value: GameStatisticValue;
 }

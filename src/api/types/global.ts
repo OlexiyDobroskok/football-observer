@@ -17,7 +17,7 @@ export type TeamLocationStatus = "HOME" | "AWAY";
 export type WinStatistic = "Total" | "Home" | "Away";
 export type MatchStatisticType = WinStatistic | FixtureStatisticType;
 
-export interface MatchStatistic {
+export interface GameStatistic {
   type: MatchStatisticType;
   value: GameStatisticValue;
 }

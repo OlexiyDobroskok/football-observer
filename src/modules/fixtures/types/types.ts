@@ -3,7 +3,7 @@ import {
   FixtureDetailInfo,
   FixtureEvent,
 } from "api/types/fixtures-types";
-import { MatchStatistic, TeamLocationStatus } from "api/types/global";
+import { GameStatistic, TeamLocationStatus } from "api/types/global";
 
 export interface DayFixtures {
   date: string;
@@ -38,6 +38,6 @@ export interface FixtureDetailInfoApp extends FixtureDetailInfo {
 export interface H2HStats {
   played: number;
   draws: number;
-  homeTeamWinStats: MatchStatistic[];
-  awayTeamWinStats: MatchStatistic[];
+  homeTeamWinStats: GameStatistic[];
+  awayTeamWinStats: GameStatistic[];
 }

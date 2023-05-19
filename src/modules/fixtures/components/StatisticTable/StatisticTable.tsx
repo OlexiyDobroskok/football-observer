@@ -1,11 +1,11 @@
 import { ListTeamMark } from "../../ui/ListTeamMark/ListTeamMark";
 import { StatisticScale } from "../../ui/StatistiсScale/StatisticScale";
 import { FixtureTeam } from "api/types/fixtures-types";
-import { MatchStatistic } from "api/types/global";
+import { GameStatistic } from "api/types/global";
 import { getStatisticScalePercent } from "helpers/get-statistic-scale-percent";
 import classes from "./StatisticTable.module.scss";
 
-export interface StatisticTableProps<T extends MatchStatistic> {
+export interface StatisticTableProps<T extends GameStatistic> {
   statisticName: string;
   homeTeam: FixtureTeam;
   awayTeam: FixtureTeam;
@@ -13,7 +13,7 @@ export interface StatisticTableProps<T extends MatchStatistic> {
   awayTeamStats: T[];
 }
 
-export const StatisticTable = <T extends MatchStatistic>({
+export const StatisticTable = <T extends GameStatistic>({
   statisticName,
   homeTeam,
   awayTeam,

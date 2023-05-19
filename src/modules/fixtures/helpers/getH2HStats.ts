@@ -1,6 +1,6 @@
 import { Fixture } from "api/types/fixtures-types";
 import { H2HStats } from "../types/types";
-import { MatchStatistic } from "api/types/global";
+import { GameStatistic } from "api/types/global";
 
 interface H2HStatsArgs {
   homeTeamId: number;
@@ -8,12 +8,12 @@ interface H2HStatsArgs {
 }
 
 export const getH2HStats = ({ homeTeamId, fixtures }: H2HStatsArgs) => {
-  const homeTeamTotal: MatchStatistic = { type: "Total", value: 0 };
-  const awayTeamTotal: MatchStatistic = { type: "Total", value: 0 };
-  const homeTeamHomeWins: MatchStatistic = { type: "Home", value: 0 };
-  const awayTeamHomeWins: MatchStatistic = { type: "Home", value: 0 };
-  const homeTeamAwayWins: MatchStatistic = { type: "Away", value: 0 };
-  const awayTeamAwayWins: MatchStatistic = { type: "Away", value: 0 };
+  const homeTeamTotal: GameStatistic = { type: "Total", value: 0 };
+  const awayTeamTotal: GameStatistic = { type: "Total", value: 0 };
+  const homeTeamHomeWins: GameStatistic = { type: "Home", value: 0 };
+  const awayTeamHomeWins: GameStatistic = { type: "Home", value: 0 };
+  const homeTeamAwayWins: GameStatistic = { type: "Away", value: 0 };
+  const awayTeamAwayWins: GameStatistic = { type: "Away", value: 0 };
   const headToHeadStats: H2HStats = {
     played: 0,
     draws: 0,
