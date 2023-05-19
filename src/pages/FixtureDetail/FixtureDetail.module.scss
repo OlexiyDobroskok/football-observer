@@ -5,9 +5,8 @@
 }
 
 .tabs {
-  display: flex;
-  justify-content: center;
-  padding: 0 fn.px-to-rem(5px);
+  padding-inline-end: fn.px-to-rem(10px);
+  margin-inline-start: fn.px-to-rem(15px);
 }
 
 .h2h {
