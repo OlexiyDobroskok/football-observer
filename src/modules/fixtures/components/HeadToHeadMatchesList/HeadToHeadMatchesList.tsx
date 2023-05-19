@@ -1,7 +1,5 @@
-import { useEffect } from "react";
-import { useAppDispatch, useAppSelector } from "hooks/redux";
+import { useHeadToHead } from "../../hooks/use-head-to-head";
 import { FinishedMatchItem } from "../FinishedMatchItem/FinishedMatchItem";
-import { fetchHeadToHeadFixtureInfo } from "../../store/head-to-head-thunk";
 import {
   getDateLongFormat,
   getValidDateTimeStrYMDFormat,
@@ -16,16 +14,7 @@ export interface HeadToHeadMatchesListProps {
 export const HeadToHeadMatchesList = ({
   numberRecentMatches,
 }: HeadToHeadMatchesListProps) => {
-  const { headToHeadFixtures } = useAppSelector(({ headToHead }) => headToHead);
-  const { homeTeamId, awayTeamId } = useAppSelector(
-    ({ fixtureDetail }) => fixtureDetail
-  );
-  const dispatch = useAppDispatch();
-
-  useEffect(() => {
-    if (homeTeamId && awayTeamId)
-      dispatch(fetchHeadToHeadFixtureInfo({ homeTeamId, awayTeamId }));
-  }, [homeTeamId, awayTeamId]);
+  const { headToHeadFixtures } = useHeadToHead();
 
   if (headToHeadFixtures) {
     const fixturesList = headToHeadFixtures
