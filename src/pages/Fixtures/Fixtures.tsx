@@ -1,5 +1,5 @@
 import { ChangeEvent, useState } from "react";
-import { useAppSelector } from "hooks/redux";
+import { useFixtures } from "modules/fixtures/hooks/use-fixtures";
 import {
   FinishedMatchesList,
   FinishedMatchesPreviewList,
@@ -24,7 +24,7 @@ export const Fixtures = () => {
   const [selectedTab, setSelectedTab] = useState<FixturesTab>(scheduledTab);
   const pageTabs: FixturesTab[] = [resultsTab, scheduledTab];
 
-  const { isLiveMatches } = useAppSelector(({ fixtures }) => fixtures);
+  const { isLiveMatches } = useFixtures();
 
   const changeTab = ({ target }: ChangeEvent<HTMLInputElement>) => {
     setSelectedTab(target.value as FixturesTab);

@@ -1,10 +1,7 @@
-import { Fragment, useEffect } from "react";
-import { useAppDispatch, useAppSelector } from "hooks/redux";
+import { Fragment } from "react";
+import { useFixtures } from "../../hooks/use-fixtures";
 import { useInfinityPagination } from "hooks/use-infinity-pagination";
-import { resetFixturesReqStatus } from "../../store/fixtures-slice";
-import { fetchFixtures } from "../../store/fixtures-thunk";
 import { ScheduledMatchItem } from "../ScheduledMatchItem/ScheduledMatchItem";
-import { getTimeToMatch } from "../../helpers/getTimeToMatch";
 import {
   getDateLongFormat,
   getValidDateTimeStrYMDFormat,
@@ -13,47 +10,13 @@ import { checkIsEven } from "helpers/check-is-even";
 import classes from "./ScheduledMatchesList.module.scss";
 
 export const ScheduledMatchesList = () => {
-  const { currentLeagueId, currentSeason } = useAppSelector(
-    ({ leagues }) => leagues
-  );
-  const { scheduledMatches, nextLiveMatch } = useAppSelector(
-    ({ fixtures }) => fixtures
-  );
-  const dispatch = useAppDispatch();
+  const { scheduledMatches } = useFixtures();
+
   const [containerRef, fixturesPage] = useInfinityPagination({
     dataList: scheduledMatches ? scheduledMatches : [],
     elementsPerPage: 7,
     observerOptions: { threshold: 0 },
   });
-
-  useEffect(() => {
-    let timerId: number | null = null;
-
-    if (currentLeagueId && currentSeason) {
-      dispatch(
-        fetchFixtures({ leagueId: currentLeagueId, season: currentSeason })
-      );
-
-      if (nextLiveMatch) {
-        const timeToMatch = getTimeToMatch(nextLiveMatch.fixture.date);
-        if (timeToMatch) {
-          timerId = window.setTimeout(() => {
-            dispatch(resetFixturesReqStatus());
-            dispatch(
-              fetchFixtures({
-                leagueId: currentLeagueId,
-                season: currentSeason,
-              })
-            );
-          }, timeToMatch);
-        }
-      }
-    }
-
-    return () => {
-      if (timerId) window.clearTimeout(timerId);
-    };
-  }, [currentLeagueId, currentSeason, nextLiveMatch]);
 
   const matchesList = fixturesPage.map(({ date, fixtures }) => {
     const matchesDate = new Date(date);

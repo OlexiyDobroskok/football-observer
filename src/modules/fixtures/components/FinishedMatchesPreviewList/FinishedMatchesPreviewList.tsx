@@ -1,48 +1,9 @@
-import { useEffect } from "react";
-import { useAppDispatch, useAppSelector } from "hooks/redux";
-import { fetchFixtures } from "../../store/fixtures-thunk";
-import { getTimeToMatch } from "../../helpers/getTimeToMatch";
-import { resetFixturesReqStatus } from "../../store/fixtures-slice";
+import { useFixtures } from "../../hooks/use-fixtures";
 import { FinishedMatchPreview } from "../FinishedMatchPreview/FinishedMatchPreview";
 import classes from "./FinishedMatchesPreviewList.module.scss";
 
 export const FinishedMatchesPreviewList = () => {
-  const { currentLeagueId, currentSeason } = useAppSelector(
-    ({ leagues }) => leagues
-  );
-  const { finishedMatches, nextLiveMatch } = useAppSelector(
-    ({ fixtures }) => fixtures
-  );
-  const dispatch = useAppDispatch();
-
-  useEffect(() => {
-    let timerId: number | null = null;
-
-    if (currentLeagueId && currentSeason) {
-      dispatch(
-        fetchFixtures({ leagueId: currentLeagueId, season: currentSeason })
-      );
-
-      if (nextLiveMatch) {
-        const timeToMatch = getTimeToMatch(nextLiveMatch.fixture.date);
-        if (timeToMatch) {
-          timerId = window.setTimeout(() => {
-            dispatch(resetFixturesReqStatus());
-            dispatch(
-              fetchFixtures({
-                leagueId: currentLeagueId,
-                season: currentSeason,
-              })
-            );
-          }, timeToMatch);
-        }
-      }
-    }
-
-    return () => {
-      if (timerId) window.clearTimeout(timerId);
-    };
-  }, [currentLeagueId, currentSeason, nextLiveMatch]);
+  const { finishedMatches } = useFixtures();
 
   if (finishedMatches && finishedMatches.length) {
     const [latestMatchDay] = finishedMatches;

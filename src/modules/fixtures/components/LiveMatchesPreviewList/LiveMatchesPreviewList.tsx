@@ -1,45 +1,9 @@
-import { useEffect } from "react";
-import { useAppDispatch, useAppSelector } from "hooks/redux";
-import { resetFixturesReqStatus } from "../../store/fixtures-slice";
-import { fetchFixtures } from "../../store/fixtures-thunk";
+import { useFixtures } from "../../hooks/use-fixtures";
 import { LiveMatchPreview } from "../LiveMatchPreview/LiveMatchPreview";
 import classes from "./LiveMatchesPreviewList.module.scss";
 
 export const LiveMatchesPreviewList = () => {
-  const { currentLeagueId, currentSeason } = useAppSelector(
-    ({ leagues }) => leagues
-  );
-  const { liveMatches, isLiveMatches } = useAppSelector(
-    ({ fixtures }) => fixtures
-  );
-  const dispatch = useAppDispatch();
-
-  useEffect(() => {
-    let intervalId: number | null = null;
-
-    if (currentLeagueId && currentSeason) {
-      dispatch(
-        fetchFixtures({ leagueId: currentLeagueId, season: currentSeason })
-      );
-
-      if (isLiveMatches) {
-        intervalId = window.setInterval(() => {
-          dispatch(resetFixturesReqStatus());
-          dispatch(
-            fetchFixtures({
-              leagueId: currentLeagueId,
-              season: currentSeason,
-            })
-          );
-        }, 30000);
-      }
-    }
-
-    return () => {
-      if (isLiveMatches) dispatch(resetFixturesReqStatus());
-      if (intervalId) window.clearInterval(intervalId);
-    };
-  }, [currentLeagueId, currentSeason, isLiveMatches]);
+  const { liveMatches } = useFixtures();
 
   if (liveMatches) {
     const previewList = liveMatches.map((liveMatchInfo) => (
