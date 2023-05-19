@@ -1,5 +1,6 @@
 import { Fixture } from "api/types/fixtures-types";
 import { H2HStats } from "../types/types";
+import { MatchStatistic } from "api/types/global";
 
 interface H2HStatsArgs {
   homeTeamId: number;
@@ -7,11 +8,17 @@ interface H2HStatsArgs {
 }
 
 export const getH2HStats = ({ homeTeamId, fixtures }: H2HStatsArgs) => {
+  const homeTeamTotal: MatchStatistic = { type: "Total", value: 0 };
+  const awayTeamTotal: MatchStatistic = { type: "Total", value: 0 };
+  const homeTeamHomeWins: MatchStatistic = { type: "Home", value: 0 };
+  const awayTeamHomeWins: MatchStatistic = { type: "Home", value: 0 };
+  const homeTeamAwayWins: MatchStatistic = { type: "Away", value: 0 };
+  const awayTeamAwayWins: MatchStatistic = { type: "Away", value: 0 };
   const headToHeadStats: H2HStats = {
     played: 0,
     draws: 0,
-    homeTeamWinStats: { total: 0, home: 0, away: 0 },
-    awayTeamWinStats: { total: 0, home: 0, away: 0 },
+    homeTeamWinStats: [homeTeamTotal, homeTeamHomeWins, homeTeamAwayWins],
+    awayTeamWinStats: [awayTeamTotal, awayTeamHomeWins, awayTeamAwayWins],
   };
 
   fixtures.forEach(({ goals, teams: { home, away } }) => {
@@ -23,21 +30,37 @@ export const getH2HStats = ({ homeTeamId, fixtures }: H2HStatsArgs) => {
 
     if (home.id === homeTeamId && !isDraw && isFinished) {
       if (home.winner) {
-        headToHeadStats.homeTeamWinStats.total++;
-        headToHeadStats.homeTeamWinStats.home++;
+        if (typeof homeTeamTotal.value === "number") {
+          homeTeamTotal.value++;
+        }
+        if (typeof homeTeamHomeWins.value === "number") {
+          homeTeamHomeWins.value++;
+        }
       } else {
-        headToHeadStats.awayTeamWinStats.total++;
-        headToHeadStats.awayTeamWinStats.away++;
+        if (typeof awayTeamTotal.value === "number") {
+          awayTeamTotal.value++;
+        }
+        if (typeof awayTeamAwayWins.value === "number") {
+          awayTeamAwayWins.value++;
+        }
       }
     }
 
     if (away.id === homeTeamId && !isDraw && isFinished) {
       if (away.winner) {
-        headToHeadStats.homeTeamWinStats.total++;
-        headToHeadStats.homeTeamWinStats.away++;
+        if (typeof homeTeamTotal.value === "number") {
+          homeTeamTotal.value++;
+        }
+        if (typeof homeTeamAwayWins.value === "number") {
+          homeTeamAwayWins.value++;
+        }
       } else {
-        headToHeadStats.awayTeamWinStats.total++;
-        headToHeadStats.awayTeamWinStats.home++;
+        if (typeof awayTeamTotal.value === "number") {
+          awayTeamTotal.value++;
+        }
+        if (typeof awayTeamHomeWins.value === "number") {
+          awayTeamHomeWins.value++;
+        }
       }
     }
   });
