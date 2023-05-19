@@ -24,16 +24,19 @@ export const GoalEvent = ({ events, teamLocationStatus }: GoalEventProps) => {
     goalDescription = getGoalDescription(goalEvent);
   }
 
+  const isAwayTeam = teamLocationStatus === "AWAY";
+
   return (
-    <div className={classes.goalEvent}>
+    <div
+      className={[classes.goalEvent, isAwayTeam && classes.awayTeamEvent].join(
+        " "
+      )}
+    >
       <p
         className={classes.goalDescription}
       >{`${playerName} ${goalDescription}`}</p>
       <img
-        className={[
-          classes.goalIcon,
-          teamLocationStatus === "AWAY" && classes.reverse,
-        ].join(" ")}
+        className={[classes.goalIcon, isAwayTeam && classes.reverse].join(" ")}
         src={ballIcon}
         alt=""
       />
