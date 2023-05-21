@@ -105,22 +105,23 @@ export interface EventTime {
 export type EventTeam = Omit<FixtureTeam, "winner">;
 
 export interface EventPlayer {
-  id: number;
-  name: string;
-}
-
-export interface EventAssist {
   id: number | null;
   name: string | null;
 }
+
+export type FixtureEventDetail =
+  | FixtureGoalType
+  | FixtureCardType
+  | FixtureVarType
+  | string;
 
 export interface FixtureEvent {
   time: EventTime;
   team: EventTeam;
   player: EventPlayer;
-  assist: EventAssist;
+  assist: EventPlayer;
   type: FixtureEventType;
-  detail: FixtureGoalType | FixtureCardType | FixtureVarType | string;
+  detail: FixtureEventDetail;
   comments: string | null;
 }
 
