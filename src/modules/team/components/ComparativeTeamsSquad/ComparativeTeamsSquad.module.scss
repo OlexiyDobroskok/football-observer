@@ -2,7 +2,8 @@
 
 .compSquad {
   padding-block-start: fn.px-to-rem(15px);
-  background-color: var(--secondary-color);
+  border-radius: 5px;
+  background-color: var(--secondary-color-dark);
 }
 
 .buttonsGroup {

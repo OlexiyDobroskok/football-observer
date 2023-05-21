@@ -10,7 +10,7 @@ export const ComparativeTeamsSquad = () => {
     ({ compSquad }) => compSquad
   );
   const [selectedTeam, setSelectedTeam] = useState(homeTeamSquad?.team.name);
-  const { homeTeamId, awayTeamId } = useAppSelector(
+  const { homeTeam, awayTeam } = useAppSelector(
     ({ fixtureDetail }) => fixtureDetail
   );
   const dispatch = useAppDispatch();
@@ -20,9 +20,14 @@ export const ComparativeTeamsSquad = () => {
       : [];
 
   useEffect(() => {
-    if (homeTeamId && awayTeamId)
-      dispatch(fetchComparativeTeamsSquad({ homeTeamId, awayTeamId }));
-  }, [homeTeamId, awayTeamId]);
+    if (homeTeam && awayTeam)
+      dispatch(
+        fetchComparativeTeamsSquad({
+          homeTeamId: homeTeam.id,
+          awayTeamId: awayTeam.id,
+        })
+      );
+  }, [homeTeam, awayTeam]);
 
   useEffect(() => {
     if (homeTeamSquad) setSelectedTeam(homeTeamSquad.team.name);
