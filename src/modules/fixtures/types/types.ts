@@ -1,9 +1,10 @@
 import {
+  EventPlayer,
   Fixture,
   FixtureDetailInfo,
   FixtureEvent,
 } from "api/types/fixtures-types";
-import { GameStatistic, TeamLocationStatus } from "api/types/global";
+import { GameStatistic } from "api/types/global";
 
 export interface DayFixtures {
   date: string;
@@ -14,25 +15,34 @@ export interface FixtureEventApp extends FixtureEvent {
   id: string | number;
 }
 
-export interface TeamEventsDefinition {
-  locationStatus: TeamLocationStatus;
-  events: FixtureEventApp[];
+export interface FixtureTeamsEvents {
+  homeTeam: FixtureEventApp[];
+  awayTeam: FixtureEventApp[];
 }
 
-export interface SortedEventsByTeamsLocationStatus {
-  homeTeam: TeamEventsDefinition;
-  awayTeam: TeamEventsDefinition;
+export type FixtureEventAppAlt = Omit<
+  FixtureEventApp,
+  "comments" | "player" | "assist" | "team"
+>;
+
+export interface FixturePlayerEvents {
+  player: EventPlayer;
+  events: FixtureEventAppAlt[];
 }
 
-export interface SortedEventsByTypes {
-  goals: FixtureEventApp[];
-  cards: FixtureEventApp[];
-  subst: FixtureEventApp[];
-  var: FixtureEventApp[];
+export interface FixtureTeamEvents {
+  goals: FixturePlayerEvents[];
+  assists: FixturePlayerEvents[];
+  redCards: FixturePlayerEvents[];
+}
+
+export interface FixtureTeamsEventsAlt {
+  homeTeamEvents: FixtureTeamEvents;
+  awayTeamEvents: FixtureTeamEvents;
 }
 
 export interface FixtureDetailInfoApp extends FixtureDetailInfo {
-  events: SortedEventsByTeamsLocationStatus;
+  events: FixtureTeamsEvents;
 }
 
 export interface H2HStats {
