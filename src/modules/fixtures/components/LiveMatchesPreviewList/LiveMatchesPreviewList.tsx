@@ -13,18 +13,15 @@ export const LiveMatchesPreviewList = () => {
     ));
 
     const isSingleMatch = previewList.length === 1;
+    const previewListClassName = [
+      classes.previewList,
+      isSingleMatch && classes.single,
+    ].join(" ");
 
     return (
       <>
         {!!previewList.length && (
-          <div
-            className={[
-              classes.previewList,
-              isSingleMatch && classes.single,
-            ].join(" ")}
-          >
-            {previewList}
-          </div>
+          <div className={previewListClassName}>{previewList}</div>
         )}
         {!previewList.length && (
           <p className={classes.message}>
