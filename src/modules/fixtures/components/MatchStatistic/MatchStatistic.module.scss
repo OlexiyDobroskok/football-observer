@@ -1,0 +1,19 @@
+@use "styles/functions" as fn;
+
+.matchStatistic {
+  padding-block: fn.px-to-rem(15px) fn.px-to-rem(5px);
+  border-radius: 5px;
+  background-color: var(--secondary-color-dark);
+}
+
+.title {
+  margin: 0 0 fn.px-to-rem(10px);
+  padding-inline: fn.px-to-rem(10px);
+  font-size: fn.px-to-rem(18px);
+  font-weight: 700;
+  text-align: center;
+}
+
+.message {
+  text-align: center;
+}
