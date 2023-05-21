@@ -1,13 +1,15 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { FixtureDetailInfoApp } from "../types/types";
+import { FixtureDetailInfoApp, FixtureTeamsEventsAlt } from "../types/types";
 import { fetchFixtureDetail } from "./fixture-detail-thunk";
 import { DynamicRequestStatus } from "api/types/global";
 import { generateDynamicReqStatus } from "api/helpers/generateDynamicReqStatus";
+import { FixtureTeam } from "api/types/fixtures-types";
 
 export interface FixtureDetailState {
   fixtureDetail: FixtureDetailInfoApp | undefined;
-  homeTeamId: number | undefined;
-  awayTeamId: number | undefined;
+  fixtureEventsAlt: FixtureTeamsEventsAlt | undefined;
+  homeTeam: FixtureTeam | undefined;
+  awayTeam: FixtureTeam | undefined;
   isLive: boolean;
   isScheduled: boolean;
   isFinished: boolean;
@@ -18,8 +20,9 @@ export interface FixtureDetailState {
 
 const initialState: FixtureDetailState = {
   fixtureDetail: undefined,
-  homeTeamId: undefined,
-  awayTeamId: undefined,
+  fixtureEventsAlt: undefined,
+  homeTeam: undefined,
+  awayTeam: undefined,
   isLive: false,
   isScheduled: false,
   isFinished: false,
@@ -53,15 +56,17 @@ export const fixtureDetailSlice = createSlice({
         });
         const {
           fixtureDetail,
-          homeTeamId,
-          awayTeamId,
+          fixtureEventsAlt,
+          homeTeam,
+          awayTeam,
           isLive,
           isFinished,
           isScheduled,
         } = payload;
         state.fixtureDetail = fixtureDetail;
-        state.homeTeamId = homeTeamId;
-        state.awayTeamId = awayTeamId;
+        state.fixtureEventsAlt = fixtureEventsAlt;
+        state.homeTeam = homeTeam;
+        state.awayTeam = awayTeam;
         state.isLive = isLive;
         state.isFinished = isFinished;
         state.isScheduled = isScheduled;
