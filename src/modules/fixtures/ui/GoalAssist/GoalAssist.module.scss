@@ -1,0 +1,10 @@
+@use "styles/functions" as fn;
+
+.goalAssistant {
+  margin: 0;
+  font-size: fn.px-to-rem(14px);
+
+  &.rightText {
+    text-align: right;
+  }
+}
