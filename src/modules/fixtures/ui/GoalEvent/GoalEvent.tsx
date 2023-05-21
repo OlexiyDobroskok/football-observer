@@ -1,45 +1,59 @@
-import { getGoalDescription } from "../../helpers/get-goal-description";
-import { FixtureEventApp } from "../../types/types";
+import { getGoalDescription } from "../../helpers/event-description";
+import { FixturePlayerEvents } from "../../types/types";
+import {
+  fixtureEventType,
+  fixtureGoalType,
+  LocationStatus,
+  locationStatus,
+} from "api/helpers/consts";
+import { SvgIcon } from "ui/SvgIcon/SvgIcon";
 import ballIcon from "./ball.svg";
-import { TeamLocationStatus } from "api/types/global";
 import classes from "./GoalEvent.module.scss";
 
 export interface GoalEventProps {
-  events: FixtureEventApp[];
-  teamLocationStatus: TeamLocationStatus;
+  eventPlayer: FixturePlayerEvents;
+  teamLocationStatus: LocationStatus;
 }
 
-export const GoalEvent = ({ events, teamLocationStatus }: GoalEventProps) => {
-  const [goalEvent] = events;
-  const playerName = goalEvent.player.name;
+export const GoalEvent = ({
+  eventPlayer: { player, events },
+  teamLocationStatus,
+}: GoalEventProps) => {
+  const [{ type, detail }] = events;
+  const playerName = player.name ? player.name : "Unknown";
+  const isOwnGoal =
+    type.toLowerCase() === fixtureEventType.GOAL.toLowerCase() &&
+    detail.toLowerCase() === fixtureGoalType.OWN.toLowerCase();
 
-  let goalDescription = "";
-  if (events.length > 1) {
-    goalDescription = events
-      .map((event) => getGoalDescription(event))
-      .join(", ");
-  }
+  const goalDescription = events
+    .map(({ time, detail }) => getGoalDescription({ time, detail }))
+    .join(", ");
 
-  if (events.length === 1) {
-    goalDescription = getGoalDescription(goalEvent);
-  }
+  const isAwayTeam = teamLocationStatus === locationStatus.away;
 
-  const isAwayTeam = teamLocationStatus === "AWAY";
+  const goalEventClassName = [
+    classes.goalEvent,
+    isAwayTeam && classes.awayTeamEvent,
+  ].join(" ");
+
+  const descriptionClassName = [
+    classes.goalDescription,
+    isAwayTeam && classes.leftText,
+    isOwnGoal && classes.altTextColor,
+  ].join(" ");
+
+  const classNameIcon = [
+    classes.goalIcon,
+    isAwayTeam && classes.reverse,
+    isOwnGoal && classes.altIconColor,
+  ].join(" ");
 
   return (
-    <div
-      className={[classes.goalEvent, isAwayTeam && classes.awayTeamEvent].join(
-        " "
-      )}
-    >
+    <div className={goalEventClassName}>
       <p
-        className={classes.goalDescription}
+        className={descriptionClassName}
       >{`${playerName} ${goalDescription}`}</p>
-      <img
-        className={[classes.goalIcon, isAwayTeam && classes.reverse].join(" ")}
-        src={ballIcon}
-        alt=""
-      />
+      <SvgIcon className={classNameIcon} href={`${ballIcon}#ball`} />
     </div>
   );
 };

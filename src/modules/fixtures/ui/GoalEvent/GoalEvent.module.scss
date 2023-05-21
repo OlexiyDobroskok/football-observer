@@ -14,13 +14,28 @@
 .goalDescription {
   margin: 0;
   font-size: fn.px-to-rem(14px);
+  text-align: right;
+
+  &.altTextColor {
+    color: #e74545;
+  }
+
+  &.leftText {
+    text-align: left;
+  }
 }
 
 .goalIcon {
+  flex-shrink: 0;
   width: fn.px-to-rem(18px);
   height: fn.px-to-rem(18px);
-}
+  fill: var(--text-color);
 
-.reverse {
-  order: -1;
+  &.altIconColor {
+    fill: #e74545;
+  }
+
+  &.reverse {
+    order: -1;
+  }
 }
