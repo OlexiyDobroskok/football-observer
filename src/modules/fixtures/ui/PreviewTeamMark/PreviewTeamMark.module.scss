@@ -1,6 +1,7 @@
 @use "styles/functions" as fn;
 
 .team {
+  position: relative;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -17,4 +18,9 @@
 .teamLogo {
   width: fn.px-to-rem(50px);
   height: fn.px-to-rem(50px);
+}
+
+.teamLink {
+  position: absolute;
+  inset: 0;
 }
