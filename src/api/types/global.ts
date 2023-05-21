@@ -12,8 +12,6 @@ export interface ApiParams {
 
 export type GameStatisticValue = number | string | null;
 
-export type TeamLocationStatus = "HOME" | "AWAY";
-
 export type WinStatistic = "Total" | "Home" | "Away";
 export type MatchStatisticType = WinStatistic | FixtureStatisticType;
 

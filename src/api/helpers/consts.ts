@@ -76,6 +76,7 @@ export const fixtureStatisticType = {
   totalPasses: "Total passes",
   passesAccurate: "Passes accurate",
   passesPercent: "Passes %",
+  expectedGoals: "Expected Goals",
 } as const;
 
 type FixtureStatisticTypeKey = keyof typeof fixtureStatisticType;
@@ -91,3 +92,11 @@ export const playerPositions = {
 
 export type PlayerPosition =
   (typeof playerPositions)[keyof typeof playerPositions];
+
+export const locationStatus = {
+  home: "HOME",
+  away: "AWAY",
+} as const;
+
+export type LocationStatus =
+  (typeof locationStatus)[keyof typeof locationStatus];
