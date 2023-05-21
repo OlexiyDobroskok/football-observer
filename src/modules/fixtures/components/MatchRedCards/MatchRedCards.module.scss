@@ -1,0 +1,17 @@
+@use "styles/functions" as fn;
+
+.redCards {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  column-gap: fn.px-to-rem(30px);
+  padding: fn.px-to-rem(5px);
+}
+
+.redCardsList {
+  display: flex;
+  flex-direction: column;
+  gap: fn.px-to-rem(5px);
+  padding: 0;
+  margin: 0;
+  list-style-type: none;
+}
