@@ -1,0 +1,35 @@
+@use "styles/functions" as fn;
+
+.redCardEvent {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: fn.px-to-rem(5px);
+
+  &.awayTeamEvent {
+    justify-content: flex-start;
+  }
+}
+
+.redCardDescription {
+  margin: 0;
+  font-size: fn.px-to-rem(14px);
+  text-align: right;
+
+  &.leftText {
+    text-align: left;
+  }
+}
+
+.redCardIcon {
+  flex-shrink: 0;
+  width: fn.px-to-rem(10px);
+  height: fn.px-to-rem(15px);
+  border: 1px solid darkred;
+  border-radius: 3px;
+  background-color: red;
+
+  &.reverse {
+    order: -1;
+  }
+}
