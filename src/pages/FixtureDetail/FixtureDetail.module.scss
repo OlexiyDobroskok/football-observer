@@ -9,11 +9,14 @@
   margin-inline-start: fn.px-to-rem(15px);
 }
 
+.tabSection {
+  padding: fn.px-to-rem(15px) fn.px-to-rem(5px);
+  border-radius: 5px;
+  background-color: var(--secondary-color);
+}
+
 .h2h {
   display: flex;
   flex-direction: column;
   gap: fn.px-to-rem(15px);
-  padding: fn.px-to-rem(15px) fn.px-to-rem(5px);
-  border-radius: 5px;
-  background-color: var(--secondary-color);
 }

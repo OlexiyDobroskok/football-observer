@@ -3,6 +3,7 @@ import {
   FixtureDetailCard,
   HeadToHeadMatchesList,
   HeadToHeadStats,
+  MatchStatistic,
 } from "modules/fixtures";
 import { TabsList } from "ui/TabsList/TabsList";
 import { HiddenElement } from "ui/HiddenElement/HiddenElement";
@@ -12,7 +13,7 @@ import { useFixtureDetail } from "modules/fixtures/hooks/use-fixture-detail";
 
 const fixtureDetailTabs = {
   lineUps: "Line-ups",
-  matchStats: "Match Stats",
+  matchStats: "Statistics",
   h2h: "Head-to-Head",
   squads: "Squads",
 } as const;
@@ -53,13 +54,24 @@ export const FixtureDetail = () => {
       </div>
       <div>
         {selectedTab === fixtureDetailTabs.h2h && (
-          <section className={classes.h2h}>
+          <section className={[classes.h2h, classes.tabSection].join(" ")}>
             <HiddenElement as={"h2"}>Head to Head Tab</HiddenElement>
             <HeadToHeadStats />
             <HeadToHeadMatchesList numberRecentMatches={5} />
           </section>
         )}
-        {selectedTab === fixtureDetailTabs.squads && <ComparativeTeamsSquad />}
+        {selectedTab === fixtureDetailTabs.squads && (
+          <section className={["squad", classes.tabSection].join(" ")}>
+            <HiddenElement as={"h2"}>Teams Squads Tab</HiddenElement>
+            <ComparativeTeamsSquad />
+          </section>
+        )}
+        {selectedTab === fixtureDetailTabs.matchStats && (
+          <section className={["statistic", classes.tabSection].join(" ")}>
+            <HiddenElement as={"h2"}>Statistic Tab</HiddenElement>
+            <MatchStatistic />
+          </section>
+        )}
       </div>
     </>
   );
