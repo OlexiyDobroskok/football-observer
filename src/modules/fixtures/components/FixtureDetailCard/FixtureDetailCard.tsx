@@ -1,5 +1,4 @@
 import { useFixtureDetail } from "../../hooks/use-fixture-detail";
-import { TeamEvents } from "../TeamEvents/TeamEvents";
 import { RefereeInfo } from "../../ui/RefereeInfo/RefereeInfo";
 import { StadiumInfo } from "../../ui/StadiumInfo/StadiumInfo";
 import { Container } from "ui/Container/Container";
@@ -9,18 +8,27 @@ import {
   getValidDateTimeStrYMDFormat,
 } from "../../helpers/date-format";
 import { PreviewTeamMark } from "../../ui/PreviewTeamMark/PreviewTeamMark";
-import { Scoreboard } from "../../ui/Scoreboard/Scoreboard";
+import { Scoreboard, scoreBoardSize } from "../../ui/Scoreboard/Scoreboard";
 import { TimeToMatch } from "../../ui/TimeToMatch/TimeToMatch";
 import { MatchStatus } from "../../ui/MatchStatus/MatchStatus";
+import { MatchGoals } from "../MatchGoals/MatchGoals";
+import { MatchGoalsAssist } from "../MatchGoalsAssist/MatchGoalsAssist";
 import classes from "./FixtureDetailCard.module.scss";
+import { HiddenElement } from "ui/HiddenElement/HiddenElement";
+import { MatchRedCards } from "../MatchRedCards/MatchRedCards";
 
 export const FixtureDetailCard = () => {
-  const { fixtureDetail, isScheduled } = useFixtureDetail();
+  const { fixtureDetail, fixtureEventsAlt, isScheduled } = useFixtureDetail();
 
-  if (fixtureDetail) {
-    const { fixture, teams, goals, events } = fixtureDetail;
+  if (fixtureDetail && fixtureEventsAlt) {
+    const { fixture, teams, goals } = fixtureDetail;
     const { date, referee, venue, status } = fixture;
     const { home: homeTeam, away: awayTeam } = teams;
+    const { homeTeamEvents, awayTeamEvents } = fixtureEventsAlt;
+    const isGoalEvents =
+      !!homeTeamEvents.goals.length && !!awayTeamEvents.goals.length;
+    const isRedCardEvents =
+      !!homeTeamEvents.redCards.length && !!awayTeamEvents.redCards.length;
     const matchDate = new Date(date);
     const matchDateFormatted = getDateMediumFormat(matchDate);
     const matchTime = getTimeShortFormat(matchDate);
@@ -42,7 +50,7 @@ export const FixtureDetailCard = () => {
           <div className={classes.scoreboard}>
             {!isScheduled && (
               <>
-                <Scoreboard matchScore={goals} boardSize={"LG"} />
+                <Scoreboard matchScore={goals} boardSize={scoreBoardSize.lg} />
                 <MatchStatus matchStatus={status} />
               </>
             )}
@@ -50,13 +58,25 @@ export const FixtureDetailCard = () => {
           </div>
           <PreviewTeamMark team={awayTeam} />
         </Container>
-        {isScheduled && (
-          <p className={classes.fixtureStartTime}>{`Kick Off: ${matchTime}`}</p>
-        )}
-        <Container className={classes.fixtureEvents}>
-          <TeamEvents eventsDefinition={events.homeTeam} />
-          <TeamEvents eventsDefinition={events.awayTeam} />
-        </Container>
+        <p className={classes.fixtureStartTime}>{`Kick Off: ${matchTime}`}</p>
+        <section className={classes.fixtureEvents}>
+          <HiddenElement as={"h3"}>Match Events</HiddenElement>
+          <div className="goalEvents">
+            <MatchGoals />
+          </div>
+          {isGoalEvents && (
+            <div className="assistEvents">
+              <p className={classes.eventTitle}>Assists</p>
+              <MatchGoalsAssist />
+            </div>
+          )}
+          {isRedCardEvents && (
+            <div className="redCardEvents">
+              <p className={classes.eventTitle}>Red Cards</p>
+              <MatchRedCards />
+            </div>
+          )}
+        </section>
       </div>
     );
   }

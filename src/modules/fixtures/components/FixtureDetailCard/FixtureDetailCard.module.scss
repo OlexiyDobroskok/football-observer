@@ -2,7 +2,7 @@
 
 .fixture {
   position: relative;
-  padding: fn.px-to-rem(5px) fn.px-to-rem(10px);
+  padding: fn.px-to-rem(5px) fn.px-to-rem(10px) fn.px-to-rem(10px);
   border-radius: 10px;
   background-color: var(--secondary-color);
 }
@@ -45,7 +45,13 @@
 }
 
 .fixtureEvents {
-  display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  column-gap: fn.px-to-rem(50px);
+  display: flex;
+  flex-direction: column;
+}
+
+.eventTitle {
+  padding: fn.px-to-rem(5px) fn.px-to-rem(10px) 0;
+  margin: 0 0 fn.px-to-rem(5px);
+  font-size: fn.px-to-rem(14px);
+  text-align: center;
 }
