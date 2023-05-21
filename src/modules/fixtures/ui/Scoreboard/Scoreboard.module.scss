@@ -7,12 +7,12 @@
   font-weight: 700;
   border-radius: 3px;
   background-color: var(--accent-color-extra-light);
-}
 
-.md {
-  font-size: fn.px-to-rem(20px);
-}
+  &.md {
+    font-size: fn.px-to-rem(20px);
+  }
 
-.lg {
-  font-size: fn.px-to-rem(32px);
+  &.lg {
+    font-size: fn.px-to-rem(32px);
+  }
 }
