@@ -2,15 +2,15 @@
 
 .scale {
   display: flex;
+  height: fn.px-to-rem(5px);
   border: 2px solid var(--accent-color);
   border-radius: 3px;
+
+  &.rightSide {
+    justify-content: flex-end;
+  }
 }
 
 .scaleResult {
-  height: fn.px-to-rem(5px);
   background-color: var(--accent-color-extra-light);
-}
-
-.rightSide {
-  justify-content: flex-end;
 }

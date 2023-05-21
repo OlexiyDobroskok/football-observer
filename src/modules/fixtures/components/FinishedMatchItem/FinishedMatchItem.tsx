@@ -2,6 +2,7 @@ import { Link } from "react-router-dom";
 import { Scoreboard, ScoreboardProps } from "../../ui/Scoreboard/Scoreboard";
 import { FixtureTeamsLocationStatus } from "api/types/fixtures-types";
 import { ListTeamMark } from "../../ui/ListTeamMark/ListTeamMark";
+import { locationStatus } from "api/helpers/consts";
 import classes from "./FinishedMatchItem.module.scss";
 
 export interface FinishedMatchItemProps
@@ -22,11 +23,11 @@ export const FinishedMatchItem = ({
 
   return (
     <div className={[classes.fixture, isEven && classes.lightBg].join(" ")}>
-      <ListTeamMark team={homeTeam} teamStatus={"HOME"} />
+      <ListTeamMark team={homeTeam} teamStatus={locationStatus.home} />
       <div className={classes.fixtureScore}>
         {isScore && <Scoreboard matchScore={matchScore} />}
       </div>
-      <ListTeamMark team={awayTeam} teamStatus={"AWAY"} />
+      <ListTeamMark team={awayTeam} teamStatus={locationStatus.away} />
       <Link className={classes.fixtureLink} to={`/fixtures/${fixtureId}`} />
     </div>
   );

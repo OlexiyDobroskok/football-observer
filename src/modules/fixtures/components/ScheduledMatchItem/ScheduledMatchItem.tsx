@@ -1,7 +1,11 @@
 import { Link } from "react-router-dom";
 import { FixtureTeamsLocationStatus } from "api/types/fixtures-types";
 import { ListTeamMark } from "../../ui/ListTeamMark/ListTeamMark";
-import { FixtureShortStatus, fixtureStatus } from "api/helpers/consts";
+import {
+  FixtureShortStatus,
+  fixtureStatus,
+  locationStatus,
+} from "api/helpers/consts";
 import {
   getTimeShortFormat,
   getValidDateTimeStrYMDFormat,
@@ -27,16 +31,17 @@ export const ScheduledMatchItem = ({
   const matchDate = new Date(fixtureDate);
   const matchTime =
     matchStatus === fixtureStatus.TBD ? `- : -` : getTimeShortFormat(matchDate);
+  const fixtureClassName = [classes.fixture, isEven && classes.altBg].join(" ");
 
   return (
-    <div className={[classes.fixture, isEven && classes.altBg].join(" ")}>
-      <ListTeamMark team={homeTeam} teamStatus={"HOME"} />
+    <div className={fixtureClassName}>
+      <ListTeamMark team={homeTeam} teamStatus={locationStatus.home} />
       <div className={classes.fixtureTime}>
         <time dateTime={getValidDateTimeStrYMDFormat(matchDate)}>
           {matchTime}
         </time>
       </div>
-      <ListTeamMark team={awayTeam} teamStatus={"AWAY"} />
+      <ListTeamMark team={awayTeam} teamStatus={locationStatus.away} />
       <Link className={classes.fixtureLink} to={`/fixtures/${fixtureId}`} />
     </div>
   );

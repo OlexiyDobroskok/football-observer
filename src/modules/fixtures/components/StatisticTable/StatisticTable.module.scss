@@ -2,6 +2,7 @@
 
 .table {
   width: 100%;
+  border-spacing: 0 fn.px-to-rem(15px);
 }
 
 .tableHeader {
@@ -15,7 +16,9 @@
 }
 
 .value {
-  min-width: 15px;
+  font-size: fn.px-to-rem(14px);
+  font-weight: 700;
+  min-width: 30px;
 }
 
 .homeData,
@@ -23,7 +26,7 @@
   display: flex;
   align-items: center;
   gap: fn.px-to-rem(5px);
-  padding: fn.px-to-rem(5px) fn.px-to-rem(10px);
+  padding: fn.px-to-rem(5px);
 }
 
 .homeData {
