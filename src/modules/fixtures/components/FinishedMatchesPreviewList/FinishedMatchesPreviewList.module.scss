@@ -12,18 +12,18 @@
   gap: fn.px-to-rem(20px);
   overflow-x: scroll;
   -webkit-overflow-scrolling: touch;
-}
 
-.previewList::-webkit-scrollbar {
-  display: none;
+  &::-webkit-scrollbar {
+    display: none;
+  }
+
+  &.single {
+    justify-content: center;
+  }
 }
 
 .previewCard {
   display: flex;
-}
-
-.single {
-  justify-content: center;
 }
 
 .message {
