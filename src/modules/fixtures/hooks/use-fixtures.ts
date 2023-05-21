@@ -1,7 +1,7 @@
 import { useEffect, useRef } from "react";
 import { useAppDispatch, useAppSelector } from "hooks/redux";
 import { fetchFixtures } from "../store/fixtures-thunk";
-import { getTimeToMatch } from "../helpers/getTimeToMatch";
+import { getTimeToMatch } from "../helpers/get-time-to-match";
 import { resetFixturesReqStatus } from "../store/fixtures-slice";
 
 export const useFixtures = () => {

@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { getTimeToMatch } from "../helpers/getTimeToMatch";
+import { getTimeToMatch } from "../helpers/get-time-to-match";
 
 export interface TimeToMatch {
   days: number;

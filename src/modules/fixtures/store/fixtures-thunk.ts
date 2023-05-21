@@ -4,9 +4,9 @@ import { FixturesParams, Fixture } from "api/types/fixtures-types";
 import { DayFixtures } from "../types/types";
 import { FixturesState } from "./fixtures-slice";
 import { dayFixturesConverter } from "../helpers/day-fixtures-converter";
-import { checkIsMatchFinished } from "../helpers/checkIsMatchFinished";
-import { checkIsMatchScheduled } from "../helpers/checkIsMatchScheduled";
-import { checkIsMatchLive } from "../helpers/checkIsMatchLive";
+import { checkIsMatchFinished } from "../helpers/check-is-match-finished";
+import { checkIsMatchScheduled } from "../helpers/check-is-match-scheduled";
+import { checkIsMatchLive } from "../helpers/check-is-match-live";
 import { generateDynamicKey } from "api/helpers/generateDynamicReqStatus";
 
 export interface FixturesData {

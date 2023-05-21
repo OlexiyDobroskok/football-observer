@@ -1,5 +1,5 @@
 import { FixtureStatus } from "api/types/fixtures-types";
-import { checkIsMatchLive } from "../../helpers/checkIsMatchLive";
+import { checkIsMatchLive } from "../../helpers/check-is-match-live";
 import classes from "./MatchStatus.module.scss";
 
 export interface MatchStatusProps {

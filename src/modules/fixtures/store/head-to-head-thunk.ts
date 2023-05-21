@@ -1,7 +1,7 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
 import { Fixture, HeadToHeadArgs } from "api/types/fixtures-types";
 import { FootballService } from "api/football-service";
-import { getH2HStats } from "../helpers/getH2HStats";
+import { getH2HStats } from "../helpers/get-h2h-stats";
 import { HeadToHeadState } from "./head-to-head-slice";
 import { H2HStats } from "../types/types";
 import { generateDynamicKey } from "api/helpers/generateDynamicReqStatus";
