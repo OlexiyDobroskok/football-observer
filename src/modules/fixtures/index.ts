@@ -9,3 +9,4 @@ export { FinishedMatchesPreviewList } from "./components/FinishedMatchesPreviewL
 export { FixtureDetailCard } from "./components/FixtureDetailCard/FixtureDetailCard";
 export { HeadToHeadMatchesList } from "./components/HeadToHeadMatchesList/HeadToHeadMatchesList";
 export { HeadToHeadStats } from "./components/HeadToHeadStats/HeadToHeadStats";
+export { MatchStatistic } from "./components/MatchStatistic/MatchStatistic";
