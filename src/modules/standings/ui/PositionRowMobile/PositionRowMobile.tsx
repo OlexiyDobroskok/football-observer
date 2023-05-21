@@ -28,7 +28,9 @@ export const PositionRowMobile = ({
     <td className={classes.data}>{rank}</td>
     <td>
       <div className={classes.team}>
-        <ClubLogo logo={logo} logoSize="SM" />
+        <div className={classes.teamLogo}>
+          <ClubLogo logo={logo} logoSize="SM" />
+        </div>
         <Link className={classes.teamLink} to={`/teams/${id}`}>
           {name}
         </Link>

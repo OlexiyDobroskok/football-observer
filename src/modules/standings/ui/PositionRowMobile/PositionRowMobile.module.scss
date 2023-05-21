@@ -7,8 +7,11 @@
   padding-left: fn.px-to-rem(3px);
 }
 
+.teamLogo {
+  flex-shrink: 0;
+}
+
 .teamLink {
-  flex-shrink: 10;
   color: var(--text-color);
   text-decoration: none;
 }
