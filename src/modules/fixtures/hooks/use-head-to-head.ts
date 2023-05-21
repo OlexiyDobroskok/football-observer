@@ -4,15 +4,20 @@ import { fetchHeadToHeadFixtureInfo } from "../store/head-to-head-thunk";
 
 export const useHeadToHead = () => {
   const headToHeadState = useAppSelector(({ headToHead }) => headToHead);
-  const { homeTeamId, awayTeamId } = useAppSelector(
+  const { homeTeam, awayTeam } = useAppSelector(
     ({ fixtureDetail }) => fixtureDetail
   );
   const dispatch = useAppDispatch();
 
   useEffect(() => {
-    if (homeTeamId && awayTeamId)
-      dispatch(fetchHeadToHeadFixtureInfo({ homeTeamId, awayTeamId }));
-  }, [homeTeamId, awayTeamId]);
+    if (homeTeam && awayTeam)
+      dispatch(
+        fetchHeadToHeadFixtureInfo({
+          homeTeamId: homeTeam.id,
+          awayTeamId: awayTeam.id,
+        })
+      );
+  }, [homeTeam, awayTeam]);
 
   return headToHeadState;
 };
