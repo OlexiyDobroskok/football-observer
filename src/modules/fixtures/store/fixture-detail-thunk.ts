@@ -1,18 +1,20 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
-import { DetailedFixtureParams } from "api/types/fixtures-types";
-import { FixtureDetailInfoApp } from "../types/types";
+import { DetailedFixtureParams, FixtureTeam } from "api/types/fixtures-types";
+import { FixtureDetailInfoApp, FixtureTeamsEventsAlt } from "../types/types";
 import { FootballService } from "api/football-service";
 import { FixtureDetailState } from "./fixture-detail-slice";
 import { generateDynamicKey } from "api/helpers/generateDynamicReqStatus";
-import { sortEventsByTeamsLocationStatus } from "../helpers/convertEvents";
-import { checkIsMatchLive } from "../helpers/checkIsMatchLive";
-import { checkIsMatchScheduled } from "../helpers/checkIsMatchScheduled";
-import { checkIsMatchFinished } from "../helpers/checkIsMatchFinished";
+import { checkIsMatchLive } from "../helpers/check-is-match-live";
+import { checkIsMatchScheduled } from "../helpers/check-is-match-scheduled";
+import { checkIsMatchFinished } from "../helpers/check-is-match-finished";
+import { sortEventsByTeam } from "../helpers/sort-events-by-team";
+import { sortPlayersByEvent } from "../helpers/sort-players-by-event";
 
 interface FixtureDetailData {
   fixtureDetail: FixtureDetailInfoApp;
-  homeTeamId: number | undefined;
-  awayTeamId: number | undefined;
+  fixtureEventsAlt: FixtureTeamsEventsAlt;
+  homeTeam: FixtureTeam;
+  awayTeam: FixtureTeam;
   isLive: boolean;
   isScheduled: boolean;
   isFinished: boolean;
@@ -31,15 +33,26 @@ export const fetchFixtureDetail = createAsyncThunk<
     try {
       const detailInfo = await FootballService.getDetailFixtureInfo(params);
 
-      const homeTeamId = detailInfo.teams.home.id;
-      const awayTeamId = detailInfo.teams.away.id;
+      const homeTeam = detailInfo.teams.home;
+      const awayTeam = detailInfo.teams.away;
       const fixtureDetail: FixtureDetailInfoApp = {
         ...detailInfo,
-        events: sortEventsByTeamsLocationStatus({
-          homeTeamId,
-          awayTeamId,
+        events: sortEventsByTeam({
+          homeTeamId: homeTeam.id,
+          awayTeamId: awayTeam.id,
           events: detailInfo.events,
         }),
+      };
+      fixtureDetail.statistics.forEach((team) =>
+        team.statistics.forEach((stat) => {
+          if (stat.type.toLowerCase() === "expected_goals") {
+            stat.type = "Expected Goals";
+          }
+        })
+      );
+      const fixtureEventsAlt: FixtureTeamsEventsAlt = {
+        homeTeamEvents: sortPlayersByEvent(fixtureDetail.events.homeTeam),
+        awayTeamEvents: sortPlayersByEvent(fixtureDetail.events.awayTeam),
       };
       const matchStatus = detailInfo.fixture.status.short;
       const isLive = checkIsMatchLive(matchStatus);
@@ -48,8 +61,9 @@ export const fetchFixtureDetail = createAsyncThunk<
 
       return {
         fixtureDetail,
-        homeTeamId,
-        awayTeamId,
+        fixtureEventsAlt,
+        homeTeam,
+        awayTeam,
         isLive,
         isFinished,
         isScheduled,
