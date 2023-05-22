@@ -1,4 +1,4 @@
-import { ChangeEvent, useState } from "react";
+import { ChangeEvent, useEffect, useState } from "react";
 import {
   FixtureDetailCard,
   HeadToHeadMatchesList,
@@ -23,11 +23,17 @@ type FixtureDetailTab =
 
 export const FixtureDetail = () => {
   const { fixtureDetail, isScheduled } = useFixtureDetail();
-  const [selectedTab, setSelectedTab] = useState<FixtureDetailTab>(
-    !isScheduled ? fixtureDetailTabs.matchStats : fixtureDetailTabs.h2h
-  );
+  const [selectedTab, setSelectedTab] = useState<
+    FixtureDetailTab | undefined
+  >();
   const { lineUps, squads, h2h, matchStats } = fixtureDetailTabs;
   const isLineUps = !!fixtureDetail && !!fixtureDetail.lineups.length;
+
+  useEffect(() => {
+    setSelectedTab(
+      !isScheduled ? fixtureDetailTabs.matchStats : fixtureDetailTabs.h2h
+    );
+  }, [isScheduled]);
 
   const tabs: FixtureDetailTab[] = [
     isLineUps ? lineUps : squads,
