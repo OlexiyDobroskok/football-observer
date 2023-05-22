@@ -3,7 +3,7 @@ import classes from "./TabsList.module.scss";
 
 export interface TabsListProps extends Omit<TabProps, "tabName" | "isChecked"> {
   tabs: string[];
-  checkedTab: string;
+  checkedTab: string | undefined;
 }
 
 export const TabsList = ({
