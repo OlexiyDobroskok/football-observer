@@ -1,4 +1,5 @@
 import { ChangeEvent, useEffect, useState } from "react";
+import { useFixtureDetail } from "modules/fixtures/hooks/use-fixture-detail";
 import {
   FixtureDetailCard,
   HeadToHeadMatchesList,
@@ -9,7 +10,6 @@ import { TabsList } from "ui/TabsList/TabsList";
 import { HiddenElement } from "ui/HiddenElement/HiddenElement";
 import { ComparativeTeamsSquad } from "modules/team";
 import classes from "./FixtureDetail.module.scss";
-import { useFixtureDetail } from "modules/fixtures/hooks/use-fixture-detail";
 
 const fixtureDetailTabs = {
   lineUps: "Line-ups",
@@ -23,23 +23,27 @@ type FixtureDetailTab =
 
 export const FixtureDetail = () => {
   const { fixtureDetail, isScheduled } = useFixtureDetail();
+  const { lineUps, squads, h2h, matchStats } = fixtureDetailTabs;
+  const [tabs, setTabs] = useState<FixtureDetailTab[]>([
+    squads,
+    h2h,
+    matchStats,
+  ]);
   const [selectedTab, setSelectedTab] = useState<
     FixtureDetailTab | undefined
   >();
-  const { lineUps, squads, h2h, matchStats } = fixtureDetailTabs;
-  const isLineUps = !!fixtureDetail && !!fixtureDetail.lineups.length;
+
+  useEffect(() => {
+    if (fixtureDetail && fixtureDetail.lineups.length) {
+      setTabs([lineUps, h2h, matchStats]);
+    }
+  }, [fixtureDetail]);
 
   useEffect(() => {
     setSelectedTab(
       !isScheduled ? fixtureDetailTabs.matchStats : fixtureDetailTabs.h2h
     );
   }, [isScheduled]);
-
-  const tabs: FixtureDetailTab[] = [
-    isLineUps ? lineUps : squads,
-    h2h,
-    matchStats,
-  ];
 
   const changeTab = ({ target }: ChangeEvent<HTMLInputElement>) =>
     setSelectedTab(target.value as FixtureDetailTab);
