@@ -93,6 +93,16 @@ export const playerPositions = {
 export type PlayerPosition =
   (typeof playerPositions)[keyof typeof playerPositions];
 
+export const playerPositionsShort = {
+  G: "G",
+  D: "D",
+  M: "M",
+  F: "F",
+} as const;
+
+export type PlayerPositionsShort =
+  (typeof playerPositionsShort)[keyof typeof playerPositionsShort];
+
 export const locationStatus = {
   home: "HOME",
   away: "AWAY",

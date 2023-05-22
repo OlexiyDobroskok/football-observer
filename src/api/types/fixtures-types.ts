@@ -5,6 +5,7 @@ import {
   FixtureShortStatus,
   FixtureStatisticType,
   FixtureVarType,
+  PlayerPositionsShort,
 } from "../helpers/consts";
 import { ApiParams, GameStatisticValue, GameStatistic } from "./global";
 
@@ -150,7 +151,7 @@ export interface LineupPlayerDefinition {
   id: number;
   name: string;
   number: number;
-  pos: string;
+  pos: PlayerPositionsShort;
   grid: string | null;
 }
 
