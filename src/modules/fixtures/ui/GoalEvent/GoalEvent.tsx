@@ -1,5 +1,5 @@
 import { getGoalDescription } from "../../helpers/event-description";
-import { FixturePlayerEvents } from "../../types/types";
+import { FixtureEventPlayer } from "../../types/types";
 import {
   fixtureEventType,
   fixtureGoalType,
@@ -11,7 +11,7 @@ import ballIcon from "./ball.svg";
 import classes from "./GoalEvent.module.scss";
 
 export interface GoalEventProps {
-  eventPlayer: FixturePlayerEvents;
+  eventPlayer: FixtureEventPlayer;
   teamLocationStatus: LocationStatus;
 }
 

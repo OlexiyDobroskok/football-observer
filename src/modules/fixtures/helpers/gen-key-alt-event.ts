@@ -1,6 +1,6 @@
-import { FixturePlayerEvents } from "../types/types";
+import { FixtureEventPlayer } from "../types/types";
 
-export const genKeyAltEvent = ({ player, events }: FixturePlayerEvents) => {
+export const genKeyAltEvent = ({ player, events }: FixtureEventPlayer) => {
   return events
     .map(({ id }) => id)
     .join("")

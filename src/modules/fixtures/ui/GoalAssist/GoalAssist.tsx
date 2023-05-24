@@ -1,10 +1,10 @@
-import { FixturePlayerEvents } from "../../types/types";
+import { FixtureEventPlayer } from "../../types/types";
 import { getEventTimeDescription } from "../../helpers/event-description";
 import { LocationStatus, locationStatus } from "api/helpers/consts";
 import classes from "./GoalAssist.module.scss";
 
 export interface GoalAssistProps {
-  eventPlayer: FixturePlayerEvents;
+  eventPlayer: FixtureEventPlayer;
   teamLocationStatus: LocationStatus;
 }
 

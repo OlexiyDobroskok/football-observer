@@ -1,10 +1,10 @@
-import { FixturePlayerEvents } from "../../types/types";
+import { FixtureEventPlayer } from "../../types/types";
 import { locationStatus, LocationStatus } from "api/helpers/consts";
 import { getGoalDescription } from "../../helpers/event-description";
 import classes from "./RedCardEvent.module.scss";
 
 export interface RedCardEventProps {
-  eventPlayer: FixturePlayerEvents;
+  eventPlayer: FixtureEventPlayer;
   teamLocationStatus: LocationStatus;
 }
 
