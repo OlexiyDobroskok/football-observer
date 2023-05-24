@@ -1,6 +1,10 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
 import { DetailedFixtureParams, FixtureTeam } from "api/types/fixtures-types";
-import { FixtureDetailInfoApp, FixtureTeamsEventsAlt } from "../types/types";
+import {
+  ComparativeTeamsLineUps,
+  FixtureDetailInfoApp,
+  FixtureTeamsEventsAlt,
+} from "../types/types";
 import { FootballService } from "api/football-service";
 import { FixtureDetailState } from "./fixture-detail-slice";
 import { generateDynamicKey } from "api/helpers/generateDynamicReqStatus";
@@ -8,16 +12,24 @@ import { checkIsMatchLive } from "../helpers/check-is-match-live";
 import { checkIsMatchScheduled } from "../helpers/check-is-match-scheduled";
 import { checkIsMatchFinished } from "../helpers/check-is-match-finished";
 import { sortEventsByTeam } from "../helpers/sort-events-by-team";
-import { sortPlayersByEvent } from "../helpers/sort-players-by-event";
+import { sortEventPlayers } from "../helpers/sort-event-players";
+import {
+  ComparativeTeamSquadsParams,
+  TeamSquadApi,
+} from "api/types/team-types";
+import { convertLineUps } from "../helpers/convert-line-ups";
 
 interface FixtureDetailData {
   fixtureDetail: FixtureDetailInfoApp;
   fixtureEventsAlt: FixtureTeamsEventsAlt;
+  comparativeTeamsLineUps: ComparativeTeamsLineUps;
   homeTeam: FixtureTeam;
   awayTeam: FixtureTeam;
   isLive: boolean;
   isScheduled: boolean;
   isFinished: boolean;
+  homeTeamSquad?: TeamSquadApi;
+  awayTeamSquad?: TeamSquadApi;
 }
 
 export const fetchFixtureDetail = createAsyncThunk<
@@ -29,7 +41,7 @@ export const fetchFixtureDetail = createAsyncThunk<
   }
 >(
   "fixture-detail/fetchFixtureDetail",
-  async (params, { rejectWithValue }) => {
+  async (params, { getState, rejectWithValue }) => {
     try {
       const detailInfo = await FootballService.getDetailFixtureInfo(params);
 
@@ -50,18 +62,90 @@ export const fetchFixtureDetail = createAsyncThunk<
           }
         })
       );
+
       const fixtureEventsAlt: FixtureTeamsEventsAlt = {
-        homeTeamEvents: sortPlayersByEvent(fixtureDetail.events.homeTeam),
-        awayTeamEvents: sortPlayersByEvent(fixtureDetail.events.awayTeam),
+        homeTeamEvents: sortEventPlayers(fixtureDetail.events.homeTeam),
+        awayTeamEvents: sortEventPlayers(fixtureDetail.events.awayTeam),
       };
       const matchStatus = detailInfo.fixture.status.short;
       const isLive = checkIsMatchLive(matchStatus);
       const isScheduled = checkIsMatchScheduled(matchStatus);
       const isFinished = checkIsMatchFinished(matchStatus);
 
+      const {
+        fixtureDetail: {
+          homeTeamSquad: homeTeamSquadState,
+          awayTeamSquad: awayTeamSquadState,
+        },
+      } = getState();
+
+      const [homeTeamLineUpRes, awayTeamLineUpRes] = fixtureDetail.lineups;
+
+      if (
+        homeTeamSquadState &&
+        awayTeamSquadState &&
+        homeTeamSquadState.team.id === homeTeam.id &&
+        awayTeamSquadState.team.id === awayTeam.id
+      ) {
+        const comparativeTeamsLineUps = {
+          homeTeamLineUps: convertLineUps({
+            resLineUp: homeTeamLineUpRes,
+            events: fixtureDetail.events.homeTeam,
+            squad: homeTeamSquadState,
+          }),
+          awayTeamLineUps: convertLineUps({
+            resLineUp: awayTeamLineUpRes,
+            events: fixtureDetail.events.awayTeam,
+            squad: awayTeamSquadState,
+          }),
+        };
+
+        return {
+          fixtureDetail,
+          fixtureEventsAlt,
+          comparativeTeamsLineUps,
+          homeTeam,
+          awayTeam,
+          isLive,
+          isFinished,
+          isScheduled,
+        };
+      }
+
+      const compTeamSquadsParams: ComparativeTeamSquadsParams = {
+        homeTeamId: homeTeam.id,
+        awayTeamId: awayTeam.id,
+      };
+
+      const compTeamSquads = await FootballService.getComparativeTeamsSquad(
+        compTeamSquadsParams
+      );
+
+      if (!compTeamSquads.length) {
+        return rejectWithValue("No Team Squads information!");
+      }
+
+      const [homeTeamSquad, awayTeamSquad] = compTeamSquads;
+
+      const comparativeTeamsLineUps = {
+        homeTeamLineUps: convertLineUps({
+          resLineUp: homeTeamLineUpRes,
+          events: fixtureDetail.events.homeTeam,
+          squad: homeTeamSquad,
+        }),
+        awayTeamLineUps: convertLineUps({
+          resLineUp: awayTeamLineUpRes,
+          events: fixtureDetail.events.awayTeam,
+          squad: awayTeamSquad,
+        }),
+      };
+
       return {
         fixtureDetail,
         fixtureEventsAlt,
+        comparativeTeamsLineUps,
+        homeTeamSquad,
+        awayTeamSquad,
         homeTeam,
         awayTeam,
         isLive,
