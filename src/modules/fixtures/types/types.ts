@@ -3,6 +3,8 @@ import {
   Fixture,
   FixtureDetailInfo,
   FixtureEvent,
+  FixtureTeamLineup,
+  LineupPlayerDefinition,
 } from "api/types/fixtures-types";
 import { GameStatistic } from "api/types/global";
 
@@ -25,20 +27,55 @@ export type FixtureEventAppAlt = Omit<
   "comments" | "player" | "assist" | "team"
 >;
 
-export interface FixturePlayerEvents {
+export interface FixtureEventPlayer {
   player: EventPlayer;
   events: FixtureEventAppAlt[];
 }
 
-export interface FixtureTeamEvents {
-  goals: FixturePlayerEvents[];
-  assists: FixturePlayerEvents[];
-  redCards: FixturePlayerEvents[];
+export interface FixtureEventPlayers {
+  goals: FixtureEventPlayer[];
+  assists: FixtureEventPlayer[];
+  redCards: FixtureEventPlayer[];
+  yellowCards?: FixtureEventPlayer[];
+  substitutionIn?: FixtureEventPlayer[];
+  substitutionOut?: FixtureEventPlayer[];
 }
 
 export interface FixtureTeamsEventsAlt {
-  homeTeamEvents: FixtureTeamEvents;
-  awayTeamEvents: FixtureTeamEvents;
+  homeTeamEvents: FixtureEventPlayers;
+  awayTeamEvents: FixtureEventPlayers;
+}
+
+export interface SortedPlayerEvents {
+  goals: FixtureEventApp[];
+  assists: FixtureEventApp[];
+  redCards: FixtureEventApp[];
+  yellowCards: FixtureEventApp[];
+  substitutionIn: FixtureEventApp[];
+  substitutionOut: FixtureEventApp[];
+}
+
+export interface LineUpPlayerCombined extends LineupPlayerDefinition {
+  photo: string | null;
+  events: SortedPlayerEvents | null;
+}
+
+export interface TeamLineUp {
+  goalkeepers: LineUpPlayerCombined[];
+  defenders: LineUpPlayerCombined[];
+  midfielders: LineUpPlayerCombined[];
+  forwards: LineUpPlayerCombined[];
+  substitutes: LineUpPlayerCombined[];
+}
+
+export interface FixtureTeamLineupApp
+  extends Omit<FixtureTeamLineup, "startXI" | "substitutes"> {
+  teamLineUp: TeamLineUp;
+}
+
+export interface ComparativeTeamsLineUps {
+  homeTeamLineUps: TeamLineUp;
+  awayTeamLineUps: TeamLineUp;
 }
 
 export interface FixtureDetailInfoApp extends FixtureDetailInfo {
