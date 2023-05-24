@@ -11,7 +11,7 @@ import {
 import { throwDataError } from "./helpers/throwDataError";
 import {
   ComparativeTeamsSquad,
-  ComparativeTeamsSquadParams,
+  ComparativeTeamSquadsParams,
   TeamSquadApi,
   TeamSquadParams,
 } from "./types/team-types";
@@ -147,7 +147,7 @@ export class FootballService {
   static async getComparativeTeamsSquad({
     homeTeamId,
     awayTeamId,
-  }: ComparativeTeamsSquadParams): Promise<ComparativeTeamsSquad> {
+  }: ComparativeTeamSquadsParams): Promise<ComparativeTeamsSquad> {
     return await Promise.all([
       FootballService.getTeamSquad({ teamId: homeTeamId }),
       FootballService.getTeamSquad({ teamId: awayTeamId }),
