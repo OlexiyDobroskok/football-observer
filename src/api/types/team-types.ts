@@ -5,7 +5,7 @@ export interface TeamSquadParams extends ApiParams {
   teamId: number;
 }
 
-export interface ComparativeTeamsSquadParams extends ApiParams {
+export interface ComparativeTeamSquadsParams extends ApiParams {
   homeTeamId: number;
   awayTeamId: number;
 }

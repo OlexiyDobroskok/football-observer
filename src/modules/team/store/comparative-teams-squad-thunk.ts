@@ -1,6 +1,6 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
 import { ComparativeTeamsSquadApp } from "../types/types";
-import { ComparativeTeamsSquadParams } from "api/types/team-types";
+import { ComparativeTeamSquadsParams } from "api/types/team-types";
 import { ComparativeTeamsSquadState } from "./comparative-teams-squad-slice";
 import { FootballService } from "api/football-service";
 import { sortPlayersByPosition } from "../helpers/sort-players-by-position";
@@ -8,7 +8,7 @@ import { generateDynamicKey } from "api/helpers/generateDynamicReqStatus";
 
 export const fetchComparativeTeamsSquad = createAsyncThunk<
   ComparativeTeamsSquadApp,
-  ComparativeTeamsSquadParams,
+  ComparativeTeamSquadsParams,
   { state: { compSquad: ComparativeTeamsSquadState }; rejectValue: string }
 >(
   "comp-squad/fetchComparativeTeamsSquad",
