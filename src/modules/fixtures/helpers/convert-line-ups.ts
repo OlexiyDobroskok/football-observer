@@ -1,25 +1,21 @@
 import { FixtureTeamLineup, LineupPlayer } from "api/types/fixtures-types";
-import { TeamSquadApi } from "api/types/team-types";
 import {
   FixtureEventApp,
   LineUpPlayerCombined,
-  TeamLineUp,
+  LineUpTeamSquad,
+  TeamLineUpDefinition,
 } from "../types/types";
 import { sortPlayerEvents } from "./sort-player-events";
+import { getPlayerLines } from "./get-players-lines";
 
 const combineLineUpPlayerInfo = ({
   players,
-  squad,
   events,
 }: {
   players: LineupPlayer[];
-  squad: TeamSquadApi;
   events: FixtureEventApp[];
-}): LineUpPlayerCombined[] => {
-  return players.map(({ player }): LineUpPlayerCombined => {
-    const squadPlayer = squad.players.find(
-      (squadPlayer) => squadPlayer.id === player.id
-    );
+}): LineUpPlayerCombined[] =>
+  players.map(({ player }): LineUpPlayerCombined => {
     const playerEvents = events.filter(
       ({ player: eventPlayer, assist: eventAssistant }) =>
         (!!eventPlayer.id && eventPlayer.id === player.id) ||
@@ -27,55 +23,56 @@ const combineLineUpPlayerInfo = ({
     );
     return {
       ...player,
-      photo: squadPlayer ? squadPlayer.photo : null,
+      photo: `https://media.api-sports.io/football/players/${player.id}.png`,
       events: sortPlayerEvents({ player, events: playerEvents }),
     };
   });
-};
 
 export const convertLineUps = ({
-  resLineUp: { startXI, substitutes },
-  squad,
+  resLineUp: { startXI, substitutes, team, coach, formation },
   events,
 }: {
   resLineUp: FixtureTeamLineup;
-  squad: TeamSquadApi;
   events: FixtureEventApp[];
-}) => {
-  const lineUp: TeamLineUp = {
+}): TeamLineUpDefinition => {
+  const teamSquad: LineUpTeamSquad = {
     goalkeepers: [],
     defenders: [],
     midfielders: [],
     forwards: [],
     substitutes: combineLineUpPlayerInfo({
       players: substitutes,
-      squad,
       events,
     }),
   };
 
   const startXIConverted = combineLineUpPlayerInfo({
     players: startXI,
-    squad,
     events,
   });
 
   startXIConverted.forEach((player) => {
     switch (player.pos) {
       case "G":
-        lineUp.goalkeepers = [...lineUp.goalkeepers, player];
+        teamSquad.goalkeepers = [...teamSquad.goalkeepers, player];
         break;
       case "D":
-        lineUp.defenders = [...lineUp.defenders, player];
+        teamSquad.defenders = [...teamSquad.defenders, player];
         break;
       case "M":
-        lineUp.midfielders = [...lineUp.midfielders, player];
+        teamSquad.midfielders = [...teamSquad.midfielders, player];
         break;
       case "F":
-        lineUp.forwards = [...lineUp.forwards, player];
+        teamSquad.forwards = [...teamSquad.forwards, player];
         break;
     }
   });
 
-  return lineUp;
+  return {
+    team,
+    formation,
+    coach,
+    squad: teamSquad,
+    positionLines: getPlayerLines({ lineUp: startXI }),
+  };
 };
