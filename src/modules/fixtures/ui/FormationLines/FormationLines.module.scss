@@ -1,0 +1,23 @@
+@use "styles/functions" as fn;
+
+.line {
+  display: flex;
+  justify-content: space-around;
+
+  &.lineReverse {
+    flex-direction: row-reverse;
+  }
+}
+
+.linePlayer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: fn.px-to-rem(3px);
+  width: fn.px-to-rem(15px);
+  height: fn.px-to-rem(15px);
+  font-size: fn.px-to-rem(14px);
+  font-weight: 700;
+  border-radius: 50%;
+  box-shadow: 2px 2px 5px var(--secondary-color-light);
+}
