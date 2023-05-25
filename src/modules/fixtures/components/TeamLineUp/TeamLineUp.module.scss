@@ -1,0 +1,58 @@
+@use "styles/functions" as fn;
+
+.team {
+  padding-block: fn.px-to-rem(10px);
+  padding-inline: fn.px-to-rem(5px);
+  border-radius: 5px;
+}
+
+.teamHeader {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-block-end: fn.px-to-rem(15px);
+}
+
+.teamTitle {
+  margin-block: 0 fn.px-to-rem(5px);
+  padding-inline: fn.px-to-rem(10px);
+  font-size: fn.px-to-rem(20px);
+}
+
+.teamFormation {
+  margin-block-end: fn.px-to-rem(10px);
+  font-weight: 500;
+}
+
+.teamLogo {
+  width: fn.px-to-rem(50px);
+  height: fn.px-to-rem(50px);
+}
+
+.teamLineUp {
+}
+
+.position {
+  margin-block-end: fn.px-to-rem(20px);
+
+  &:last-child {
+    margin-block-end: 0;
+  }
+}
+
+.positionTitle {
+  margin-block: 0 fn.px-to-rem(20px);
+  padding-inline: fn.px-to-rem(10px);
+  font-size: fn.px-to-rem(18px);
+  text-transform: capitalize;
+}
+
+.positionList {
+  display: flex;
+  flex-direction: column;
+}
+
+.playerAlt {
+  border-radius: 5px;
+  background-color: var(--secondary-color-light);
+}
