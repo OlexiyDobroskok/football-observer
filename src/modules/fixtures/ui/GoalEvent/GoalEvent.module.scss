@@ -31,10 +31,6 @@
   height: fn.px-to-rem(18px);
   fill: var(--text-color);
 
-  &.altIconColor {
-    fill: #e74545;
-  }
-
   &.reverse {
     order: -1;
   }

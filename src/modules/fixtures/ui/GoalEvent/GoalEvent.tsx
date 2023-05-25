@@ -42,18 +42,20 @@ export const GoalEvent = ({
     isOwnGoal && classes.altTextColor,
   ].join(" ");
 
-  const classNameIcon = [
-    classes.goalIcon,
-    isAwayTeam && classes.reverse,
-    isOwnGoal && classes.altIconColor,
-  ].join(" ");
+  const classNameIcon = [classes.goalIcon, isAwayTeam && classes.reverse].join(
+    " "
+  );
 
   return (
     <div className={goalEventClassName}>
       <p
         className={descriptionClassName}
       >{`${playerName} ${goalDescription}`}</p>
-      <SvgIcon className={classNameIcon} href={`${ballIcon}#ball`} />
+      {isOwnGoal ? (
+        <SvgIcon className={classNameIcon} href={`${ballIcon}#ballRed`} />
+      ) : (
+        <SvgIcon className={classNameIcon} href={`${ballIcon}#ball`} />
+      )}
     </div>
   );
 };
