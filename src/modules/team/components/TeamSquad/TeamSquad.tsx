@@ -1,6 +1,6 @@
-import { Link } from "react-router-dom";
 import { TeamPlayerCard } from "../TeamPlayerCard/TeamPlayerCard";
 import { List } from "ui/List/List";
+import { TeamLogo } from "components/TeamLogo/TeamLogo";
 import { SortedTeamSquad, TeamSquadApp } from "../../types/types";
 import { checkIsEven } from "helpers/check-is-even";
 import classes from "./TeamSquad.module.scss";
@@ -33,12 +33,10 @@ export const TeamSquad = ({ teamSquad: { team, players } }: TeamSquadProps) => {
   return (
     <article className={classes.team}>
       <header className={classes.teamHeader}>
-        <h2 className={classes.teamTitle} id={teamId.toString()}>
-          {teamName}
-        </h2>
-        <Link to={`/teams/${teamId}`} aria-labelledby={teamId.toString()}>
-          <img className={classes.teamLogo} src={teamLogo} alt="" />
-        </Link>
+        <h2 className={classes.teamTitle}>{teamName}</h2>
+        <div className={classes.teamLogo}>
+          <TeamLogo id={teamId} name={teamName} logo={teamLogo} />
+        </div>
       </header>
       {positionsList}
     </article>
