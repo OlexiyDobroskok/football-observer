@@ -4,18 +4,18 @@ import classes from "./RadioButtonsGroup.module.scss";
 
 export interface RadioButtonsGroupProps {
   groupName: string;
-  buttonsNames: string[];
+  buttonNames: string[];
   selectedButton: string | undefined;
   onChange: (event: ChangeEvent<HTMLInputElement>) => void;
 }
 
 export const RadioButtonsGroup = ({
   groupName,
-  buttonsNames,
+  buttonNames,
   selectedButton,
   onChange,
 }: RadioButtonsGroupProps) => {
-  const toggleButtonGroup = buttonsNames.map((buttonName) => {
+  const toggleButtonGroup = buttonNames.map((buttonName) => {
     const isSelected = selectedButton === buttonName;
 
     return (
