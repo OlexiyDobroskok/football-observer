@@ -27,11 +27,19 @@
 
 .goalIcon {
   flex-shrink: 0;
-  width: fn.px-to-rem(18px);
-  height: fn.px-to-rem(18px);
+  display: flex;
+  width: fn.px-to-rem(20px);
+  justify-content: flex-end;
+  align-items: center;
   fill: var(--text-color);
 
   &.reverse {
     order: -1;
+    justify-content: flex-start;
   }
+}
+
+.icon {
+  width: fn.px-to-rem(18px);
+  height: fn.px-to-rem(18px);
 }

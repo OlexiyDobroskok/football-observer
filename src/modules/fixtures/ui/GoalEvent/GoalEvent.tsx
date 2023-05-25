@@ -51,11 +51,13 @@ export const GoalEvent = ({
       <p
         className={descriptionClassName}
       >{`${playerName} ${goalDescription}`}</p>
-      {isOwnGoal ? (
-        <SvgIcon className={classNameIcon} href={`${ballIcon}#ballRed`} />
-      ) : (
-        <SvgIcon className={classNameIcon} href={`${ballIcon}#ball`} />
-      )}
+      <div className={classNameIcon}>
+        {isOwnGoal ? (
+          <SvgIcon className={classes.icon} href={`${ballIcon}#ballRed`} />
+        ) : (
+          <SvgIcon className={classes.icon} href={`${ballIcon}#ball`} />
+        )}
+      </div>
     </div>
   );
 };
