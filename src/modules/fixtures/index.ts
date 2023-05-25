@@ -10,3 +10,4 @@ export { FixtureDetailCard } from "./components/FixtureDetailCard/FixtureDetailC
 export { HeadToHeadMatchesList } from "./components/HeadToHeadMatchesList/HeadToHeadMatchesList";
 export { HeadToHeadStats } from "./components/HeadToHeadStats/HeadToHeadStats";
 export { MatchStatistic } from "./components/MatchStatistic/MatchStatistic";
+export { ComparativeTeamsLineUps } from "./components/ComparativeTeamsLineUps/ComparativeTeamsLineUps";
