@@ -1,0 +1,33 @@
+@use "styles/functions" as fn;
+
+.player {
+  position: relative;
+  display: flex;
+  align-items: center;
+  gap: fn.px-to-rem(10px);
+  padding: fn.px-to-rem(10px);
+}
+
+.playerName {
+  padding-block: fn.px-to-rem(5px);
+  font-weight: 700;
+}
+
+.playerNumber {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-width: fn.px-to-rem(20px);
+  font-weight: 500;
+}
+
+.playerPhoto {
+  width: fn.px-to-rem(40px);
+  height: fn.px-to-rem(40px);
+  border-radius: 50%;
+}
+
+.playerLink {
+  color: var(--text-color);
+  text-decoration: none;
+}
