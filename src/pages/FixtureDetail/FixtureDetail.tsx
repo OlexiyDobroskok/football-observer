@@ -1,6 +1,7 @@
-import { ChangeEvent, useEffect, useState } from "react";
+import { ChangeEvent, useLayoutEffect, useState } from "react";
 import { useFixtureDetail } from "modules/fixtures/hooks/use-fixture-detail";
 import {
+  ComparativeTeamsLineUps,
   FixtureDetailCard,
   HeadToHeadMatchesList,
   HeadToHeadStats,
@@ -24,22 +25,23 @@ type FixtureDetailTab =
 export const FixtureDetail = () => {
   const { fixtureDetail, isScheduled } = useFixtureDetail();
   const { lineUps, squads, h2h, matchStats } = fixtureDetailTabs;
-  const [tabs, setTabs] = useState<FixtureDetailTab[]>([
-    squads,
-    h2h,
-    matchStats,
-  ]);
+  const [tabs, setTabs] = useState<FixtureDetailTab[]>([]);
   const [selectedTab, setSelectedTab] = useState<
     FixtureDetailTab | undefined
   >();
 
-  useEffect(() => {
-    if (fixtureDetail && fixtureDetail.lineups.length) {
-      setTabs([lineUps, h2h, matchStats]);
+  useLayoutEffect(() => {
+    if (fixtureDetail) {
+      const pageTabs: FixtureDetailTab[] = [
+        !fixtureDetail.lineups.length ? squads : lineUps,
+        h2h,
+        matchStats,
+      ];
+      setTabs(pageTabs);
     }
   }, [fixtureDetail]);
 
-  useEffect(() => {
+  useLayoutEffect(() => {
     setSelectedTab(
       !isScheduled ? fixtureDetailTabs.matchStats : fixtureDetailTabs.h2h
     );
@@ -80,6 +82,12 @@ export const FixtureDetail = () => {
           <section className={["statistic", classes.tabSection].join(" ")}>
             <HiddenElement as={"h2"}>Statistic Tab</HiddenElement>
             <MatchStatistic />
+          </section>
+        )}
+        {selectedTab === fixtureDetailTabs.lineUps && (
+          <section className={["line-ups", classes.tabSection].join(" ")}>
+            <HiddenElement as={"h2"}>Line-Ups Tab</HiddenElement>
+            <ComparativeTeamsLineUps />
           </section>
         )}
       </div>
