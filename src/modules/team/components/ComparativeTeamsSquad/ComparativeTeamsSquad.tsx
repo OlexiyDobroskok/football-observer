@@ -1,5 +1,5 @@
 import { useAppDispatch, useAppSelector } from "hooks/redux";
-import { ChangeEvent, useEffect, useState } from "react";
+import { ChangeEvent, useEffect, useLayoutEffect, useState } from "react";
 import { fetchComparativeTeamsSquad } from "../../store/comparative-teams-squad-thunk";
 import { TeamSquad } from "../TeamSquad/TeamSquad";
 import { RadioButtonsGroup } from "ui/RadioButtonsGroup/RadioButtonsGroup";
@@ -29,7 +29,7 @@ export const ComparativeTeamsSquad = () => {
       );
   }, [homeTeam, awayTeam]);
 
-  useEffect(() => {
+  useLayoutEffect(() => {
     if (homeTeamSquad) setSelectedTeam(homeTeamSquad.team.name);
   }, [homeTeamSquad]);
 
@@ -43,7 +43,7 @@ export const ComparativeTeamsSquad = () => {
           <div className={classes.buttonsGroup}>
             <RadioButtonsGroup
               groupName={"teams-squads"}
-              buttonsNames={teamsNames}
+              buttonNames={teamsNames}
               selectedButton={selectedTeam}
               onChange={changeTeam}
             />
