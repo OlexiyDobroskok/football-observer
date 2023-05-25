@@ -30,9 +30,7 @@
             <rect x="0" y="0" width="50" height="80" rx="5" ry="5" fill="#eac71a" />
         </symbol>
         <symbol id="redCard" viewBox="0 0 50 80">
-            <svg xmlns="http://www.w3.org/2000/svg" width="50" height="80" viewBox="0 0 50 80">
-                <rect x="0" y="0" width="50" height="80" rx="5" ry="5" fill="#c70000" />
-            </svg>
+            <rect x="0" y="0" width="50" height="80" rx="5" ry="5" fill="#c70000" />
         </symbol>
     </defs>
 </svg>
