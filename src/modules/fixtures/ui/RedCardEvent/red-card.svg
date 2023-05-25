@@ -1,0 +1,5 @@
+<svg xmlns="http://www.w3.org/2000/svg">
+    <symbol id="redCard" viewBox="0 0 50 80">
+        <rect x="0" y="0" width="50" height="80" rx="5" ry="5" fill="#c70000" />
+    </symbol>
+</svg>

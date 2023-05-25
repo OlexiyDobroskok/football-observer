@@ -1,6 +1,8 @@
 import { FixtureEventPlayer } from "../../types/types";
 import { locationStatus, LocationStatus } from "api/helpers/consts";
 import { getGoalDescription } from "../../helpers/event-description";
+import { SvgIcon } from "ui/SvgIcon/SvgIcon";
+import redCardIcon from "./red-card.svg";
 import classes from "./RedCardEvent.module.scss";
 
 export interface RedCardEventProps {
@@ -39,7 +41,9 @@ export const RedCardEvent = ({
       <p
         className={descriptionClassName}
       >{`${playerName} ${redCardDescription}`}</p>
-      <div className={iconClassName}></div>
+      <div className={iconClassName}>
+        <SvgIcon className={classes.icon} href={`${redCardIcon}#redCard`} />
+      </div>
     </div>
   );
 };
