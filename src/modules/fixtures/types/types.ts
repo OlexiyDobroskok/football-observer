@@ -60,7 +60,7 @@ export interface LineUpPlayerCombined extends LineupPlayerDefinition {
   events: SortedPlayerEvents | null;
 }
 
-export interface TeamLineUp {
+export interface LineUpTeamSquad {
   goalkeepers: LineUpPlayerCombined[];
   defenders: LineUpPlayerCombined[];
   midfielders: LineUpPlayerCombined[];
@@ -68,14 +68,22 @@ export interface TeamLineUp {
   substitutes: LineUpPlayerCombined[];
 }
 
-export interface FixtureTeamLineupApp
+export interface TeamLineUpDefinition
   extends Omit<FixtureTeamLineup, "startXI" | "substitutes"> {
-  teamLineUp: TeamLineUp;
+  squad: LineUpTeamSquad;
 }
 
 export interface ComparativeTeamsLineUps {
-  homeTeamLineUps: TeamLineUp;
-  awayTeamLineUps: TeamLineUp;
+  homeTeamLineUps: TeamLineUpDefinition;
+  awayTeamLineUps: TeamLineUpDefinition;
+}
+
+export interface PlayerLines {
+  first: LineupPlayerDefinition[];
+  second: LineupPlayerDefinition[];
+  third: LineupPlayerDefinition[];
+  fourth: LineupPlayerDefinition[];
+  fifth: LineupPlayerDefinition[];
 }
 
 export interface FixtureDetailInfoApp extends FixtureDetailInfo {
