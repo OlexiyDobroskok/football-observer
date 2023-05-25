@@ -68,22 +68,23 @@ export interface LineUpTeamSquad {
   substitutes: LineUpPlayerCombined[];
 }
 
-export interface TeamLineUpDefinition
-  extends Omit<FixtureTeamLineup, "startXI" | "substitutes"> {
-  squad: LineUpTeamSquad;
-}
-
-export interface ComparativeTeamsLineUps {
-  homeTeamLineUps: TeamLineUpDefinition;
-  awayTeamLineUps: TeamLineUpDefinition;
-}
-
 export interface PlayerLines {
   first: LineupPlayerDefinition[];
   second: LineupPlayerDefinition[];
   third: LineupPlayerDefinition[];
   fourth: LineupPlayerDefinition[];
   fifth: LineupPlayerDefinition[];
+}
+
+export interface TeamLineUpDefinition
+  extends Omit<FixtureTeamLineup, "startXI" | "substitutes"> {
+  squad: LineUpTeamSquad;
+  positionLines: PlayerLines;
+}
+
+export interface ComparativeTeamsLineUps {
+  homeTeamLineUps: TeamLineUpDefinition;
+  awayTeamLineUps: TeamLineUpDefinition;
 }
 
 export interface FixtureDetailInfoApp extends FixtureDetailInfo {
