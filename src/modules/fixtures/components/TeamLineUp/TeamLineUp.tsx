@@ -9,7 +9,7 @@ import classes from "./TeamLineUp.module.scss";
 export interface TeamLineUpProps {
   team: LineupTeam;
   lineUpSquad: LineUpTeamSquad;
-  formation: string;
+  formation: string | null;
 }
 
 export const TeamLineUp = ({
@@ -41,7 +41,9 @@ export const TeamLineUp = ({
     <article className={classes.team}>
       <header className={classes.teamHeader}>
         <h2 className={classes.teamTitle}>{teamName}</h2>
-        <span className={classes.teamFormation}>{`( ${formation} )`}</span>
+        <span className={classes.teamFormation}>
+          {formation ? `( ${formation} )` : "(no formation information)"}
+        </span>
         <div className={classes.teamLogo}>
           <TeamLogo id={teamId} name={teamName} logo={teamLogo} />
         </div>

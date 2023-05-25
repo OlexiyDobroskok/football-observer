@@ -161,7 +161,7 @@ export interface LineupPlayer {
 
 export interface FixtureTeamLineup {
   team: LineupTeam;
-  formation: string;
+  formation: string | null;
   startXI: LineupPlayer[];
   substitutes: LineupPlayer[];
   coach: LineupTeamCoach;
