@@ -1,0 +1,17 @@
+@use "styles/functions" as fn;
+
+.compLineUps {
+  padding-block-start: fn.px-to-rem(15px);
+  border-radius: 5px;
+  background-color: var(--secondary-color-dark);
+}
+
+.tabsGroup {
+  display: flex;
+  justify-content: center;
+  margin-block-end: fn.px-to-rem(10px);
+}
+
+.message {
+  text-align: center;
+}
