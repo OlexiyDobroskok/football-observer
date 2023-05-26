@@ -13,7 +13,7 @@ export interface LiveMatchPreviewProps {
 export const LiveMatchPreview = ({
   matchInfo: { fixture, league, goals, teams },
 }: LiveMatchPreviewProps) => {
-  const { id, status } = fixture;
+  const { id, status, periods } = fixture;
   const { home: homeTeam, away: awayTeam } = teams;
 
   return (
@@ -22,7 +22,7 @@ export const LiveMatchPreview = ({
         <PreviewTeamMark team={homeTeam} />
         <Container className={classes.matchScore}>
           <Scoreboard matchScore={goals} boardSize={scoreBoardSize.md} />
-          <MatchStatus matchStatus={status} />
+          <MatchStatus matchStatus={status} periods={periods} />
         </Container>
         <PreviewTeamMark team={awayTeam} />
       </Container>

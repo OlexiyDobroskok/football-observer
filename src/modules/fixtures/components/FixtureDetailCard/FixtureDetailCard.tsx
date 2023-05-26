@@ -22,7 +22,7 @@ export const FixtureDetailCard = () => {
 
   if (fixtureDetail && fixtureEventsAlt) {
     const { fixture, teams, goals } = fixtureDetail;
-    const { date, referee, venue, status } = fixture;
+    const { date, referee, venue, status, periods } = fixture;
     const { home: homeTeam, away: awayTeam } = teams;
     const { homeTeamEvents, awayTeamEvents } = fixtureEventsAlt;
     const isGoalEvents =
@@ -51,7 +51,7 @@ export const FixtureDetailCard = () => {
             {!isScheduled && (
               <>
                 <Scoreboard matchScore={goals} boardSize={scoreBoardSize.lg} />
-                <MatchStatus matchStatus={status} />
+                <MatchStatus matchStatus={status} periods={periods} />
               </>
             )}
             {isScheduled && <TimeToMatch fixtureDate={date} />}

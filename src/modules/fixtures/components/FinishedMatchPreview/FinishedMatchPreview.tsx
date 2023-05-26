@@ -13,7 +13,7 @@ export interface FinishedMatchPreviewProps {
 export const FinishedMatchPreview = ({
   matchInfo: { fixture, league, goals, teams },
 }: FinishedMatchPreviewProps) => {
-  const { id, status } = fixture;
+  const { id, status, periods } = fixture;
   const { home: homeTeam, away: awayTeam } = teams;
 
   return (
@@ -22,7 +22,7 @@ export const FinishedMatchPreview = ({
         <PreviewTeamMark team={homeTeam} />
         <Container className={classes.matchScore}>
           <Scoreboard matchScore={goals} boardSize={scoreBoardSize.md} />
-          <MatchStatus matchStatus={status} />
+          <MatchStatus matchStatus={status} periods={periods} />
         </Container>
         <PreviewTeamMark team={awayTeam} />
       </Container>
