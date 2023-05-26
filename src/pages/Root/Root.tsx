@@ -1,4 +1,4 @@
-import { Outlet } from "react-router-dom";
+import { Outlet, ScrollRestoration } from "react-router-dom";
 import { Container } from "ui/Container/Container";
 import { NavMenuMobile } from "components/NavMenu";
 import { LeaguesFilter } from "modules/leagues-filter";
@@ -13,5 +13,6 @@ export const Root = () => (
     <main className={classes.main}>
       <Outlet />
     </main>
+    <ScrollRestoration />
   </Container>
 );
