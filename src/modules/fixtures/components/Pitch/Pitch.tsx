@@ -1,5 +1,5 @@
 import { useAppSelector } from "hooks/redux";
-import { FormationLines } from "../../ui/FormationLines/FormationLines";
+import { FormationLines } from "../FormationLines/FormationLines";
 import { locationStatus } from "api/helpers/consts";
 import { TeamLogo } from "components/TeamLogo/TeamLogo";
 import classes from "./Pitch.module.scss";
