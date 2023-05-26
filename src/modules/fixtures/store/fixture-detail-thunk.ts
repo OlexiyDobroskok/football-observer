@@ -7,13 +7,13 @@ import {
 } from "../types/types";
 import { FootballService } from "api/football-service";
 import { FixtureDetailState } from "./fixture-detail-slice";
-import { generateDynamicKey } from "api/helpers/generateDynamicReqStatus";
 import { checkIsMatchLive } from "../helpers/check-is-match-live";
 import { checkIsMatchScheduled } from "../helpers/check-is-match-scheduled";
 import { checkIsMatchFinished } from "../helpers/check-is-match-finished";
 import { sortEventsByTeam } from "../helpers/sort-events-by-team";
 import { sortEventPlayers } from "../helpers/sort-event-players";
 import { convertLineUps } from "../helpers/convert-line-ups";
+import { checkThunkCancel } from "api/helpers/check-thunk-cancel";
 
 interface FixtureDetailData {
   fixtureDetail: FixtureDetailInfoApp;
@@ -101,10 +101,8 @@ export const fetchFixtureDetail = createAsyncThunk<
       const {
         fixtureDetail: { reqStatus },
       } = getState();
-      const reqKey = generateDynamicKey({ params });
-      const isLoading = !!reqStatus && reqStatus[reqKey] === "loading";
-      const isSucceed = !!reqStatus && reqStatus[reqKey] === "succeeded";
-      if (isLoading || isSucceed) return false;
+
+      return checkThunkCancel<DetailedFixtureParams>({ params, reqStatus });
     },
   }
 );

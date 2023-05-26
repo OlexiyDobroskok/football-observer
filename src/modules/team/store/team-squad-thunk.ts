@@ -3,8 +3,8 @@ import { TeamSquadApp } from "../types/types";
 import { TeamSquadParams } from "api/types/team-types";
 import { TeamSquadState } from "./team-squad-slice";
 import { FootballService } from "api/football-service";
-import { generateDynamicKey } from "api/helpers/generateDynamicReqStatus";
 import { sortPlayersByPosition } from "../helpers/sort-players-by-position";
+import { checkThunkCancel } from "api/helpers/check-thunk-cancel";
 
 export const fetchTeamSquad = createAsyncThunk<
   TeamSquadApp,
@@ -29,10 +29,8 @@ export const fetchTeamSquad = createAsyncThunk<
       const {
         teamSquad: { reqStatus },
       } = getState();
-      const reqKey = generateDynamicKey({ params });
-      const isLoading = !!reqStatus && reqStatus[reqKey] === "loading";
-      const isSucceed = !!reqStatus && reqStatus[reqKey] === "succeeded";
-      if (isLoading || isSucceed) return false;
+
+      return checkThunkCancel<TeamSquadParams>({ params, reqStatus });
     },
   }
 );

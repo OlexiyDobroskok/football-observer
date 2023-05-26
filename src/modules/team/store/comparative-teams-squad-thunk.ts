@@ -4,7 +4,7 @@ import { ComparativeTeamSquadsParams } from "api/types/team-types";
 import { ComparativeTeamsSquadState } from "./comparative-teams-squad-slice";
 import { FootballService } from "api/football-service";
 import { sortPlayersByPosition } from "../helpers/sort-players-by-position";
-import { generateDynamicKey } from "api/helpers/generateDynamicReqStatus";
+import { checkThunkCancel } from "api/helpers/check-thunk-cancel";
 
 export const fetchComparativeTeamsSquad = createAsyncThunk<
   ComparativeTeamsSquadApp,
@@ -36,10 +36,11 @@ export const fetchComparativeTeamsSquad = createAsyncThunk<
       const {
         compSquad: { reqStatus },
       } = getState();
-      const reqKey = generateDynamicKey({ params });
-      const isLoading = !!reqStatus && reqStatus[reqKey] === "loading";
-      const isSucceed = !!reqStatus && reqStatus[reqKey] === "succeeded";
-      if (isLoading || isSucceed) return false;
+
+      return checkThunkCancel<ComparativeTeamSquadsParams>({
+        params,
+        reqStatus,
+      });
     },
   }
 );

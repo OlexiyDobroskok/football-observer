@@ -7,7 +7,7 @@ import { dayFixturesConverter } from "../helpers/day-fixtures-converter";
 import { checkIsMatchFinished } from "../helpers/check-is-match-finished";
 import { checkIsMatchScheduled } from "../helpers/check-is-match-scheduled";
 import { checkIsMatchLive } from "../helpers/check-is-match-live";
-import { generateDynamicKey } from "api/helpers/generateDynamicReqStatus";
+import { checkThunkCancel } from "api/helpers/check-thunk-cancel";
 
 export interface FixturesData {
   finished: DayFixtures[];
@@ -71,10 +71,8 @@ export const fetchFixtures = createAsyncThunk<
       const {
         fixtures: { reqStatus },
       } = getState();
-      const reqKey = generateDynamicKey({ params });
-      const isLoading = !!reqStatus && reqStatus[reqKey] === "loading";
-      const isSucceed = !!reqStatus && reqStatus[reqKey] === "succeeded";
-      if (isLoading || isSucceed) return false;
+
+      return checkThunkCancel<FixturesParams>({ params, reqStatus });
     },
   }
 );
