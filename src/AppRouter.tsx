@@ -6,14 +6,14 @@ import {
   Profile,
   Root,
   Standings,
-  TeamInfo,
+  Team,
   Teams,
 } from "./pages";
 import { PAGE_ROUTES } from "helpers/consts";
 import { Provider } from "react-redux";
 import { store } from "store/store";
 
-export const AppRoute = () => {
+export const AppRouter = () => {
   const router = createBrowserRouter([
     {
       path: PAGE_ROUTES.ROOT,
@@ -24,7 +24,7 @@ export const AppRoute = () => {
         { path: PAGE_ROUTES.FIXTURE_DETAIL, element: <FixtureDetail /> },
         { path: PAGE_ROUTES.STANDINGS, element: <Standings /> },
         { path: PAGE_ROUTES.TEAMS, element: <Teams /> },
-        { path: PAGE_ROUTES.TEAM_INFO, element: <TeamInfo /> },
+        { path: PAGE_ROUTES.TEAM_INFO, element: <Team /> },
         { path: PAGE_ROUTES.PROFILE, element: <Profile /> },
       ],
     },

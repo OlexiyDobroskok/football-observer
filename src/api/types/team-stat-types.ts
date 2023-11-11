@@ -1,4 +1,4 @@
-import { TeamDefinition } from "api/types/team-info-types";
+import { TeamDefinition } from "./team-types";
 
 export interface TeamStatLeagueInfo {
   id: number;

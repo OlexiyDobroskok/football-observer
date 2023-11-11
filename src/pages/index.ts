@@ -4,5 +4,5 @@ export { Fixtures } from "./Fixtures/Fixtures";
 export { Standings } from "./Standings/Standings";
 export { Profile } from "./Profile/Profile";
 export { Teams } from "./Teams/Teams";
-export { TeamInfo } from "./TeamInfo/TeamInfo";
-export { FixtureDetail } from './FixtureDetail/FixtureDetail';
+export { Team } from "./Team/Team";
+export { FixtureDetail } from "./FixtureDetail/FixtureDetail";

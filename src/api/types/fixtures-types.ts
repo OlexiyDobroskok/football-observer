@@ -14,6 +14,7 @@ export interface FixturesParams extends ApiParams {
   season: number;
 }
 
+
 export interface DetailedFixtureParams extends ApiParams {
   fixtureId: number | string;
 }

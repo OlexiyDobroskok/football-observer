@@ -14,6 +14,8 @@ import {
   ComparativeTeamSquadsParams,
   TeamSquadApi,
   TeamSquadParams,
+  TeamInformationParams,
+  TeamInformation,
 } from "./types/team-types";
 
 export interface DataError {
@@ -124,6 +126,19 @@ export class FootballService {
     }
 
     return data.response;
+  }
+
+  static async getTeamInformation({ teamId }: TeamInformationParams) {
+    const { data }: FootballApiResponse<TeamInformation[]> =
+      await footballApi.get("teams", { params: { id: teamId } });
+
+    if (data.errors.length !== 0) {
+      throwDataError(data.errors as DataError);
+    }
+
+    const [teamInformation] = data.response;
+
+    return teamInformation;
   }
 
   static async getTeamSquad({ teamId }: TeamSquadParams) {

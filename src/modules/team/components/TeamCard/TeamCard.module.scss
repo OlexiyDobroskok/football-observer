@@ -1,0 +1,39 @@
+@use "styles/functions" as fn;
+
+.team {
+  background-color: var(--secondary-color);
+}
+
+.teamHeader {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.teamLogo {
+  width: fn.px-to-rem(100px);
+  height: fn.px-to-rem(100px);
+}
+
+.teamLogoImg {
+  width: 100%;
+  height: 100%;
+}
+
+.teamStadium {
+  display: flex;
+  align-items: center;
+  gap: fn.px-to-rem(10px);
+  margin-block-start: 0;
+}
+
+.stadiumIcon {
+  width: fn.px-to-rem(30px);
+  height: fn.px-to-rem(30px);
+  fill: #fff;
+}
+
+.stadiumLink {
+  text-decoration: none;
+  color: var(--text-color);
+}

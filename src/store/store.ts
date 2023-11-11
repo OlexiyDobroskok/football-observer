@@ -7,7 +7,11 @@ import {
   fixturesReducer,
   headToHeadReducer,
 } from "modules/fixtures";
-import { compSquadReducer, teamSquadReducer } from "modules/team";
+import {
+  compSquadReducer,
+  teamInfoReducer,
+  teamSquadReducer,
+} from "modules/team";
 
 export const store = configureStore({
   reducer: {
@@ -17,6 +21,7 @@ export const store = configureStore({
     fixtures: fixturesReducer,
     fixtureDetail: fixtureDetailReducer,
     headToHead: headToHeadReducer,
+    teamInfo: teamInfoReducer,
     teamSquad: teamSquadReducer,
     compSquad: compSquadReducer,
   },

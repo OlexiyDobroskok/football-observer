@@ -1,8 +1,12 @@
 import { PlayerPosition } from "../helpers/consts";
 import { ApiParams } from "./global";
 
+export interface TeamInformationParams extends ApiParams {
+  teamId: number | string;
+}
+
 export interface TeamSquadParams extends ApiParams {
-  teamId: number;
+  teamId: number | string;
 }
 
 export interface ComparativeTeamSquadsParams extends ApiParams {

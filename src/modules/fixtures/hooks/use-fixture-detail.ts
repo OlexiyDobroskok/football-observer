@@ -4,6 +4,8 @@ import { useAppDispatch, useAppSelector } from "hooks/redux";
 import { fetchFixtureDetail } from "../store/fixture-detail-thunk";
 import { resetFixtureDetailReqStatus } from "../store/fixture-detail-slice";
 
+const a = [1, 2, 3];
+
 export const useFixtureDetail = () => {
   const { fixtureId } = useParams<"fixtureId">();
   const fixtureDetailState = useAppSelector(
